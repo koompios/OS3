@@ -1,0 +1,37 @@
+# Maintainer: Hangsia Hong <hangsia@koompi.org>
+
+pkgname=abroot
+pkgver=1.2.2
+pkgrel=1
+pkgdesc='Utility that allows fully atomic transactions between 2 root partitions'
+arch=(x86_64 aarch64)
+url='https://github.com/KOOMPI-OS/ABRoot'
+license=(GPL3)
+depends=(glibc)
+makedepends=(go)
+source=("ABRoot-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+
+prepare(){
+	cd "ABRoot-${pkgver}"
+	mkdir -p build/
+}
+
+build() {
+	cd "ABRoot-${pkgver}"
+	export CGO_CPPFLAGS="${CPPFLAGS}"
+	export CGO_CFLAGS="${CFLAGS}"
+	export CGO_CXXFLAGS="${CXXFLAGS}"
+	export CGO_LDFLAGS="${LDFLAGS}"
+	export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
+	go build -o build
+}
+
+check() {
+	cd "ABRoot-${pkgver}"
+	go test
+}
+
+package() {
+	cd "ABRoot-${pkgver}"
+	install -Dm755 build/${pkgname} "${pkgdir}/usr/bin/${pkgname}"
+}
