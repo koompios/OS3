@@ -1,0 +1,43 @@
+# Maintainer: Hangsiahong <hangsia at koompi.org>
+pkgname="pix-git"
+_pkgname="pix"
+pkgver=1.8.0
+pkgrel=1
+pkgdesc="KOOMPI OS package manager"
+arch=('x86_64')
+url="https://github.com/KOOMPI-OS/pix"
+license=('GPL3')
+depends=(
+  'pacman>5'
+  'git'
+  'micro-distrobox'
+  'go'
+  'podman'
+  )
+makedepends=('go>=1.17')
+options=(!lto)
+conflicts=('pix')
+provides=('pix')
+source=(
+  'pix::git+https://github.com/KOOMPI-OS/pix.git#branch=main'
+  'config.json'
+  )
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "$srcdir/$_pkgname"
+  go build -o pix main.go
+}
+
+package() {
+  install -Dm755 "$srcdir/$_pkgname/pix" "$pkgdir/usr/bin/pix"
+  install -Dm644 "$srcdir/$_pkgname/man/pix.1" "$pkgdir/usr/share/man/man1/pix.1"
+  install -Dm644 "$srcdir/$_pkgname/man/es/pix.1" "$pkgdir/usr/share/man/es/man1/pix.1"
+
+  install -Dm644 "$srcdir/config.json" "$pkgdir/etc/pix/config.json"
+}
+
