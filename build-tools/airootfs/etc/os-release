@@ -1,0 +1,10 @@
+NAME="KOOMPI-OS3-beta2"
+PRETTY_NAME="KOOMPI-OS3"
+ID=koompios
+BUILD_ID=rolling
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://koompi.org/"
+DOCUMENTATION_URL="https://docs.koompi.org/"
+SUPPORT_URL=""
+BUG_REPORT_URL=""
+LOGO=koompios-logo
