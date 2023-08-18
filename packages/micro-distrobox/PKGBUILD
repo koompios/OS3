@@ -1,0 +1,19 @@
+pkgname=micro-distrobox
+pkgver=1.4.2.1
+pkgrel=2
+pkgdesc="Another tool for containerized command line environments on Linux"
+arch=('any')
+url="https://distrobox.privatedns.org/"
+license=('GPL3')
+depends=('podman' 'docker.io' 'uidmap')
+makedepends=('debhelper-compat')
+source=("https://github.com/koompi-os/micro-distrobox.git")
+md5sums=('SKIP')
+
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  mkdir -p "$pkgdir/usr"
+  cp -r usr/* "$pkgdir/usr/"
+}
+

@@ -1,6 +1,6 @@
 - [x] pix
 - [x] abroot
-- [ ] micro-distrobox
+- [x] micro-distrobox
 - [ ] koompi-control-center
 - [ ] koompi-systemd-units
 - [ ] koompi-system-operator
