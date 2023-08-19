@@ -34,4 +34,11 @@ check() {
 package() {
 	cd "ABRoot-${pkgver}"
 	install -Dm755 build/${pkgname} "${pkgdir}/usr/bin/${pkgname}"
+ 	mkdir -pv ${pkgdir}/etc/abroot
+  	mkdir -pv ${pkgdir}/etc/default
+   	mkdir -pv "${pkgdir}/usr/share/man/man1"
+ 	cp -r start-transaction-rules.d/ "${pkgdir}/etc/abroot/"
+	cp -r end-transaction-rules.d/ "${pkgdir}/etc/abroot/"
+	cp abroot_kargs "${pkgdir}/etc/default/"
+	cp man/abroot.1 "${pkgdir}/usr/share/man/man1"
 }
