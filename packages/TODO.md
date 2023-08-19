@@ -1,6 +1,9 @@
 - [x] pix
 - [x] abroot
 - [x] micro-distrobox
+- [x] koompi-installer
+- [ ] first-setup
+- [ ] plymouth-theme-koompi
 - [ ] koompi-control-center
 - [ ] koompi-systemd-units
 - [ ] koompi-system-operator
