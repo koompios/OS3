@@ -1,0 +1,28 @@
+pkgname=koompi-installer
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="A frontend in GTK 4 and Libadwaita for distinst."
+arch=('any')
+url="https://github.com/koompi-os/koompi-installer"
+license=('custom')
+depends=('python3' 'python3-tz' 'python3-requests' 'python3-gi' 'libadwaita-1-0' 'libgnome-desktop-4-2' 'libgweather-4-0' 'gir1.2-gtk-4.0' 'gir1.2-adw-1' 'gir1.2-gnomedesktop-4.0' 'gir1.2-gweather-4.0' 'gir1.2-vte-3.91' 'gparted' 'openssl')
+makedepends=('meson' 'gettext' 'desktop-file-utils')
+
+source=("$pkgname-$pkgver.tar.gz::https://github.com/koompi-os/koompi-installer/archive/refs/tags/$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  meson build
+  ninja -C build
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  DESTDIR="$pkgdir" ninja -C build install
+  mkdir -pv "$pkgdir/etc/koompi-installer"
+  cp recipe.json "$pkgdir/etc/koompi-installer/"
+  mkdir -pv "$pkgdir/etc/koompi"
+  cp installer.log "$pkgdir/etc/koompi"
+
+}
