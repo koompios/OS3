@@ -12,7 +12,7 @@
 - [ ] gnome-software
 - [ ] distinst
 - [ ] koompi-updater
-- [ ] koompi-base-meta
+- [x] koompi-base-meta
 - [ ] koompi-base-desktop
 - [ ] gs-plugin-koompi-meta
 
