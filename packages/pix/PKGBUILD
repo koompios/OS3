@@ -1,5 +1,5 @@
 # Maintainer: Hangsiahong <hangsia at koompi.org>
-pkgname="pix-git"
+pkgname="pix"
 _pkgname="pix"
 pkgver=1.8.0
 pkgrel=1
@@ -16,8 +16,6 @@ depends=(
   )
 makedepends=('go>=1.17')
 options=(!lto)
-conflicts=('pix')
-provides=('pix')
 source=(
   'pix::git+https://github.com/KOOMPI-OS/pix.git#branch=main'
   'config.json'

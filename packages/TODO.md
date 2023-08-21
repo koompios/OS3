@@ -4,7 +4,7 @@
 - [x] koompi-installer
 - [ ] first-setup
 - [ ] plymouth-theme-koompi
-- [ ] koompi-control-center
+- [x] koompi-control-center
 - [ ] koompi-systemd-units
 - [ ] koompi-system-operator
 - [ ] AdwDialog(Maybe we can used prebuild from arch?)

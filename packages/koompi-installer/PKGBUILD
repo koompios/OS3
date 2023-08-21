@@ -8,9 +8,7 @@ license=('custom')
 depends=('python' 'python-tz' 'python-requests' 'python-gobject' 'libadwaita' 'gnome-desktop' 'libgweather' 'gtk4' 'adwaita-icon-theme' 'gnome-desktop' 'gweather' 'vte3' 'gparted' 'openssl')
 makedepends=('meson' 'gettext' 'desktop-file-utils')
 sha256sums=('SKIP')
-
-source=("$pkgname-$pkgver.tar.gz::https://github.com/koompi-os/koompi-installer/archive/refs/tags/$pkgver.tar.gz")
-sha256sums=('SKIP')
+source=("$pkgname::git+https://github.com/koompi-os/koompi-installer.git")
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
