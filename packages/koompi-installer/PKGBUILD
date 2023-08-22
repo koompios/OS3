@@ -11,13 +11,13 @@ sha256sums=('SKIP')
 source=("$pkgname::git+https://github.com/koompi-os/koompi-installer.git")
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgname"
   meson build
   ninja -C build
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgname"
   DESTDIR="$pkgdir" ninja -C build install
   mkdir -pv "$pkgdir/etc/koompi-installer"
   cp recipe.json "$pkgdir/etc/koompi-installer/"

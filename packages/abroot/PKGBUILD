@@ -9,15 +9,16 @@ url='https://github.com/KOOMPI-OS/ABRoot'
 license=(GPL3)
 depends=(glibc)
 makedepends=(go)
-source=("ABRoot-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+source=('ABRoot::git+https://github.com/KOOMPI-OS/abroot.git#branch=archlinux')
+md5sums=('SKIP')
 
 prepare(){
-	cd "ABRoot-${pkgver}"
+	cd "ABRoot"
 	mkdir -p build/
 }
 
 build() {
-	cd "ABRoot-${pkgver}"
+	cd "$srcdir/ABRoot"
 	export CGO_CPPFLAGS="${CPPFLAGS}"
 	export CGO_CFLAGS="${CFLAGS}"
 	export CGO_CXXFLAGS="${CXXFLAGS}"
@@ -27,12 +28,12 @@ build() {
 }
 
 check() {
-	cd "ABRoot-${pkgver}"
+	cd "$srcdir/ABRoot"
 	go test
 }
 
 package() {
-	cd "ABRoot-${pkgver}"
+	cd "$srcdir/ABRoot"
 	install -Dm755 build/${pkgname} "${pkgdir}/usr/bin/${pkgname}"
  	mkdir -pv ${pkgdir}/etc/abroot
   	mkdir -pv ${pkgdir}/etc/default

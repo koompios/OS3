@@ -7,7 +7,7 @@
 - [x] koompi-control-center
 - [ ] koompi-systemd-units
 - [x] koompi-system-operator
-- [ ] AdwDialog(Maybe we can used prebuild from arch?)
+- [x] AdwDialog(Maybe we can used prebuild from arch?)
 - [ ] adwaita-icon-theme
 - [ ] gnome-software
 - [ ] distinst

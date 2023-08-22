@@ -20,6 +20,7 @@ source=(
   'pix::git+https://github.com/KOOMPI-OS/pix.git#branch=main'
   'config.json'
   )
+md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
