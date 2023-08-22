@@ -1,0 +1,36 @@
+# Maintainer: Hangsia Hong <hangsia@koompi.org>
+
+pkgname=koompi-system-operator
+pkgver=1.3.1
+pkgrel=1
+pkgdesc='KSO is an utility which allows you to perform maintenance tasks on your KOOMPI OS installation.'
+arch=(x86_64 aarch64)
+url='https://github.com/KOOMPI-OS/koompi-system-operator'
+license=(GPL3)
+depends=(go)
+makedepends=('go', 'adwdialog', 'ifstat')
+source=('koompi-system-operator::git+https://github.com/KOOMPI-OS/koompi-system-operator.git#branch=main')
+
+prepare(){
+	cd "$pkgname-${pkgver}"
+	mkdir -p build/
+}
+
+build() {
+	cd "ABRoot-${pkgver}"
+	export CGO_CPPFLAGS="${CPPFLAGS}"
+	export CGO_CFLAGS="${CFLAGS}"
+	export CGO_CXXFLAGS="${CXXFLAGS}"
+	export CGO_LDFLAGS="${LDFLAGS}"
+	export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
+	go build -o build
+}
+
+package() {
+	cd "$pkgname-${pkgver}"
+	install -Dm755 build/${pkgname} "${pkgdir}/usr/bin/${pkgname}"
+ 	mkdir -pv ${pkgdir}/etc/kso
+  mkdir -pv "${pkgdir}/usr/share/man/man1"
+ 	cp -r config/config.json "${pkgdir}/etc/kso/"
+	cp man/kso.1 "${pkgdir}/usr/share/man/man1"
+}
