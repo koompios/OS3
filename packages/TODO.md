@@ -13,6 +13,6 @@
 - [ ] koompi-updater
 - [x] koompi-base-meta
 - [x] koompi-base-desktop
-- [ ] gs-plugin-koompi-meta
+- [x] gs-plugin-koompi-meta
 
 
