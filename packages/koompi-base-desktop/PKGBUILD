@@ -1,0 +1,66 @@
+# Maintainer: Hangsia Hong <send@koompi.org>
+
+pkgname=koompi-base-desktop
+pkgver=1.0
+pkgrel=1
+pkgdesc="This meta package contains GNOME Core applications for KOOMPI OS."
+arch=('any')
+url="https://github.com/koompi-os/koompi-base-desktop/"
+sha256sums=('SKIP')
+license=('GPL')
+depends=(
+    'adwaita-icon-theme'
+    'gnome-system-monitor'
+    'gnome-color-manager'
+    'gnome-control-center'
+    'gnome-menus'
+    'gnome-online-accounts'
+    'gnome-online-miners'
+    'gnome-remote-desktop'
+    'gnome-session'
+    'gnome-settings-daemon'
+    'gnome-shell'
+    'gnome-shell-extensions'
+    'gnome-themes-extra'
+    'gnome-user-docs'
+    'gnome-user-share'
+    'gnome-bluetooth'
+    'gnome-keyring'
+    'nautilus'
+    'chrome-gnome-shell'
+    'dejavu-fonts'
+    'noto-fonts-emoji'
+    'noto-fonts'
+    'mutter'
+    'gdm'
+    'gjs'
+    'xorg-server'
+    'gdk-pixbuf2'
+    'koompi-first-setup'
+    'koompi-control-center'
+    'koompi-backgrounds'
+    'plymouth'
+    'plymouth-theme-spinner'
+    'plymouth-theme-koompi'
+    'plymouth-theme-koompi-bgrt'
+    'plymouth-theme-koompi-text'
+)
+recommends=(
+    'switcheroo-control'
+    'gnome-calculator'
+    'gnome-music'
+    'gnome-photos'
+    'gnome-software'
+    'gnome-disk-utility'
+    'gnome-sushi'
+    'evince'
+    'yelp'
+    'file-roller'
+    'eog'
+    'orca'
+    'totem'
+)
+
+package() {
+  printf "This package is a desktop meta package and does not need to be installed directly."
+}

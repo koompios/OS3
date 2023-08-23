@@ -13,7 +13,7 @@
 - [ ] distinst
 - [ ] koompi-updater
 - [x] koompi-base-meta
-- [ ] koompi-base-desktop
+- [x] koompi-base-desktop
 - [ ] gs-plugin-koompi-meta
 
 
