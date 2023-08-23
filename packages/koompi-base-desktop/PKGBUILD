@@ -42,8 +42,6 @@ depends=(
     'plymouth'
     'plymouth-theme-spinner'
     'plymouth-theme-koompi'
-    'plymouth-theme-koompi-bgrt'
-    'plymouth-theme-koompi-text'
 )
 recommends=(
     'switcheroo-control'
