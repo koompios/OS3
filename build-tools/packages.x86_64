@@ -125,4 +125,5 @@ gnome-software-plugin-flatpak
 ### KOOMPIOS
 # Core packages
 koompi-base-meta
+koompi-base-desktop
 
