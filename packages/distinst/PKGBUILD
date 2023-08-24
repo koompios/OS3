@@ -1,0 +1,24 @@
+# Maintainer: Hangsia Hong <hangsiahong@koompi.org>
+
+pkgname=distinst
+pkgver=0.5.0
+pkgrel=1
+pkgdesc="Distribution Installer CLI"
+arch=('x86_64')
+url="https://github.com/koompi-os/distinst"
+license=('GPL')
+depends=('libdistinst')
+makedepends=('cargo' 'clang' 'gettext' 'libclang' 'libdbus' 'libparted')
+source=('distinst::git+https://github.com/KOOMPI-OS/distinst.git#branch=main')
+sha256sums=('SKIP')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  cargo build --release
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}/target/release"
+  install -Dm755 "$pkgname" "${pkgdir}/usr/bin/${pkgname}"
+}
+

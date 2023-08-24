@@ -9,7 +9,7 @@
 - [x] koompi-system-operator
 - [x] AdwDialog(Maybe we can used prebuild from arch?)
 - [ ] gnome-software
-- [ ] distinst
+- [x] distinst
 - [ ] koompi-updater
 - [x] koompi-base-meta
 - [x] koompi-base-desktop
