@@ -1,0 +1,21 @@
+# Maintainer: Hangsia Hong <hangsia@koompi.org>
+
+pkgname=koompi-systemd-units
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="a collection of systemd unit files needed by KOOMPI OS for the core system to function."
+arch=('any')
+url="https://github.com/KOOMPI-OS/koompi-systemd-units"
+license=('GPL3')
+source=('koompi-systemd-units::git+https://github.com/KOOMPI-OS/koompi-systemd-units.git#branch=main')
+md5sums=('SKIP')
+install=koompi-systemd-units.install
+
+package() {
+  cd "$srcdir/$pkgname"
+  install -d "${pkgdir}/usr/lib/systemd/system"
+  install -Dm644 \x2esystem-usr.mount "${pkgdir}/usr/lib/systemd/system/\x2esystem-usr.mount"
+  install -Dm644 kso-autoupdate.service "${pkgdir}/usr/lib/systemd/system/kso-autoupdate.service"
+  install -Dm644 kso-autoupdate.timer "${pkgdir}/usr/lib/systemd/system/kso-autoupdate.timer"
+
+}
