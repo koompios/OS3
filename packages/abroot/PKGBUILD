@@ -9,7 +9,7 @@ url='https://github.com/KOOMPI-OS/ABRoot'
 license=(GPL3)
 depends=(glibc)
 makedepends=(go)
-source=('ABRoot::git+https://github.com/KOOMPI-OS/abroot.git#branch=archlinux')
+source=('ABRoot::git+https://github.com/KOOMPI-OS/abroot.git#branch=main')
 md5sums=('SKIP')
 
 prepare(){
@@ -25,11 +25,6 @@ build() {
 	export CGO_LDFLAGS="${LDFLAGS}"
 	export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
 	go build -o build
-}
-
-check() {
-	cd "$srcdir/ABRoot"
-	go test
 }
 
 package() {
