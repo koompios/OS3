@@ -7,18 +7,18 @@ pkgdesc="Distribution Installer CLI"
 arch=('x86_64')
 url="https://github.com/koompi-os/distinst"
 license=('GPL')
-depends=('libdistinst')
-makedepends=('cargo' 'clang' 'gettext' 'libclang' 'libdbus' 'libparted')
+#depends=('libdistinst')
+makedepends=('cargo' 'clang' 'gettext' 'libdbus')
 source=('distinst::git+https://github.com/KOOMPI-OS/distinst.git#branch=main')
 sha256sums=('SKIP')
 
 build() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
-  cargo build --release
+  cd "${srcdir}/${pkgname}"
+  make
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}/target/release"
-  install -Dm755 "$pkgname" "${pkgdir}/usr/bin/${pkgname}"
+  cd "${srcdir}/${pkgname}"
+  make install prefix="{pkgdir}/usr/"
 }
 
