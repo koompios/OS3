@@ -7,12 +7,13 @@ url="https://distrobox.privatedns.org/"
 license=('GPL3')
 depends=('podman' 'docker.io' 'uidmap')
 makedepends=('debhelper-compat')
-source=("https://github.com/koompi-os/micro-distrobox.git")
+source=("$pkgname::git+https://github.com/koompi-os/micro-distrobox.git")
+
 md5sums=('SKIP')
 
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgname"
   mkdir -p "$pkgdir/usr"
   cp -r usr/* "$pkgdir/usr/"
 }
