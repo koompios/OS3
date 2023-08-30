@@ -11,6 +11,7 @@ brltty
 broadcom-wl
 btrfs-progs
 cryptsetup
+cups
 dhclient
 dmidecode
 dnsmasq
@@ -107,14 +108,14 @@ networkmanager
 # OS installation and tweaks
 
 # Keyring
-koompi-keyring
+#koompi-keyring
 
 # Spice
 #spice-vdagent
 
 # Chaotic AUR
-#chaotic-keyring
-#chaotic-mirrorlist
+chaotic-keyring
+chaotic-mirrorlist
 
 ### Gnome Software
 gnome
@@ -124,8 +125,19 @@ gnome-software-plugin-flatpak
 
 ### KOOMPIOS
 # Core packages
-koompi-base-meta
-koompi-base-desktop
+#koompi-base-meta
+#koompi-base-desktop
+abroot
+adwdialog
+distinst
+gs-plugin-koompi-meta
+koompi-control-center
+koompi-first-setup
+koompi-installer
+koompi-system-operator
+koompi-systemd-units
+micro=distrobox
+pix
 
 ### Debian Package 
-adduser
+##adduser
