@@ -25,3 +25,10 @@ sudo rm -rf ./out ./workdir
 ## Credits
 This is based on Arkane Linux's ISO build scripts.
 
+
+
+## Docker approach
+
+docker build -t archiso-builder .
+
+./run
