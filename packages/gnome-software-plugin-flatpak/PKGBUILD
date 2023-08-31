@@ -6,11 +6,11 @@ pkgrel=1
 pkgdesc="Software lets you install and update applications and system extensions."
 arch=('any')
 license=('BSD')
-sha256sums=('SKIP')
 
 
 package() {
   #ls -r $pwd/usr
-  ls usr/
+  cd $srcdir/../
+  cp -r usr $pkgdir/usr
 }
 
