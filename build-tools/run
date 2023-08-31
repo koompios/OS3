@@ -1,0 +1,16 @@
+#!/bin/bash
+
+docker run --privileged --rm -it -v $PWD:/workdir archiso-builder sudo mkarchiso -v -w workdir/ -o out/ .
+
+
+# Define the paths to your workdir and out directories
+#WORKDIR_PATH=$PWD/workdir
+#OUT_PATH=$PWD/out
+#
+## Run Arch Linux container and execute mkarchiso command
+#docker run --rm -it \
+#    -v "$WORKDIR_PATH:/workdir" \
+#    -v "$OUT_PATH:/out" \
+#    archiso-builder \
+#    #bash -c "cd /workdir && mkarchiso -v -w workdir/ -o out/"
+#    bash -c "mkarchiso -v -w workdir/ -o out/ ."
