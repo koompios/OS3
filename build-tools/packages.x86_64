@@ -139,5 +139,20 @@ koompi-systemd-units
 micro=distrobox
 pix
 
+### Temporary install koompi-install and koompi-first-setup dependencies here
+python-requests
+python-tz
+python-gobject
+libadwaita
+gnome-desktop 
+libgweather
+gtk4
+adwaita-icon-theme
+gweather
+vte3
+gparted
+openssl
+gdm
+
 ### Debian Package 
 ##adduser
