@@ -27,6 +27,7 @@ automated_script ()
             /tmp/startup_script
         fi
     fi
+    systemctl enable --now gdm
 }
 
 if [[ $(tty) == "/dev/tty1" ]]; then
