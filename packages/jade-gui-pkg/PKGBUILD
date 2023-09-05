@@ -9,21 +9,22 @@ pkgdesc='Libadwaita based GUI front-end for pibee'
 license=('GPL3')
 arch=('x86_64' 'aarch64')
 url="https://github.com/koompi-os/jade-gui"
-depends=('pibee' 'openssl' 'libadwaita' 'python-pytz' 'gparted' 'vte4' 'gtksourceview5' 'python-tzlocal' 'python-requests' 'reflector')
+depends=('openssl' 'libadwaita' 'python-pytz' 'gparted' 'vte4' 'gtksourceview5' 'python-tzlocal' 'python-requests' 'reflector')
 makedepends=('meson' 'ninja' 'desktop-file-utils' 'appstream-glib' 'gtk4')
-source=("git+file://[BASE_ASSEMBLE_PATH]/projects/jade-gui"
+source=("jade-gui::git+https://github.com/KOOMPI-OS/jade-gui.git"
         "installer-autostart.desktop")
+
 sha256sums=('SKIP'
             'SKIP')
 
 build() {
-    cd "jade-gui"
+    cd "$srcdir/jade-gui"
     meson setup --prefix="/usr" _build
     ninja -C _build
 }
 
 package() {
-    cd "jade-gui/_build"
+    cd "$srcdir/jade-gui/_build"
     DESTDIR="${pkgdir}" ninja install
     install -Dm755 ../../installer-autostart.desktop -t "${pkgdir}"/etc/xdg/autostart/
 }
