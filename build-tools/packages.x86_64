@@ -125,19 +125,15 @@ gnome-software-plugin-flatpak
 
 ### KOOMPIOS
 # Core packages
-#koompi-base-meta
-#koompi-base-desktop
-abroot
 adwdialog
-distinst
-gs-plugin-koompi-meta
 koompi-control-center
 koompi-first-setup
-koompi-installer
-koompi-system-operator
-koompi-systemd-units
-micro=distrobox
+micro-distrobox
 pix
+pibee-git
+jade-gui
+python-yaml
+
 
 ### Temporary install koompi-install and koompi-first-setup dependencies here
 python-requests
@@ -153,6 +149,10 @@ vte3
 gparted
 openssl
 gdm
+cups-pk-helper
+open-vm-tools
+iio-sensor-proxy
+xorg-xhost
 
 ### Debian Package 
 ##adduser
