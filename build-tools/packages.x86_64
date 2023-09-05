@@ -114,8 +114,8 @@ networkmanager
 #spice-vdagent
 
 # Chaotic AUR
-chaotic-keyring
-chaotic-mirrorlist
+#chaotic-keyring
+#ichaotic-mirrorlist
 
 ### Gnome Software
 gnome
@@ -137,14 +137,11 @@ python-yaml
 
 ### Temporary install koompi-install and koompi-first-setup dependencies here
 python-requests
-python-tz
+python-pytz
 python-gobject
 libadwaita
-gnome-desktop 
-libgweather
 gtk4
 adwaita-icon-theme
-gweather
 vte3
 gparted
 openssl
