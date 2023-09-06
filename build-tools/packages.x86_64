@@ -1,3 +1,5 @@
+grub
+efibootmgr
 alsa-utils
 amd-ucode
 arch-install-scripts
@@ -121,7 +123,7 @@ networkmanager
 gnome
 firefox
 flatpak
-gnome-software-plugin-flatpak
+#gnome-software-plugin-flatpak
 
 ### KOOMPIOS
 # Core packages
