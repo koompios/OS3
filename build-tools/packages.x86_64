@@ -130,7 +130,6 @@ flatpak
 # Core packages
 adwdialog
 koompi-control-center
-koompi-first-setup
 micro-distrobox
 pix
 pibee-git
