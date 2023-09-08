@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <requires lib="gtk" version="4.0" />
+    <requires lib="libadwaita" version="1.0" />
+    <object class="AdwPreferencesPage" id="freqBoostIntelTab">
+        <property name="margin-top">16</property>
+        <property name="margin-end">16</property>
+        <property name="margin-bottom">16</property>
+        <property name="margin-start">16</property>
+        <property name="title">Intel</property>
+        <property name="icon-name">application-x-firmware-symbolic</property>
+        <child>
+            <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="halign">center</property>
+                <property name="width-request">640</property>
+                <property name="spacing">24</property>
+                <child>
+                    <object class="AdwPreferencesGroup" id="freqBoostEppFrame">
+                        <property name="title">Energy-Performance Preference (EPP)</property>
+                        <child>
+                            <object class="AdwActionRow">
+                                <property name="title" translatable="yes">When I switch frequency boost to &lt;b&gt;ON&lt;/b&gt; set EPP to</property>
+                                <property name="subtitle" translatable="yes">For all cores.</property>
+                                <property name="activatable-widget">freqBoostEppOn</property>
+                                <child>
+                                    <object class="GtkComboBoxText" id="freqBoostEppOn">
+                                        <property name="valign">center</property>
+                                        <property name="name">epp-on</property>
+                                        <items>
+                                            <item translatable="yes" id="-1">No change</item>
+                                        </items>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="AdwActionRow">
+                                <property name="title" translatable="yes">When I switch frequency boost to &lt;b&gt;OFF&lt;/b&gt; set EPP to</property>
+                                <property name="subtitle" translatable="yes">For all cores.</property>
+                                <property name="activatable-widget">freqBoostEppOff</property>
+                                <child>
+                                    <object class="GtkComboBoxText" id="freqBoostEppOff">
+                                        <property name="valign">center</property>
+                                        <property name="name">epp-off</property>
+                                        <items>
+                                            <item translatable="yes" id="-1">No change</item>
+                                        </items>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+                <child>
+                    <object class="AdwPreferencesGroup" id="freqBoostEpbFrame">
+                        <property name="title">Performance and Energy Bias Hint (EPB)</property>
+                        <child>
+                            <object class="AdwActionRow">
+                                <property name="title" translatable="yes">When I switch frequency boost to &lt;b&gt;ON&lt;/b&gt; set EPB to</property>
+                                <property name="subtitle" translatable="yes">For all cores.</property>
+                                <property name="activatable-widget">freqBoostEpbOn</property>
+                                <child>
+                                    <object class="GtkComboBoxText" id="freqBoostEpbOn">
+                                        <property name="valign">center</property>
+                                        <property name="name">epb-on</property>
+                                        <items>
+                                            <item translatable="yes" id="-1">No change</item>
+                                        </items>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="AdwActionRow">
+                                <property name="title" translatable="yes">When I switch frequency boost to &lt;b&gt;OFF&lt;/b&gt; set EPB to</property>
+                                <property name="subtitle" translatable="yes">For all cores.</property>
+                                <property name="activatable-widget">freqBoostEpbOff</property>
+                                <child>
+                                    <object class="GtkComboBoxText" id="freqBoostEpbOff">
+                                        <property name="valign">center</property>
+                                        <property name="name">epb-off</property>
+                                        <items>
+                                            <item translatable="yes" id="-1">No change</item>
+                                        </items>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>

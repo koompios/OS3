@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+    <schema id="org.gnome.shell.extensions.freq-boost-switch" path="/org/gnome/shell/extensions/freq-boost-switch/">
+        <key name="persist" type="b">
+            <default>false</default>
+            <summary>Apply saved Boost state after login</summary>
+            <description>This will prompt user for permission</description>
+        </key>
+        <key name="boost" type="b">
+            <default>true</default>
+            <summary>Saved state of Boost</summary>
+            <description>Not visible in the Preferences window</description>
+        </key>
+        <key name="epb-off" type="i">
+            <default>-1</default>
+            <summary>Set EPB when frequency boost is off</summary>
+            <description>-1 is no change, others are valid EPB values</description>
+        </key>
+        <key name="epb-on" type="i">
+            <default>-1</default>
+            <summary>Set EPB when frequency boost is on</summary>
+            <description>-1 is no change, others are valid EPB values</description>
+        </key>
+        <key name="epp-off" type="s">
+            <default>"-1"</default>
+            <summary>Set EPP when frequency boost is off</summary>
+            <description>-1 is no change, others are valid EPP values</description>
+        </key>
+        <key name="epp-on" type="s">
+            <default>"-1"</default>
+            <summary>Set EPP when frequency boost is on</summary>
+            <description>-1 is no change, others are valid EPP values</description>
+        </key>
+        <key name="polkit-rules" type="b">
+            <default>false</default>
+            <summary>Save if user added Polkit rules</summary>
+            <description>Querying for the rules requires permissions, so we save instead</description>
+        </key>
+    </schema>
+</schemalist>

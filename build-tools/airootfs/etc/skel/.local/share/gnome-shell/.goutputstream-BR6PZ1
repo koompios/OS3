@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<application-state>
+  <context id="">
+    <application id="org.gnome.TextEditor.desktop" score="0" last-seen="1675244397"/>
+    <application id="net.rpcs3.RPCS3.desktop" score="0" last-seen="1674986536"/>
+    <application id="xdg-desktop-portal-gnome.desktop" score="34" last-seen="1675487210"/>
+    <application id="com.mattjakeman.ExtensionManager.desktop" score="131" last-seen="1675305236"/>
+    <application id="io.gitlab.o20.word.desktop" score="39" last-seen="1674986121"/>
+    <application id="webcatalog-custom-1673625115094.desktop" score="57" last-seen="1674986542"/>
+    <application id="app.ytmdesktop.ytmdesktop.desktop" score="0" last-seen="1675005378"/>
+    <application id="org.gnome.eog.desktop" score="0" last-seen="1675002931"/>
+    <application id="apx_managed-org.gnome.tweaks.desktop" score="35" last-seen="1675138614"/>
+    <application id="org.vanillaos.ControlCenter.desktop" score="16" last-seen="1674887921"/>
+    <application id="org.gnome.Software.desktop" score="1743" last-seen="1675138803"/>
+    <application id="com.visualstudio.code.desktop" score="15" last-seen="1675487257"/>
+    <application id="foot.desktop" score="394" last-seen="1674925293"/>
+    <application id="webcatalog-custom-1673625352343.desktop" score="8" last-seen="1674986939"/>
+    <application id="webcatalog-instagram.desktop" score="4" last-seen="1675004551"/>
+    <application id="webcatalog-monkeytype.desktop" score="204" last-seen="1675004609"/>
+    <application id="org.gnome.Settings.desktop" score="413" last-seen="1675484592"/>
+    <application id="org.gnome.Console.desktop" score="6779" last-seen="1675487257"/>
+    <application id="gnome-wifi-panel.desktop" score="0" last-seen="0"/>
+    <application id="org.gnome.Calculator.desktop" score="3" last-seen="1675304847"/>
+    <application id="webcatalog-youtube.desktop" score="30" last-seen="1674986205"/>
+    <application id="com.usebottles.bottles.desktop" score="6165" last-seen="1674986468"/>
+    <application id="webcatalog-facebook.desktop" score="86" last-seen="1675305779"/>
+    <application id="org.gnome.Calendar.desktop" score="0" last-seen="1675303819"/>
+    <application id="org.gnome.Shell.Extensions.desktop" score="45" last-seen="1675301422"/>
+    <application id="com.google.Chrome.desktop" score="402" last-seen="1674887378"/>
+    <application id="net.pcsx2.PCSX2.desktop" score="0" last-seen="1674986541"/>
+    <application id="io.github.shiftey.Desktop.desktop" score="5" last-seen="1675002610"/>
+    <application id="org.gnome.Nautilus.desktop" score="679" last-seen="1675244433"/>
+    <application id="com.obsproject.Studio.desktop" score="4" last-seen="1675002416"/>
+    <application id="gnome-system-monitor.desktop" score="13" last-seen="1675004935"/>
+    <application id="org.gnome.Evince.desktop" score="67" last-seen="1675135688"/>
+    <application id="org.telegram.desktop.desktop" score="3003" last-seen="1675305106"/>
+    <application id="app.moosync.moosync.desktop" score="4257" last-seen="1675244859"/>
+  </context>
+</application-state>

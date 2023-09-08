@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<application-state>
+  <context id="">
+    <application id="org.gnome.Nautilus.desktop" score="137" last-seen="1681792178"/>
+    <application id="org.gnome.Settings.desktop" score="40" last-seen="1681791161"/>
+    <application id="org.gnome.Epiphany.desktop" score="9" last-seen="1681786853"/>
+    <application id="org.gnome.Console.desktop" score="6638" last-seen="1681791237"/>
+    <application id="org.gnome.Shell.Extensions.desktop" score="5" last-seen="1681789303"/>
+    <application id="org.gnome.Software.desktop" score="80" last-seen="1681789872"/>
+    <application id="org.gnome.Calculator.desktop" score="6" last-seen="1681791100"/>
+    <application id="org.koompios.ControlCenter.desktop" score="2" last-seen="1681787735"/>
+    <application id="com.mattjakeman.ExtensionManager.desktop" score="25" last-seen="1681789304"/>
+  </context>
+</application-state>

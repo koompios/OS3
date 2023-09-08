@@ -1,0 +1,43 @@
+#!/bin/bash
+: '
+Moved from the extension.js file. Reason - more meaningful pkexec message.
+$1 can be 0 (pstate) or 1 (cpufreq)
+$2 can be 0 (set boost to off) or 1 (set boost to on)
+$3 is Intel EPP value or -1 (if not supported)
+$4 is Intel EPB value or -1 (if not supported)
+'
+
+if [ "$1" == "0" ]; then
+  DRIVER="intel_pstate/no_turbo"
+
+  # EPP goes first, as it could change EPB
+  if [ "$3" != "-1" ]; then
+    CORES=$(grep --count ^processor /proc/cpuinfo)
+
+    for ((i = 0; i < $CORES; i++)); do
+      echo $3 >/sys/devices/system/cpu/cpu$i/cpufreq/energy_performance_preference
+    done
+  fi
+
+  if [ $4 -ne -1 ]; then
+    CORES=$(grep --count ^processor /proc/cpuinfo)
+
+    for ((i = 0; i < $CORES; i++)); do
+      echo $4 >/sys/devices/system/cpu/cpu$i/power/energy_perf_bias
+    done
+  fi
+
+  if [ "$2" == "0" ]; then
+    VALUE=1
+  else
+    VALUE=0
+  fi
+else
+  DRIVER="cpufreq/boost"
+  VALUE=$2
+fi
+
+echo "$VALUE" >/sys/devices/system/cpu/$DRIVER
+
+# Report all good to Gio.Subprocess
+exit 0

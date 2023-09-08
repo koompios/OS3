@@ -1,0 +1,114 @@
+#!/bin/bash
+
+# Backup GNOME customization files
+function backup() {
+    # Set the backup file name and location
+    backup_file="gnome_customizations_$(date +%Y%m%d).tar.gz"
+
+    # Set the directories to backup
+    customization_directories=(
+      "$HOME/.themes"
+      "$HOME/.icons"
+      "$HOME/.local/share/gnome-shell/extensions"
+      "$HOME/.local/share/icons/"
+      "$HOME/.local/share/flatpak/overrides"
+      "$HOME/.config/dconf"
+      "$HOME/.config/gtk-4.0"
+    )
+
+    # Create a temporary directory to store the backup files
+    backup_dir=$(mktemp -d)
+
+    # Copy customization directories to the backup directory
+    for directory in "${customization_directories[@]}"; do
+      if [ -d "$directory" ]; then
+        cp -r "$directory" "$backup_dir"
+      fi
+    done
+
+    # Backup dconf settings using gsettings
+    dconf_settings_file="$backup_dir/.dconf_settings.ini"
+    dconf dump / > "$dconf_settings_file"
+
+    # Create the final backup archive
+    tar -czvf "$backup_file" -C "$backup_dir" .
+
+    # Cleanup the temporary backup directory
+    rm -rf "$backup_dir"
+
+    echo "Backup created: $backup_file"
+
+}
+
+# Restore GNOME customization files
+function update() {
+    # Set the URL of the backup directory
+    backup_url="https://dev.koompi.org/os3/gnome-backup/"
+
+    # Set the destination directory to update the configuration files
+    destination_dir="$HOME"
+
+    # Check if the backup directory URL is accessible
+    if curl --output /dev/null --silent --head --fail "$backup_url"; then
+      # Retrieve the latest backup file name
+      latest_backup_file=$(curl -s "$backup_url" | grep -oE 'href="([^"#]+)"' | sed -e 's/^href=//' -e 's/\"//g' | sort -r | head -n 1)
+
+      # Set the URL of the latest backup file
+      latest_backup_url="${backup_url}${latest_backup_file}"
+
+      # Check if the latest backup file exists
+      if curl --output /dev/null --silent --head --fail "$latest_backup_url"; then
+        # Download the latest backup file
+        wget "$latest_backup_url" -O "$destination_dir/gnome_customizations.tar.gz"
+
+        # Check if the download was successful
+        if [ $? -eq 0 ]; then
+          # Extract the backup file
+          tar -xzvf "$destination_dir/gnome_customizations.tar.gz" -C "$destination_dir" --keep-newer-files
+
+	  cp -r ~/extensions ~/.local/share/gnome-shell/
+	  cp -r ~/dconf ~/.config/
+	  cp -r ~/gtk-4.0 ~/.config/
+	  cp -r ~/icons ~/.local/share/icons/
+	  cp -r ~/overrides ~/.local/share/flatpak/
+
+	  rm -rf ~/extensions
+	  rm -rf ~/dconf
+	  rm -rf ~/gtk-4.0
+	  rm -rf ~/icons
+	  rm -rf ~/overrides
+
+          dconf load / < $HOME/.dconf_settings.ini
+          echo "Configuration files have been updated."
+        else
+          echo "Error: Failed to download the latest backup file."
+          exit 1
+        fi
+      else
+        echo "Error: Latest backup file not found."
+        exit 1
+      fi
+    else
+      echo "Error: Backup directory URL not accessible."
+      exit 1
+    fi
+
+}
+
+# Display usage information
+function usage() {
+  echo "Usage: $0 [backup|update]"
+}
+
+# Check command line arguments
+case "$1" in
+  "backup")
+    backup
+    ;;
+  "update")
+    update
+    ;;
+  *)
+    usage
+    ;;
+esac

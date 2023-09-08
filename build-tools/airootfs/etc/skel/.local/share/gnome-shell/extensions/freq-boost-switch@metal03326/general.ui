@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <requires lib="gtk" version="4.0" />
+    <requires lib="libadwaita" version="1.0" />
+    <object class="AdwPreferencesPage" id="freqBoostGeneralTab">
+        <property name="margin-top">16</property>
+        <property name="margin-end">16</property>
+        <property name="margin-bottom">16</property>
+        <property name="margin-start">16</property>
+        <property name="name">freqBoostGeneralTab</property>
+        <property name="title" translatable="yes">General</property>
+        <property name="icon-name">emblem-system-symbolic</property>
+        <child>
+            <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="halign">center</property>
+                <property name="width-request">640</property>
+                <property name="spacing">24</property>
+                <child>
+                    <object class="AdwPreferencesGroup">
+                        <child>
+                            <object class="AdwActionRow">
+                                <property name="title" translatable="yes">Persist</property>
+                                <property name="subtitle" translatable="yes">Warning! This will make permissions dialog to appear 5s after login (only if boost needs to be changed).</property>
+                                <property name="activatable-widget">freqBoostPersistSwitch</property>
+                                <child>
+                                    <object class="GtkSwitch" id="freqBoostPersistSwitch">
+                                        <property name="valign">center</property>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+                <child>
+                    <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Get rid of the permissions dialog</property>
+                        <child>
+                            <object class="AdwActionRow" id="freqBoostPolkitOk">
+                                <property name="visible">0</property>
+                                <property name="title" translatable="yes">Add Polkit rules</property>
+                                <property name="subtitle">/etc/polkit-1/rules.d/freq-boost-switch.rules</property>
+                                <property name="activatable-widget">freqBoostPolkitSwitch</property>
+                                <child>
+                                    <object class="GtkSwitch" id="freqBoostPolkitSwitch">
+                                        <property name="valign">center</property>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="AdwActionRow" id="freqBoostOutdatedPolkit">
+                                <property name="title" translatable="yes">Outdated Polkit</property>
+                                <property name="subtitle" translatable="yes">Update it to at least 0.106 to be able to get rid of the permissions dialog.</property>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>
