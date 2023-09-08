@@ -249,6 +249,8 @@ def inst_setup_base(config):
     exec_chroot(['pacman-key', '--populate', 'archlinux'])
     # Install linux-zen
     #exec_chroot(['pacman', '-Sy', '--noconfirm', 'linux-zen', 'xorriso'])
+    # cp linux-zen image
+    exec_chroot(['cp', '/usr/lib/modules/*zen', '/boot/vmlinuz-linux-zen'])
     # generate linux-zen image
     exec_chroot(['mkinitcpio', '-p', 'linux-zen'])
     # Remove jade-gui and pibee
