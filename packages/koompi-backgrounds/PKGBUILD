@@ -1,0 +1,14 @@
+pkgname='koompi-backgrounds'
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='KOOMPI OS3 Background Wallpaper'
+arch=(any)
+source=('koompi-background::git+https://github.com/koompi-os/koompi-background.git')
+sha256sums=('SKIP')
+
+package() {
+    cd "${srcdir}/koompi-backgrounds"
+    mkdir -pv $pkgdir/usr/share/
+    cp -r backgrounds $pkgdir/usr/share/
+
+}
