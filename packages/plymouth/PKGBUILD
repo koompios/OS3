@@ -17,7 +17,8 @@ backup=('etc/plymouth/plymouthd.conf')
 source=("https://gitlab.freedesktop.org/plymouth/plymouth/-/archive/${pkgver}/plymouth-${pkgver}.tar.gz"
         "https://github.com/koompi-os/plymouth/tarball/master")
 
-sha256sums=('SKIP')
+sha256sums=('8921cd61a9f32f5f8903ceffb9ab0defaef8326253e1549ef85587c19b7f2ab6'
+            'SKIP')
 
 prepare() {
 	tar xf master
