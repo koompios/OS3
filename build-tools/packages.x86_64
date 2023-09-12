@@ -2,9 +2,8 @@ xorriso
 os-prober
 gnome-disk-utility
 gnome-tweaks
-plymouth-theme-koompi
 vim
-grub
+grub-koompi
 efibootmgr
 alsa-utils
 amd-ucode
@@ -39,7 +38,6 @@ irssi
 less
 libfido2
 libusb-compat
-linux
 linux-zen
 linux-atm
 linux-firmware
@@ -143,6 +141,14 @@ jade-gui
 python-yaml
 koompi-backgrounds
 
+# Fonts
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+ttf-jetbrains-mono
+
+# Startup
+plymouth-koompi
 
 ### Temporary install koompi-install and koompi-first-setup dependencies here
 python-requests
