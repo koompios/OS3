@@ -8,7 +8,7 @@ sha256sums=('SKIP')
 
 package() {
     cd "${srcdir}/koompi-backgrounds"
-    mkdir -pv $pkgdir/usr/share/
-    cp -r backgrounds $pkgdir/usr/share/
+    mkdir -pv $pkgdir/usr/share/backgrounds/gnome/
+    cp -r backgrounds/* $pkgdir/usr/share/backgrounds/gnome/
 
 }
