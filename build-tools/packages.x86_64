@@ -140,12 +140,114 @@ pibee-git
 jade-gui
 python-yaml
 koompi-backgrounds
+waydroid-koompi
 
 # Fonts
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 ttf-jetbrains-mono
+khmer-fonts
+inter-font
+noto-fonts-emoji
+
+# printing
+cups
+libcups
+cups-pdf
+cups-filters
+cups-pk-helper
+foomatic-db-engine
+foomatic-db
+foomatic-db-ppds
+foomatic-db-nonfree
+foomatic-db-nonfree-ppds
+gutenprint
+foomatic-db-gutenprint-ppds
+libpaper
+system-config-printer
+nss-mdns
+hplip
+a2ps
+
+
+# io & fs
+kio
+kio-extras
+kio-fuse
+kio-gdrive
+imount
+mtpfs
+libmtp
+gvfs-mtp
+audiocd-kio
+btrfs-progs
+exfatprogs
+f2fs-tools
+fatresize
+fsarchiver
+xfsprogs
+ntfs-3g
+gpart
+gptfdisk
+hdparm
+lsscsi
+libfido2
+libusb-compat
+jfsutils
+nvme-cli
+nfs-utils
+nilfs-utils
+partclone
+parted
+partimage
+reiserfsprogs
+udftools
+usb_modeswitch
+usbmuxd
+usbutils
+
+# editors
+nano
+nano-syntax-highlighting
+vim
+kate
+visual-studio-code-bin
+
+firefox
+google-chrome
+telegram-desktop
+teams
+zoom
+xdman
+
+# office
+libreoffice-fresh
+libreoffice-fresh-km
+kcalc
+okular
+spectacle
+freemind
+
+# graphic
+kdegraphics-thumbnailers
+gimp
+inkscape
+krita
+darktable
+gwenview
+
+# multimedia
+vlc
+kdenlive
+obs-studio
+webcamoid-git
+libuvc
+akvcam-dkms-git
+elisa
+
+
+
 
 # Startup
 plymouth-koompi
