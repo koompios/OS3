@@ -39,6 +39,7 @@ less
 libfido2
 libusb-compat
 linux-zen
+linux-zen-headers
 linux-atm
 linux-firmware
 linux-firmware-marvell
@@ -109,6 +110,7 @@ pipewire-jack
 pipewire-alsa
 wireplumber
 networkmanager
+ifstat
 
 # Startup
 
@@ -134,6 +136,7 @@ flatpak
 # Core packages
 adwdialog
 koompi-control-center
+koompi-system-operator
 micro-distrobox
 pix
 pibee-git
