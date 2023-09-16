@@ -8,16 +8,16 @@ arch=(x86_64 aarch64)
 url='https://github.com/KOOMPI-OS/koompi-system-operator'
 license=(GPL3)
 depends=(go)
-makedepends=('go', 'adwdialog', 'ifstat')
+makedepends=('go' 'adwdialog' 'ifstat')
 source=('koompi-system-operator::git+https://github.com/KOOMPI-OS/koompi-system-operator.git#branch=main')
 
 prepare(){
-	cd "$pkgname-${pkgver}"
+	cd "$pkgname"
 	mkdir -p build/
 }
 
 build() {
-	cd "ABRoot-${pkgver}"
+	cd $pkgname
 	export CGO_CPPFLAGS="${CPPFLAGS}"
 	export CGO_CFLAGS="${CFLAGS}"
 	export CGO_CXXFLAGS="${CXXFLAGS}"
@@ -27,8 +27,9 @@ build() {
 }
 
 package() {
-	cd "$pkgname-${pkgver}"
-	install -Dm755 build/${pkgname} "${pkgdir}/usr/bin/${pkgname}"
+	cd "$pkgname"
+	install -Dm755 build/kso "${pkgdir}/usr/bin/kso"
+
  	mkdir -pv ${pkgdir}/etc/kso
   mkdir -pv "${pkgdir}/usr/share/man/man1"
  	cp -r config/config.json "${pkgdir}/etc/kso/"

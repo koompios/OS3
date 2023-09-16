@@ -7,18 +7,18 @@ pkgdesc='This utility is meant to be used in KOOMPI OS to manage its components 
 arch=(x86_64 aarch64)
 url='https://github.com/KOOMPI-OS/koompi-control-center'
 license=(GPL3)
-makedepends=('itstool', 'base-devel', 'python', 'meson', 'libadwaita', 'gettext', 'make', 'desktop-file-utils')
-depends=('python', 'python-gobject', 'libadwaita', 'gtk4', 'pix', 'koompi-system-operator')
+makedepends=('itstool''base-devel' 'python' 'meson' 'libadwaita' 'gettext' 'make' 'desktop-file-utils')
+depends=('python', 'python-gobject' 'libadwaita' 'gtk4' 'pix' 'koompi-system-operator')
 source=("$pkgname::git+https://github.com/koompi-os/koompi-control-center.git")
 md5sums=('SKIP')
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgname"
   meson build
   ninja -C build
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgname"
   DESTDIR="$pkgdir" ninja -C build install
 }
