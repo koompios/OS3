@@ -144,6 +144,7 @@ jade-gui
 python-yaml
 koompi-backgrounds
 waydroid-koompi
+waydroid-image
 
 # Fonts
 noto-fonts
@@ -214,7 +215,6 @@ usbutils
 nano
 nano-syntax-highlighting
 vim
-kate
 visual-studio-code-bin
 
 firefox
@@ -222,23 +222,16 @@ google-chrome
 telegram-desktop
 teams
 zoom
-xdman
 
 # office
 libreoffice-fresh
 libreoffice-fresh-km
-kcalc
 okular
-spectacle
-freemind
 
 # graphic
-kdegraphics-thumbnailers
 gimp
 inkscape
 krita
-darktable
-gwenview
 
 # multimedia
 vlc
@@ -247,8 +240,6 @@ obs-studio
 webcamoid-git
 libuvc
 akvcam-dkms-git
-elisa
-
 
 
 
