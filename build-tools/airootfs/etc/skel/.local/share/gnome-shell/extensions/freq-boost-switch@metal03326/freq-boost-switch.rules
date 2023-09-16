@@ -1,7 +1,0 @@
-polkit.addRule( function ( action )
-{
-	if ( action.id === 'org.freedesktop.policykit.exec' && action.lookup( 'program' ).endsWith( '/freq-boost-switch@metal03326/set_boost' ) )
-	{
-		return polkit.Result.YES;
-	}
-} );
