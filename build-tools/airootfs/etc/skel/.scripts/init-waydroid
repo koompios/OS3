@@ -1,0 +1,28 @@
+#!/bin/bash
+
+init_waydroid() {
+    # Spawn the necessary child processes and perform initialization steps
+    sudo waydroid init
+    sudo systemctl enable --now waydroid-container
+    sudo waydroid session start & disown
+    
+    sleep 8
+
+    sudo waydroid shell wm set-fix-to-user-rotation enabled;
+    sudo echo "persist.waydroid.multi_windows=true" | tee -a /var/lib/waydroid/waydroid.cfg
+
+    if LC_ALL=C glxinfo | grep "^OpenGL renderer string: " | grep -q 'NVIDIA' || cat /proc/cpuinfo | grep -q 'hypervisor'; then
+        sudo echo -e "ro.hardware.gralloc=default\\nro.hardware.egl=swiftshader" | sudo tee -a "/var/lib/waydroid/waydroid.cfg"
+    fi
+
+    sudo waydroid upgrade -o
+    sudo waydroid session stop
+    sudo waydroid session start
+
+    sleep 2
+
+    echo 'success'
+}
+
+init_waydroid
+
