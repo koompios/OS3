@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Display warning message
+echo "WARNING: We are strongly recommend you to use the Linux Subsystem instead"
+echo "Example: pix install neofetch git wget"
+echo "If you still want to run pacman, please confirm by typing 'Y':"
+read -r confirm
+
+# Check user input
+if [[ "$confirm" != "Y" && "$confirm" != "y" ]]; then
+  echo "Operation canceled."
+  exit 0
+fi
+
+# Run pacman command
+/usr/bin/pacman "$@"
