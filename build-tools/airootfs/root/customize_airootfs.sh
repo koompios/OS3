@@ -7,3 +7,4 @@ set -e -u
 systemctl enable gdm
 systemctl set-default graphical.target
 
+export $(dbus-launch)
