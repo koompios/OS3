@@ -1,0 +1,16 @@
+pkgname='wpm'
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='Waydroid Package Manager'
+arch=(any)
+source=('wpm::git+https://github.com/koompi-os/waydroid-package-manager.git')
+sha256sums=('SKIP')
+
+package() {
+    cd "${srcdir}/wpm"
+    chmod +x wpm.sh
+    mkdir -p "$pkgdir"/usr/share/wpm
+    cp wpm.sh "$pkgdir"/usr/bin/wpm
+    mkdir -p "$pkgdir"/usr/share/wpm/repos
+    cp -r repos/* "$pkgdir"/usr/share/wpm/repos
+}
