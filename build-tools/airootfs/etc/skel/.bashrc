@@ -118,10 +118,11 @@ fi
 export PATH="$HOME/gems/bin:$PATH:$HOME/.local/bin"
 
 
-alias goubuntu="/usr/lib/pix/distrobox enter pix_managed"
+alias goubuntu="/usr/lib/pix/distrobox enter pix_managed_apt"
 alias goarch="/usr/lib/pix/distrobox enter pix_managed_aur"
 alias px="pix"
 
 
 alias update-ui="$HOME/.scripts/pizard update"
+alias open="nautilus"
 
