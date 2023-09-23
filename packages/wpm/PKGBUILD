@@ -10,6 +10,7 @@ package() {
     cd "${srcdir}/wpm"
     chmod +x wpm.sh
     mkdir -p "$pkgdir"/usr/share/wpm
+    mkdir -p "$pkgdir"/usr/bin
     cp wpm.sh "$pkgdir"/usr/bin/wpm
     mkdir -p "$pkgdir"/usr/share/wpm/repos
     cp -r repos/* "$pkgdir"/usr/share/wpm/repos

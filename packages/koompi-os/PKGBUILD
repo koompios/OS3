@@ -1,21 +1,16 @@
 # Maintainer: Hangsiahong <honghangsia@gmail.com>
-pkgname=koompi-updater
-pkgver=1.0
+pkgname=koompi-os
+pkgver=3.0
 pkgrel=1
-pkgdesc="KOOMPI OS Updater"
+pkgdesc="KOOMPI OS Version Package"
 arch=('any')
 license=('GPL')
-source=("koompi-updater::git+https://github.com/KOOMPI-OS/koompi-updater.git")
-depends=('zenity')
+
+depends=('package-providing-updated-os-release') # Replace with the actual package name providing the updated os-release file
 
 package() {
-    cd $srcdir/$pkgname
-    mkdir -pv $pkgdir/usr/bin
-    mkdir -pv $pkgdir/usr/share/applications/
-    mkdir -pv $pkgdir/usr/share/icons/
-    cp koompi-updater* $pkgdir/usr/bin/
-    cp koompi-update.desktop $pkgdir/usr/share/applications/
-    cp koompi-updater.svg $pkgdir/usr/share/icons/
+    # You don't need to do anything here for a meta-package
+    # It's empty because the package doesn't contain files
 }
 
 # The following functions are optional but can be included for more control:
