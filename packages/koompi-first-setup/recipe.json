@@ -3,10 +3,10 @@
     "distro_name": "KOOMPI OS",
     "distro_logo": "org.koompios.FirstSetup",
     "pre_run": [
-        "pacman -Syu --no-confirm"
+        "/usr/bin/pacman -Syu --no-confirm"
     ],
     "post_run": [
-        "pacman -Syu --no-confirm"
+        "/usr/bin/pacman -Syu --no-confirm"
     ],
     "tour": {
         "get-involved": {
@@ -20,12 +20,6 @@
              "title": "Join The Community",
              "description": "Our community is active on Discord. You can join us to ask questions, get help, or just to chat with other users.",
              "read_more_link": "https://t.me/KOOMPI"
-        },
-        "abroot": {
-             "icon": "security-medium-symbolic",
-             "title": "Immutable and Atomic",
-             "description": "KOOMPI OS is an immutable and atomic Linux distribution. It is based on Ubuntu and uses ABRoot to provide atomic transactions.",
-             "read_more_link": "https://docs.koompi.org/docs/ABRoot/"
         },
         "pix": {
              "icon": "koompi-container-terminal-symbolic",
@@ -81,7 +75,7 @@
                     "if": "flatpak",
                     "type": "command",
                     "commands": [
-                        "flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
+                        "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
                     ]
                 },
                 {
@@ -93,7 +87,7 @@
                     "if": "appimage",
                     "type": "command",
                     "commands": [
-                        "pacman -S --no-confirm appimagelauncher"
+                        "/usr/bin/pacman -S --no-confirm appimagelauncher"
                    ]
                 }
             ]
@@ -116,7 +110,7 @@
                 {
                     "if": "timeshift",
                     "type": "command",
-                    "commands": ["pacman -S --no-confirm timeshift"]
+                    "commands": ["/usr/bin/pacman -S --no-confirm timeshift"]
                 }
             ]
         },
@@ -142,7 +136,7 @@
                     "if": "nvidia",
                     "type": "command",
                     "commands": [
-                        "apt install -y linux-headers nvidia"
+                        "/usr/bin/pacman -S nvidia"
                     ]
                 }
             ]
@@ -168,7 +162,7 @@
                 {
                     "if": "vm",
                     "type": "command",
-                    "commands": ["pacman -S --no-confirm open-vm-tools"]
+                    "commands": ["/usr/bin/pacman -S --no-confirm open-vm-tools"]
                 }
             ]
         },
@@ -190,29 +184,7 @@
                 {
                     "if": "codecs",
                     "type": "command",
-                    "commands": ["pacman -S --no-confirm ffmpeg-full"]
-                }
-            ]
-        },
-        "timezone": {
-            "template": "yes-no",
-            "icon": "koompi-puzzle-piece-symbolic",
-            "title": "Enable Automatic Timezone Setup",
-            "description": "Choose whether to enable Autoset Timezone Location.",
-            "buttons": {
-                "yes": "Install",
-                "no": "Skip",
-                "info": {
-                    "type": "text",
-                    "title": "About Auto Timezone Setup",
-                    "text": "The script will auto set your timezone to whichever your IP Address come from. Default will be set to Asia/Phnom_Penh"
-                }
-            },
-            "final": [
-                {
-                    "if": "timezone",
-                    "type": "command",
-                    "commands": ["systemctl enable automatic-timezone"]
+                    "commands": ["/usr/bin/pacman -S --no-confirm ffmpeg-full"]
                 }
             ]
         },
@@ -234,7 +206,7 @@
                 {
                     "if": "proprietary",
                     "type": "command",
-                    "commands": ["pacman -S --no-confirm ttf-ms-fonts"]
+                    "commands": ["/usr/bin/pacman -S --no-confirm ttf-ms-fonts"]
                 }
             ]
         }
