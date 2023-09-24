@@ -6,11 +6,13 @@ pkgdesc="KOOMPI OS Version Package"
 arch=('any')
 license=('GPL')
 
-depends=('package-providing-updated-os-release') # Replace with the actual package name providing the updated os-release file
+#depends=('package-providing-updated-os-release') # Replace with the actual package name providing the updated os-release file
 
 package() {
     # You don't need to do anything here for a meta-package
     # It's empty because the package doesn't contain files
+    install -Dm644 os-release "$pkgdir/etc/os-release"
+
 }
 
 # The following functions are optional but can be included for more control:
