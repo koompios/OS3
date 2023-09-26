@@ -1,12 +1,12 @@
 # Maintainer: Hangsiahong <honghangsia@gmail.com>
 pkgname=koompi-os
 pkgver=3.0
-pkgrel=1
+pkgrel=2
 pkgdesc="KOOMPI OS Version Package"
 arch=('any')
 license=('GPL')
 
-#depends=('package-providing-updated-os-release') # Replace with the actual package name providing the updated os-release file
+depends=('flatpak-repo-add') # Replace with the actual package name providing the updated os-release file
 
 package() {
     # You don't need to do anything here for a meta-package
