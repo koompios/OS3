@@ -1,0 +1,17 @@
+# Maintainer: Hangsia Hong <honghangsia@gmail.com>
+pkgname=flatpak-repo-add
+pkgver=1.0
+pkgrel=1
+pkgdesc="Add Flathub remote repository"
+arch=('any')
+license=('MIT')
+
+post_install() {
+    echo "Adding Flathub remote repository..."
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+}
+
+package() {
+    # No need to install any files here
+}
+
