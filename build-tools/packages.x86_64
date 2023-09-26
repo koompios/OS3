@@ -218,29 +218,7 @@ usbutils
 nano
 nano-syntax-highlighting
 vim
-visual-studio-code-bin
 
-firefox
-google-chrome
-telegram-desktop
-teams
-zoom
-
-# office
-libreoffice-fresh
-libreoffice-fresh-km
-okular
-
-# graphic
-gimp
-inkscape
-krita
-
-# multimedia
-vlc
-kdenlive
-obs-studio
-libuvc
 
 
 
