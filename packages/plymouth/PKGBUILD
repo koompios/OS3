@@ -50,7 +50,7 @@ build() {
 		--enable-pango \
 		--enable-gtk=no \
 		--with-release-file=/etc/os-release \
-		--with-logo=/usr/share/plymouth/koompi-logo.png \
+		--with-logo=/usr/share/plymouth/koompi-text.png \
 		--with-background-color=0x000000 \
 		--with-background-start-color-stop=0x000000 \
 		--with-background-end-color-stop=0x4D4D4D \
@@ -58,6 +58,7 @@ build() {
 		--without-system-root-install \
 		--runstatedir=/run
 
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 	make
 }
 
@@ -66,8 +67,8 @@ package() {
 
 	make DESTDIR="$pkgdir" install
 
-	install -Dm644 "$srcdir/koompi-logo.png" "$pkgdir/usr/share/plymouth/koompi-logo.png"
-	ln -s ../../koompi-logo.png "$pkgdir/usr/share/plymouth/themes/spinner/watermark.png"
+	install -Dm644 "$srcdir/koompi-text.png" "$pkgdir/usr/share/plymouth/koompi-text.png"
+	ln -s ../../koompi-text.png "$pkgdir/usr/share/plymouth/themes/spinner/watermark.png"
 
 	install -Dm644 "$srcdir/plymouth.encrypt_hook" "$pkgdir/usr/lib/initcpio/hooks/plymouth-encrypt"
 	install -Dm644 "$srcdir/plymouth.encrypt_install" "$pkgdir/usr/lib/initcpio/install/plymouth-encrypt"
