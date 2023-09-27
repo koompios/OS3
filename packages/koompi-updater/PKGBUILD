@@ -6,7 +6,7 @@ pkgdesc="KOOMPI OS Updater"
 arch=('any')
 license=('GPL')
 source=("koompi-updater::git+https://github.com/KOOMPI-OS/koompi-updater.git")
-depends=('zenity')
+depends=('zenity' 'jq' 'curl')
 sha256sums=('SKIP')
 
 
