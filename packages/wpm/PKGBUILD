@@ -1,11 +1,11 @@
 pkgname='wpm'
 pkgver=0.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Waydroid Package Manager'
 arch=(any)
 source=('wpm::git+https://github.com/koompi-os/waydroid-package-manager.git')
 sha256sums=('SKIP')
-depend=('android-tools')
+depend=('android-tools' 'xmlstarlet')
 
 package() {
     cd "${srcdir}/wpm"
