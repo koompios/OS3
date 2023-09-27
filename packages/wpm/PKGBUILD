@@ -5,6 +5,7 @@ pkgdesc='Waydroid Package Manager'
 arch=(any)
 source=('wpm::git+https://github.com/koompi-os/waydroid-package-manager.git')
 sha256sums=('SKIP')
+depend=('android-tools')
 
 package() {
     cd "${srcdir}/wpm"
