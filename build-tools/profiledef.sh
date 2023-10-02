@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="KOOMPIOS3-beta2"
-iso_label="KOOMPIOS3_$(date +%Y%m)-beta2"
-iso_publisher="KOOMPIOS3 <https://koompi.org"
-iso_application="KOOMPIOS3 Live/Rescue CD"
+iso_name="KOOMPIOS"
+iso_label="KOOMPIOS_$(date +%Y%m)-beta2"
+iso_publisher="KOOMPIOS <https://koompi.org"
+iso_application="KOOMPIOS Live/Rescue CD"
 iso_version="$(date +%Y.%m.%d)"
 install_dir="koompi"
 buildmodes=('iso')

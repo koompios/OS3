@@ -94,6 +94,7 @@ wpa_supplicant
 wvdial
 xfsprogs
 xl2tpd
+android-tools
 
 ### On-ISO drivers
 ###nvidia
@@ -241,5 +242,5 @@ open-vm-tools
 iio-sensor-proxy
 xorg-xhost
 
-### Debian Package 
+### Debian Package
 ##adduser
