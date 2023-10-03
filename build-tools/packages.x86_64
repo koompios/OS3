@@ -1,9 +1,7 @@
 xorriso
 os-prober
 gnome-disk-utility
-gnome-tweaks
-vim
-grub-koompi
+gnome-tweaks vim grub-koompi
 efibootmgr
 alsa-utils
 amd-ucode
@@ -214,6 +212,7 @@ udftools
 usb_modeswitch
 usbmuxd
 usbutils
+zramd
 
 # editors
 nano
