@@ -5,6 +5,7 @@
 
 set -e -u
 systemctl enable gdm
+systemctl enable zramd
 systemctl set-default graphical.target
 
 export $(dbus-launch)
