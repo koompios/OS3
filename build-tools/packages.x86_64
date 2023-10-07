@@ -1,7 +1,9 @@
 xorriso
 os-prober
 gnome-disk-utility
-gnome-tweaks vim grub-koompi
+gnome-tweaks
+vim
+grub-koompi
 efibootmgr
 alsa-utils
 amd-ucode
@@ -98,10 +100,6 @@ android-tools
 ###nvidia
 
 
-# Fonts
-noto-fonts
-noto-fonts-emoji
-
 # Background and services
 pipewire
 pipewire-pulse
@@ -149,13 +147,11 @@ waydroid-image
 wpm
 
 # Fonts
-noto-fonts
-noto-fonts-cjk
-noto-fonts-emoji
-ttf-jetbrains-mono
+#noto-fonts
+#noto-fonts-cjk
+#noto-fonts-emoji
 khmer-fonts
 inter-font
-noto-fonts-emoji
 
 # printing
 cups
