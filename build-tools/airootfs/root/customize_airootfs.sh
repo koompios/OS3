@@ -13,4 +13,5 @@ export $(dbus-launch)
 chmod +x /usr/local/bin/lock-pacman
 ln -s /usr/local/bin/lock-pacman /usr/local/bin/pacman
 
-dconf update
+gsettings set org.gnome.software.sources flatpak-url 'flatpak:remote=flathub'
+
