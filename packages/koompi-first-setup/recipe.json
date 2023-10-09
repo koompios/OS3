@@ -2,27 +2,18 @@
     "log_file": "/etc/koompi/first-setup.log",
     "distro_name": "KOOMPI OS",
     "distro_logo": "org.koompios.FirstSetup",
-    "pre_run": [
-        "/usr/bin/pacman -Syu --no-confirm"
-    ],
-    "post_run": [
-        "/usr/bin/pacman -Syu --no-confirm"
-    ],
     "tour": {
         "get-involved": {
-             "icon": "system-users-symbolic",
              "title": "Get Involved",
              "description": "KOOMPI OS is a community project. You can contribute to the project by reporting bugs, suggesting new features, or even by writing code.",
              "read_more_link": "https://koompi.org/"
         },
         "community": {
-             "icon": "help-faq-symbolic",
              "title": "Join The Community",
              "description": "Our community is active on Discord. You can join us to ask questions, get help, or just to chat with other users.",
              "read_more_link": "https://t.me/KOOMPI"
         },
         "pix": {
-             "icon": "koompi-container-terminal-symbolic",
              "title": "Sub-System Ready To Go",
              "description": "KOOMPI OS comes with pix, a new package manager which installs software in integrated containers to prevent host compromise.",
              "read_more_link": "https://docs.koompi.org/docs/pix/"
@@ -40,7 +31,6 @@
         },
         "packages": {
             "template": "preferences",
-            "icon": "koompi-package-symbolic",
             "title": "Package Manager",
             "description": "Choose one or more package managers to install",
             "preferences": [
@@ -81,20 +71,19 @@
                 {
                     "if": "snap",
                     "type": "command",
-                    "commands": ["pacman -S --no-confirm snapd"]
+                    "commands": ["pacman -S --noconfirm snapd"]
                 },
                 {
                     "if": "appimage",
                     "type": "command",
                     "commands": [
-                        "/usr/bin/pacman -S --no-confirm appimagelauncher"
+                        "/usr/bin/pacman -S --noconfirm appimagelauncher"
                    ]
                 }
             ]
         },
         "timeshift": {
             "template": "yes-no",
-            "icon": "koompi-history-undo-symbolic",
             "title": "Timeshift",
             "description": "Choose whether to install Timeshift to create snapshots of your system.",
             "buttons": {
@@ -110,7 +99,7 @@
                 {
                     "if": "timeshift",
                     "type": "command",
-                    "commands": ["/usr/bin/pacman -S --no-confirm timeshift"]
+                    "commands": ["/usr/bin/pacman -S --noconfirm timeshift"]
                 }
             ]
         },
@@ -119,7 +108,6 @@
             "display-conditions": [
                 "lspci | grep -i '.* nvidia .*'"
             ],
-            "icon": "video-display-symbolic",
             "title": "NVIDIA® Drivers",
             "description": "Choose whether to install proprietary NVIDIA drivers for better compatibility and performance.",
             "buttons": {
@@ -136,7 +124,7 @@
                     "if": "nvidia",
                     "type": "command",
                     "commands": [
-                        "/usr/bin/pacman -S nvidia"
+                        "/usr/bin/pacman -S --noconfirm nvidia"
                     ]
                 }
             ]
@@ -146,7 +134,6 @@
             "display-conditions": [
                 "grep 'hypervisor' /proc/cpuinfo"
             ],
-            "icon": "application-x-appliance-symbolic",
             "title": "Open VM Tools",
             "description": "Choose whether to install Open VM Tools for the virtual machine.",
             "buttons": {
@@ -162,13 +149,12 @@
                 {
                     "if": "vm",
                     "type": "command",
-                    "commands": ["/usr/bin/pacman -S --no-confirm open-vm-tools"]
+                    "commands": ["/usr/bin/pacman -S --noconfirm open-vm-tools"]
                 }
             ]
         },
         "codecs": {
             "template": "yes-no",
-            "icon": "koompi-puzzle-piece-symbolic",
             "title": "Restricted Codecs",
             "description": "Choose whether to install restricted codecs and fonts.",
             "buttons": {
@@ -184,13 +170,12 @@
                 {
                     "if": "codecs",
                     "type": "command",
-                    "commands": ["/usr/bin/pacman -S --no-confirm ffmpeg-full"]
+                    "commands": ["/usr/bin/pacman -S --noconfirm ffmpeg-full"]
                 }
             ]
         },
         "proprietary": {
             "template": "yes-no",
-            "icon": "koompi-puzzle-piece-symbolic",
             "title": "Proprietary Fonts",
             "description": "Choose whether to install msfont support.",
             "buttons": {
@@ -206,7 +191,7 @@
                 {
                     "if": "proprietary",
                     "type": "command",
-                    "commands": ["/usr/bin/pacman -S --no-confirm ttf-ms-fonts"]
+                    "commands": ["/usr/bin/pacman -S --noconfirm ttf-ms-fonts"]
                 }
             ]
         }
