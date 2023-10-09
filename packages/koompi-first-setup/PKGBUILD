@@ -23,5 +23,6 @@ package() {
   cp recipe.json "$pkgdir/etc/koompi-first-setup/"
   mkdir -pv "$pkgdir/etc/koompi"
   cp first-setup.txt "$pkgdir/etc/koompi"
+  chmod +x $pkgdir/usr/local/bin/*
 
 }
