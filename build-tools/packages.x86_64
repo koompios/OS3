@@ -95,6 +95,7 @@ wvdial
 xfsprogs
 xl2tpd
 android-tools
+zramswap
 
 ### On-ISO drivers
 ###nvidia
@@ -147,7 +148,7 @@ waydroid-image
 wpm
 
 # Fonts
-#noto-fonts
+noto-fonts
 #noto-fonts-cjk
 #noto-fonts-emoji
 khmer-fonts
@@ -208,7 +209,6 @@ udftools
 usb_modeswitch
 usbmuxd
 usbutils
-zramd
 
 # editors
 nano
