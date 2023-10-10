@@ -95,7 +95,6 @@ wvdial
 xfsprogs
 xl2tpd
 android-tools
-zramswap
 
 ### On-ISO drivers
 ###nvidia
@@ -133,6 +132,7 @@ flatpak
 ### KOOMPIOS
 # Core packages
 koompi-os
+koompi-first-setup
 adwdialog
 koompi-control-center
 koompi-system-operator
