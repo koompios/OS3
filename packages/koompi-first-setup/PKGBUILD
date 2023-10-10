@@ -5,7 +5,6 @@ pkgdesc="This utility is meant to be used in KOOMPI OS as a first-setup wizard. 
 arch=('any')
 url="https://github.com/koompi-os/first-setup"
 license=('custom')
-depends=('python' 'python-tz' 'python-requests' 'python-gobject' 'libadwaita' 'gnome-desktop' 'libgweather' 'gtk4' 'adwaita-icon-theme' 'gnome-desktop' 'gweather' 'vte3' 'gparted' 'openssl')
 makedepends=('meson' 'gettext' 'desktop-file-utils')
 sha256sums=('SKIP')
 source=("$pkgname::git+https://github.com/koompi-os/first-setup.git")

@@ -159,27 +159,6 @@
                 }
             ]
         },
-        "codecs": {
-            "template": "yes-no",
-            "title": "Restricted Codecs",
-            "description": "Choose whether to install restricted codecs and fonts.",
-            "buttons": {
-                "yes": "Install",
-                "no": "Skip",
-                "info": {
-                    "type": "text",
-                    "title": "About Restricted Codecs",
-                    "text": "Install drivers, fonts and other essentials from the ubuntu-restricted-extras and ubuntu-restricted-addons repositories."
-                }
-            },
-            "final": [
-                {
-                    "if": "codecs",
-                    "type": "command",
-                    "commands": ["/usr/bin/pacman -S --noconfirm ffmpeg-full"]
-                }
-            ]
-        },
         "proprietary": {
             "template": "yes-no",
             "title": "Proprietary Fonts",
