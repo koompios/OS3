@@ -1,7 +1,7 @@
 # Maintainer: Hangsiahong <honghangsia@gmail.com>
 pkgname=koompi-os
-pkgver=3.0
-pkgrel=2
+pkgver=3.1
+pkgrel=1
 pkgdesc="KOOMPI OS Version Package"
 arch=('any')
 license=('GPL')
@@ -11,7 +11,7 @@ depends=('flatpak-repo-add') # Replace with the actual package name providing th
 package() {
     # You don't need to do anything here for a meta-package
     # It's empty because the package doesn't contain files
-    install -Dm644 os-release "$pkgdir/etc/os-release"
+    install -Dm644 ../os-release "$pkgdir/etc/os-release"
 
 }
 
