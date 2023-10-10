@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="KOOMPIOS"
+iso_name="KOOMPIOS-3.0.1"
 iso_label="KOOMPIOS_$(date +%Y%m)"
 iso_publisher="KOOMPIOS <https://koompi.org"
 iso_application="KOOMPIOS Live/Rescue CD"
