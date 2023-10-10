@@ -2,6 +2,12 @@
     "log_file": "/etc/koompi/first-setup.log",
     "distro_name": "KOOMPI OS",
     "distro_logo": "org.koompios.FirstSetup",
+    "pre_run": [
+        "/usr/bin/pacman -Sy"
+    ],
+    "post_run": [
+        "/usr/bin/pacman -Sy"
+    ],
     "tour": {
         "get-involved": {
              "title": "Get Involved",
@@ -65,13 +71,13 @@
                     "if": "flatpak",
                     "type": "command",
                     "commands": [
-                        "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
+                        "flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
                     ]
                 },
                 {
                     "if": "snap",
                     "type": "command",
-                    "commands": ["pacman -S --noconfirm snapd"]
+                    "commands": ["/usr/bin/pacman -S --noconfirm snapd"]
                 },
                 {
                     "if": "appimage",
