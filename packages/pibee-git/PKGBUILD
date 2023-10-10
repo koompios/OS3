@@ -6,7 +6,7 @@ arch=(any)
 depends=('squashfs-tools' 'arch-install-scripts' 'util-linux' 'parted')
 provides=('pibee')
 conflicts=('pibee')
-source=('git-inst::git+https://github.com/koompi-os/pibee.git')
+source=('pibee-git::git+https://github.com/koompi-os/pibee-git')
 sha256sums=('SKIP')
 
 package() {
