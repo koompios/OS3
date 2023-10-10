@@ -7,7 +7,7 @@ url="https://github.com/koompi-os/first-setup"
 license=('custom')
 makedepends=('meson' 'gettext' 'desktop-file-utils')
 sha256sums=('SKIP')
-source=("$pkgname::git+https://github.com/koompi-os/first-setup.git")
+source=("first-setup::git+https://github.com/koompi-os/first-setup.git")
 
 build() {
   cd "$srcdir/first-setup"
