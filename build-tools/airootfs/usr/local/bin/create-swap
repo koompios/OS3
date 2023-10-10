@@ -1,0 +1,61 @@
+#!/bin/bash
+set -e  # bail if anything goes wrong
+
+# Function to check if we're root
+is_root(){
+   if [ "$( id -u )" -ne 0  ] ; then
+      return 1
+   fi
+   return 0
+}
+
+# Function to get the swap amount in Gigabytes
+get_swap_amount(){
+    awk '/SwapTotal/{printf "%.2f",($2/1048576)}' /proc/meminfo
+}
+
+# Function to create and enable the swap file
+create_swap_file(){
+   printf "Working on creating swap file\n"
+   RAM_SIZE=$(awk '/MemTotal/{printf "%.2f",($2/1048576)}' /proc/meminfo)
+   SWAP_SIZE=$(awk -v ram="$RAM_SIZE" 'BEGIN{printf "%.2f",(2*ram)}')
+   filename="/swap/swapfile"
+   dd if=/dev/zero of="$filename" bs=1M count="$SWAP_SIZE"
+   chmod 600 "$filename"
+   mkswap "$filename"
+   swapon "$filename"
+   printf "Swap file created and turned on: %s\n" "$filename"
+   printf "Current swap amount: %f\n" "$(get_swap_amount)"
+}
+
+# Function to add the swap entry to /etc/fstab
+add_to_fstab(){
+   printf "Adding swap entry to /etc/fstab\n"
+   printf "%s none swap defaults 0 0\n" "/swap/swapfile" >> /etc/fstab
+   printf "Swap entry added to /etc/fstab\n"
+}
+
+# Main function
+main(){
+    if is_root; then
+        # Check if the swap file already exists
+        if [ -f "/swap/swapfile" ]; then
+            printf "Swap file already exists: /swap/swapfile\n"
+            exit 0
+        fi
+
+        # Create the /swap directory if it doesn't exist
+        if [ ! -d "/swap" ]; then
+            mkdir -p /swap
+        fi
+
+        create_swap_file
+        add_to_fstab
+    else
+        printf ">>> ERR: $0 must run as root\n" > /dev/stderr
+        exit 1
+    fi
+}
+
+main
+
