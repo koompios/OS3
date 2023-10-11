@@ -1,61 +1,66 @@
 #!/bin/bash
-set -e  # bail if anything goes wrong
+#This script is for creating swap memory in linux systems
+#tested on BASH shell only 
 
-# Function to check if we're root
-is_root(){
-   if [ "$( id -u )" -ne 0  ] ; then
-      return 1
-   fi
-   return 0
-}
+#script to calculate RAM size 
 
-# Function to get the swap amount in Gigabytes
-get_swap_amount(){
-    awk '/SwapTotal/{printf "%.2f",($2/1048576)}' /proc/meminfo
-}
+#Thanks to Andre [stackoverflow.com/users/2215136/andr%c3%a9] for the answer on  stackoverflow.com/a/53186875/12058066
 
-# Function to create and enable the swap file
-create_swap_file(){
-   printf "Working on creating swap file\n"
-   RAM_SIZE=$(awk '/MemTotal/{printf "%.2f",($2/1048576)}' /proc/meminfo)
-   SWAP_SIZE=$(awk -v ram="$RAM_SIZE" 'BEGIN{printf "%.2f",(2*ram)}')
-   filename="/swap/swapfile"
-   dd if=/dev/zero of="$filename" bs=1M count="$SWAP_SIZE"
-   chmod 600 "$filename"
-   mkswap "$filename"
-   swapon "$filename"
-   printf "Swap file created and turned on: %s\n" "$filename"
-   printf "Current swap amount: %f\n" "$(get_swap_amount)"
-}
 
-# Function to add the swap entry to /etc/fstab
-add_to_fstab(){
-   printf "Adding swap entry to /etc/fstab\n"
-   printf "%s none swap defaults 0 0\n" "/swap/swapfile" >> /etc/fstab
-   printf "Swap entry added to /etc/fstab\n"
-}
+totalmem=0;
+for mem in /sys/devices/system/memory/memory*; do
+  [[ "$(cat ${mem}/online)" == "1" ]] \
+    && totalmem=$((totalmem+$((0x$(cat /sys/devices/system/memory/block_size_bytes)))));
+done
 
-# Main function
-main(){
-    if is_root; then
-        # Check if the swap file already exists
-        if [ -f "/swap/swapfile" ]; then
-            printf "Swap file already exists: /swap/swapfile\n"
-            exit 0
-        fi
+#one-line code
+totalmem=0; for mem in /sys/devices/system/memory/memory*; do [[ "$(cat ${mem}/online)" == "1" ]] && totalmem=$((totalmem+$((0x$(cat /sys/devices/system/memory/block_size_bytes))))); done
 
-        # Create the /swap directory if it doesn't exist
-        if [ ! -d "/swap" ]; then
-            mkdir -p /swap
-        fi
 
-        create_swap_file
-        add_to_fstab
-    else
-        printf ">>> ERR: $0 must run as root\n" > /dev/stderr
-        exit 1
-    fi
-}
+ram_size=$((totalmem/1024**3)) 
 
-main
+if [ $ram_size -le 2 ]; then
+  swap_size=$( expr $ram_size \* 2)
+fi
+if [ $ram_size -ge 2 ] && [ $ram_size -lt 32 ]; then
+  swap_size=$( expr $ram_size - 2 + 4) 
 
+fi
+if [ $ram_size -ge 32 ]; then
+  swap_size=$ram_size;
+fi
+
+
+
+echo "The swap size should be $swap_size GB";
+ 
+count=$( expr  $swap_size \* 1024 / 128 );
+
+#The  code below is based on https://aws.amazon.com/premiumsupport/knowledge-center/ec2-memory-swap-file/
+
+echo "\nswap file creation\n"
+
+
+sudo dd if=/dev/zero of=/swapfile bs=128M count=$count status=progress
+
+echo "  \n\n Updating the read and write permissions for the swap file\n\n"
+
+sudo chmod 600 /swapfile -v
+
+echo " \n\nsetting up a Linux swap area\n\n"
+
+sudo mkswap /swapfile
+
+echo "\n\nmaking the swap file available for immediate use by adding the swap file to swap space\n\n"
+
+sudo swapon /swapfile
+
+echo "\n\nverifying the process\n\n"
+
+sudo swapon -s
+
+echo  "\n\nenabling the swap file at boot time by editing the /etc/fstab file.\n"
+
+echo "/swapfile      swap      swap      defaults      0      0"  >> /etc/fstab
+
+echo "Mission Accomplished "
