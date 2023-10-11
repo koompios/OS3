@@ -132,7 +132,7 @@ flatpak
 ### KOOMPIOS
 # Core packages
 koompi-os
-koompi-first-setup
+#koompi-first-setup
 adwdialog
 koompi-control-center
 koompi-system-operator
