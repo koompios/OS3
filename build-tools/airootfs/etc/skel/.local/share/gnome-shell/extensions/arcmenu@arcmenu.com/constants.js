@@ -1,34 +1,31 @@
-/* eslint-disable no-unused-vars */
+import {domain} from 'gettext';
+const {gettext: _} = domain('arcmenu');
 
-const Me = imports.misc.extensionUtils.getCurrentExtension();
-const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
-const _ = Gettext.gettext;
+export const DASH_TO_PANEL_UUID = 'dash-to-panel@jderose9.github.com';
+export const AZTASKBAR_UUID = 'aztaskbar@aztaskbar.gitlab.com';
 
-var DASH_TO_PANEL_UUID = 'dash-to-panel@jderose9.github.com';
-var AZTASKBAR_UUID = 'aztaskbar@aztaskbar.gitlab.com';
-
-var SearchbarLocation = {
+export const SearchbarLocation = {
     BOTTOM: 0,
     TOP: 1,
 };
 
-var MenuItemLocation = {
+export const MenuItemLocation = {
     BOTTOM: 0,
     TOP: 1,
 };
 
-var DisplayType = {
+export const DisplayType = {
     LIST: 0,
     GRID: 1,
     BUTTON: 2,
 };
 
-var AvatarStyle = {
+export const AvatarStyle = {
     ROUND: 0,
     SQUARE: 1,
 };
 
-var CategoryType = {
+export const CategoryType = {
     FAVORITES: 0,
     FREQUENT_APPS: 1,
     ALL_PROGRAMS: 2,
@@ -39,14 +36,14 @@ var CategoryType = {
     CATEGORIES_LIST: 7,
 };
 
-var DefaultMenuView = {
+export const DefaultMenuView = {
     PINNED_APPS: 0,
     CATEGORIES_LIST: 1,
     FREQUENT_APPS: 2,
     ALL_PROGRAMS: 3,
 };
 
-var SettingsPage = {
+export const SettingsPage = {
     MAIN: 0,
     MENU_LAYOUT: 1,
     BUTTON_APPEARANCE: 2,
@@ -64,21 +61,21 @@ var SettingsPage = {
     PINNED_APPS: 14,
 };
 
-var DefaultMenuViewTognee = {
+export const DefaultMenuViewTognee = {
     CATEGORIES_LIST: 0,
     ALL_PROGRAMS: 1,
 };
 
-var DefaultMenuViewRedmond = {
+export const DefaultMenuViewRedmond = {
     ALL_PROGRAMS: 0,
     PINNED_APPS: 1,
 };
 
-var SoftwareManagerIDs = ['org.manjaro.pamac.manager.desktop', 'pamac-manager.desktop',
+export const SoftwareManagerIDs = ['org.manjaro.pamac.manager.desktop', 'pamac-manager.desktop',
     'io.elementary.appcenter.desktop', 'snap-store_ubuntu-software.desktop', 'snap-store_snap-store.desktop',
-    'org.gnome.Software.desktop'];
+    'org.gnome.Software.desktop', 'tr.org.pardus.software.desktop'];
 
-var Categories = [
+export const Categories = [
     {CATEGORY: CategoryType.FAVORITES, NAME: _('Favorites'), ICON: 'emblem-favorite-symbolic'},
     {CATEGORY: CategoryType.FREQUENT_APPS, NAME: _('Frequent Apps'), ICON: 'user-bookmarks-symbolic'},
     {CATEGORY: CategoryType.ALL_PROGRAMS, NAME: _('All Apps'), ICON: 'view-app-grid-symbolic'},
@@ -86,24 +83,24 @@ var Categories = [
     {CATEGORY: CategoryType.RECENT_FILES, NAME: _('Recent Files'), ICON: 'document-open-recent-symbolic'},
 ];
 
-var TooltipLocation = {
+export const TooltipLocation = {
     TOP_CENTERED: 0,
     BOTTOM_CENTERED: 1,
     BOTTOM: 2,
 };
 
-var ContextMenuLocation = {
+export const ContextMenuLocation = {
     DEFAULT: 0,
     BOTTOM_CENTERED: 1,
     RIGHT: 2,
 };
 
-var SeparatorAlignment = {
+export const SeparatorAlignment = {
     VERTICAL: 0,
     HORIZONTAL: 1,
 };
 
-var SeparatorStyle = {
+export const SeparatorStyle = {
     SHORT: 0,
     MEDIUM: 1,
     LONG: 2,
@@ -112,24 +109,24 @@ var SeparatorStyle = {
     NORMAL: 5,
 };
 
-var CaretPosition = {
+export const CaretPosition = {
     END: -1,
     START: 0,
     MIDDLE: 2,
 };
 
-var CategoryIconType = {
+export const CategoryIconType = {
     FULL_COLOR: 0,
     SYMBOLIC: 1,
 };
 
-var ForcedMenuLocation = {
+export const ForcedMenuLocation = {
     OFF: 0,
     TOP_CENTERED: 1,
     BOTTOM_CENTERED: 2,
 };
 
-var IconSize = {
+export const IconSize = {
     DEFAULT: 0,
     EXTRA_SMALL: 1,
     SMALL: 2,
@@ -139,7 +136,7 @@ var IconSize = {
     HIDDEN: 6,
 };
 
-var GridIconSize = {
+export const GridIconSize = {
     DEFAULT: 0,
     SMALL: 1,
     MEDIUM: 2,
@@ -147,62 +144,65 @@ var GridIconSize = {
     SMALL_RECT: 4,
     MEDIUM_RECT: 5,
     LARGE_RECT: 6,
+    CUSTOM: 7,
+    EXTRA_LARGE: 8,
 };
 
-var GridIconInfo = [
-    {NAME: 'SmallIconGrid', SIZE: 90, ICON_SIZE: 36, ENUM: GridIconSize.SMALL},
-    {NAME: 'MediumIconGrid', SIZE: 97, ICON_SIZE: 42, ENUM: GridIconSize.MEDIUM},
-    {NAME: 'LargeIconGrid', SIZE: 105, ICON_SIZE: 52, ENUM: GridIconSize.LARGE},
-    {NAME: 'SmallRectIconGrid', SIZE: 95, ICON_SIZE: 28, ENUM: GridIconSize.SMALL_RECT},
-    {NAME: 'MediumRectIconGrid', SIZE: 102, ICON_SIZE: 34, ENUM: GridIconSize.MEDIUM_RECT},
-    {NAME: 'LargeRectIconGrid', SIZE: 105, ICON_SIZE: 42, ENUM: GridIconSize.LARGE_RECT},
+export const GridIconInfo = [
+    {ENUM: GridIconSize.SMALL, WIDTH: 80, HEIGHT: 80, ICON_SIZE: 36},
+    {ENUM: GridIconSize.MEDIUM, WIDTH: 87, HEIGHT: 87, ICON_SIZE: 42},
+    {ENUM: GridIconSize.LARGE, WIDTH: 95, HEIGHT: 95, ICON_SIZE: 52},
+    {ENUM: GridIconSize.SMALL_RECT, WIDTH: 85, HEIGHT: 70, ICON_SIZE: 28},
+    {ENUM: GridIconSize.MEDIUM_RECT, WIDTH: 92, HEIGHT: 78, ICON_SIZE: 34},
+    {ENUM: GridIconSize.LARGE_RECT, WIDTH: 95, HEIGHT: 85, ICON_SIZE: 42},
+    {ENUM: GridIconSize.EXTRA_LARGE, WIDTH: 148, HEIGHT: 148, ICON_SIZE: 68},
 ];
 
-var ICON_HIDDEN = 0;
-var EXTRA_SMALL_ICON_SIZE = 16;
-var SMALL_ICON_SIZE = 20;
-var MEDIUM_ICON_SIZE = 25;
-var LARGE_ICON_SIZE = 30;
-var EXTRA_LARGE_ICON_SIZE = 35;
-var MISC_ICON_SIZE = 24;
+export const ICON_HIDDEN = 0;
+export const EXTRA_SMALL_ICON_SIZE = 16;
+export const SMALL_ICON_SIZE = 20;
+export const MEDIUM_ICON_SIZE = 25;
+export const LARGE_ICON_SIZE = 30;
+export const EXTRA_LARGE_ICON_SIZE = 35;
+export const MISC_ICON_SIZE = 24;
 
-var SUPER_L = 'Super_L';
+export const SUPER_L = 'Super_L';
 
-var HotkeyType = {
+export const HotkeyType = {
     SUPER_L: 0,
     CUSTOM: 1,
 };
 
-var SECTIONS = [
+export const SECTIONS = [
     'devices',
     'network',
     'bookmarks',
 ];
 
-var Direction = {
+export const Direction = {
     GO_NEXT: 0,
     GO_PREVIOUS: 1,
 };
 
-var MenuPosition = {
+export const MenuPosition = {
     LEFT: 0,
     CENTER: 1,
     RIGHT: 2,
 };
 
-var RavenPosition = {
+export const RavenPosition = {
     LEFT: 0,
     RIGHT: 1,
 };
 
-var DiaglogType = {
+export const DiaglogType = {
     DEFAULT: 0,
     OTHER: 1,
     APPLICATIONS: 2,
     DIRECTORIES: 3,
 };
 
-var MenuSettingsListType = {
+export const MenuSettingsListType = {
     PINNED_APPS: 0,
     APPLICATIONS: 1,
     DIRECTORIES: 2,
@@ -213,7 +213,7 @@ var MenuSettingsListType = {
     CONTEXT_MENU: 7,
 };
 
-var MenuButtonAppearance = {
+export const MenuButtonAppearance = {
     ICON: 0,
     TEXT: 1,
     ICON_TEXT: 2,
@@ -221,7 +221,7 @@ var MenuButtonAppearance = {
     NONE: 4,
 };
 
-var PowerType = {
+export const PowerType = {
     LOGOUT: 0,
     LOCK: 1,
     RESTART: 2,
@@ -232,13 +232,13 @@ var PowerType = {
     SWITCH_USER: 7,
 };
 
-var PowerDisplayStyle = {
+export const PowerDisplayStyle = {
     DEFAULT: 0,
     IN_LINE: 1,
     MENU: 2,
 };
 
-var PowerOptions = [
+export const PowerOptions = [
     {TYPE: PowerType.LOGOUT, ICON: 'system-log-out-symbolic', NAME: _('Log Out...')},
     {TYPE: PowerType.LOCK, ICON: 'changes-prevent-symbolic', NAME: _('Lock')},
     {TYPE: PowerType.RESTART, ICON: 'system-reboot-symbolic', NAME: _('Restart...')},
@@ -251,7 +251,7 @@ var PowerOptions = [
 
 // Icon type for the menu button
 // set 'menu-button-icon' enum setting to value of desired icon type.
-var MenuIconType = {
+export const MenuIconType = {
     MENU_ICON: 0,
     DISTRO_ICON: 1,
     CUSTOM: 2,
@@ -259,7 +259,7 @@ var MenuIconType = {
 
 // Object order in MenuIcons array corresponds to the integer value of 'arc-menu-icon' setting
 // i.e 'arc-menu-icon' value of 0 is arcmenu-logo-symbolic.
-var MenuIcons = [
+export const MenuIcons = [
     {PATH: 'icon-arcmenu-logo-symbolic'},
     {PATH: 'icon-arcmenu-logo-alt-symbolic'},
     {PATH: 'icon-arcmenu-old-symbolic'},
@@ -336,7 +336,7 @@ var MenuIcons = [
 
 // Object order in DistroIcons array corresponds to the integer value of 'distro-icon' setting
 // i.e 'distro-icon' value of 3 is manjaro-logo.
-var DistroIcons = [
+export const DistroIcons = [
     {PATH: 'distro-gnome-symbolic', NAME: 'GNOME'},
     {PATH: 'distro-debian-symbolic', NAME: 'Debian'},
     {PATH: 'distro-fedora-symbolic', NAME: 'Fedora'},
@@ -361,7 +361,7 @@ var DistroIcons = [
     {PATH: 'distro-cachyos-symbolic', NAME: 'CachyOS'},
 ];
 
-var MenuLayout = {
+export const MenuLayout = {
     ARCMENU: 0,
     BRISK: 1,
     WHISKER: 2,
@@ -382,9 +382,10 @@ var MenuLayout = {
     ELEVEN: 17,
     AZ: 18,
     ENTERPRISE: 19,
+    POP: 20,
 };
 
-var TraditionalMenus = [
+export const TraditionalMenus = [
     {
         LAYOUT: MenuLayout.ARCMENU,
         TITLE: _('ArcMenu'),
@@ -417,7 +418,7 @@ var TraditionalMenus = [
     },
 ];
 
-var ModernMenus = [
+export const ModernMenus = [
     {
         LAYOUT: MenuLayout.UNITY,
         TITLE: _('Unity'),
@@ -463,9 +464,14 @@ var ModernMenus = [
         TITLE: _('Enterprise'),
         IMAGE: 'menu-enterprise-symbolic',
     },
+    {
+        LAYOUT: MenuLayout.POP,
+        TITLE: _('Pop'),
+        IMAGE: 'menu-pop-symbolic',
+    },
 ];
 
-var TouchMenus = [
+export const TouchMenus = [
     {
         LAYOUT: MenuLayout.ELEMENTARY,
         TITLE: _('Elementary'),
@@ -478,7 +484,7 @@ var TouchMenus = [
     },
 ];
 
-var LauncherMenus = [
+export const LauncherMenus = [
     {
         LAYOUT: MenuLayout.RUNNER,
         TITLE: _('Runner'),
@@ -491,7 +497,7 @@ var LauncherMenus = [
     },
 ];
 
-var AlternativeMenus = [
+export const AlternativeMenus = [
     {
         LAYOUT: MenuLayout.RAVEN,
         TITLE: _('Raven'),
@@ -499,7 +505,7 @@ var AlternativeMenus = [
     },
 ];
 
-var MenuStyles = [
+export const MenuStyles = [
     {
         MENU_TYPE: TraditionalMenus,
         TITLE: _('Traditional'),
@@ -527,12 +533,12 @@ var MenuStyles = [
     },
 ];
 
-var ArcMenuLogoSymbolic = `${Me.path}/icons/arcmenu-logo-symbolic.svg`;
+export const ArcMenuLogoSymbolic = '/icons/arcmenu-logo-symbolic.svg';
 
-var TranslatableSettingsStrings = [_('Software'), _('Settings'), _('Tweaks'), _('Terminal'),
+export const TranslatableSettingsStrings = [_('Software'), _('Settings'), _('Tweaks'), _('Terminal'),
     _('Activities Overview'), _('ArcMenu Settings'), _('Files')];
 
-var ShortcutCommands = {
+export const ShortcutCommands = {
     SUSPEND: 'ArcMenu_Suspend',
     LOG_OUT: 'ArcMenu_LogOut',
     POWER_OFF: 'ArcMenu_PowerOff',
@@ -569,7 +575,7 @@ var ShortcutCommands = {
     ARCMENU_ICON: 'ArcMenu_ArcMenuIcon',
 };
 
-var DistroIconsDisclaimer = '<i>All brand icons are trademarks of their respective owners.' +
+export const DistroIconsDisclaimer = '<i>All brand icons are trademarks of their respective owners.' +
             ' The use of these trademarks does not indicate endorsement of the trademark holder ' +
             'by ArcMenu project, nor vice versa.' +
             ' Please do not use brand logos for any purpose except to represent the company, ' +
@@ -596,16 +602,16 @@ var DistroIconsDisclaimer = '<i>All brand icons are trademarks of their respecti
     '\n\n•   <b>ZORIN OS</b> - The "Z" logomark is a registered trademark of Zorin Technology Group Ltd. ' +
                 'Copyright © 2019 - 2021 Zorin Technology Group Ltd';
 
-var DEVELOPERS = '<b><a href="https://gitlab.com/AndrewZaech">AndrewZaech</a></b> - Current ArcMenu Maintainer and Developer' +
+export const DEVELOPERS = '<b><a href="https://gitlab.com/AndrewZaech">AndrewZaech</a></b> - Current ArcMenu Maintainer and Developer' +
                 '\n\n<b><a href="https://gitlab.com/LinxGem33">AndyC</a></b> - ArcMenu Founder, Former Maintainer, Digital Art Designer';
-var CONTRIBUTORS = '<b>Thank you to all contributors and translators</b>\n\n' +
+export const CONTRIBUTORS = '<b>Thank you to all contributors and translators</b>\n\n' +
                     '<b><a href="https://gitlab.com/arcmenu/ArcMenu#contributors">Contributors</a></b> - ' +
                     '<b><a href="https://gitlab.com/arcmenu/ArcMenu#translators">Translators</a></b>';
-var ARTWORK = '<b>Digital Artwork</b>\n\n' +
+export const ARTWORK = '<b>Digital Artwork</b>\n\n' +
                 '<b><a href="https://gitlab.com/LinxGem33">AndyC</a></b> - Custom icons and other ArcMenu Assets' +
                 '\n\n<b><a href="https://gitlab.com/AndrewZaech">AndrewZaech</a></b> - Modification of some custom icons';
 
-var GNU_SOFTWARE = '<span size="small">' +
+export const GNU_SOFTWARE = '<span size="small">' +
     'This program comes with absolutely no warranty.\n' +
     'See the <a href="https://gnu.org/licenses/old-licenses/gpl-2.0.html">' +
     'GNU General Public License, version 2 or later</a> for details.' +

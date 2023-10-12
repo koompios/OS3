@@ -1,29 +1,13 @@
-const {Meta, St} = imports.gi;
+import Meta from 'gi://Meta';
+import St from 'gi://St';
+import GLib from 'gi://GLib';
 
-const Main = imports.ui.main;
-const GLib = imports.gi.GLib;
+import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-const Config = imports.misc.config;
-const [major] = Config.PACKAGE_VERSION.split('.');
-const shellVersion = Number.parseInt(major);
-
-const ExtensionUtils = imports.misc.extensionUtils;
-
-/**
- * https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
- * https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/clearTimeout
- */
-window.setTimeout = function(func, delay, ...args) {
-    return GLib.timeout_add(GLib.PRIORITY_DEFAULT, delay, () => {
-        func(...args);
-        return GLib.SOURCE_REMOVE;
-    });
-};
-
-window.clearTimeout = GLib.source_remove;
-
-class Extension {
-    constructor() {
+export default class TransparentTopBarWithCustomTransparencyExtension extends Extension {
+    constructor(metadata) {
+        super(metadata);
         this._actorSignalIds = null;
         this._windowSignalIds = null;
         this._delayedTimeoutId = null;
@@ -32,13 +16,14 @@ class Extension {
     }
 
     enable() {
-        this._settings = ExtensionUtils.getSettings('com.ftpix.transparentbar');
+
+        this._settings = this.getSettings('com.ftpix.transparentbar');
         this._currentTransparency = this._settings.get_int('transparency');
-        this._darkFullScreen = shellVersion >= 40 ? this._settings.get_boolean('dark-full-screen') : true;
+        this._darkFullScreen = this._settings.get_boolean('dark-full-screen');
 
         this._actorSignalIds = new Map();
         this._windowSignalIds = new Map();
-        this._settings.connect('changed', this.transparencyChanged.bind(this));
+        this._settings.connect('changed', (settings, key) => this.transparencyChanged(settings, key));
         this._actorSignalIds.set(Main.overview, [
             Main.overview.connect('showing', this._updateTransparent.bind(this)),
             Main.overview.connect('hiding', this._updateTransparent.bind(this))
@@ -66,29 +51,33 @@ class Extension {
     }
 
     transparencyChanged(settings, key) {
+
         if (key === 'transparency') {
-            clearTimeout(this.settingChangeDebounce);
-            this.settingChangeDebounce = setTimeout(() => {
+            GLib.source_remove(this.transparencyChangeDebounce);
+            this.transparencyChangeDebounce = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
                 const oldTransparency = this._currentTransparency;
                 this._currentTransparency = this._settings.get_int('transparency');
-                Main.panel.remove_style_class_name('transparent-top-bar--transparent-' + oldTransparency);
+                Main.panel.remove_style_class_name('transparent-top-bar-' + oldTransparency);
                 this._updateTransparent();
-            }, 250);
+            });
             return;
         }
 
-        if(key === 'dark-full-screen'){
-            this._darkFullScreen = shellVersion >= 40 ? this._settings.get_boolean('dark-full-screen') : true;
-            clearTimeout(this.darkFullScreenChangeDebounce);
-            this.darkFullScreenChangeDebounce = setTimeout(() => {
-                Main.panel.remove_style_class_name('transparent-top-bar--transparent-' + this._currentTransparency);
+        if (key === 'dark-full-screen') {
+            this._darkFullScreen = this._settings.get_boolean('dark-full-screen');
+            GLib.source_remove(this.darkFullScreenChangeDebounce);
+            this.darkFullScreenChangeDebounce = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
+                Main.panel.remove_style_class_name('transparent-top-bar-' + this._currentTransparency);
                 this._updateTransparent();
-            }, 250);
+            });
             return;
         }
     }
 
     disable() {
+        GLib.source_remove(this.transparencyChangeDebounce);
+        GLib.source_remove(this.darkFullScreenChangeDebounce);
+
         for (const actorSignalIds of [this._actorSignalIds, this._windowSignalIds]) {
             for (const [actor, signalIds] of actorSignalIds) {
                 for (const signalId of signalIds) {
@@ -132,7 +121,7 @@ class Extension {
     }
 
     _updateTransparent() {
-        if(!this._darkFullScreen){
+        if (!this._darkFullScreen) {
             this._setTransparent(true);
             return
         }
@@ -172,18 +161,12 @@ class Extension {
     _setTransparent(transparent) {
         const transparency = this._settings.get_int("transparency");
         if (transparent) {
-            Main.panel.remove_style_class_name('transparent-top-bar--solid');
-            Main.panel.add_style_class_name('transparent-top-bar--transparent');
-            Main.panel.add_style_class_name('transparent-top-bar--transparent-' + transparency);
+            Main.panel.add_style_class_name('transparent-top-bar');
+            Main.panel.add_style_class_name('transparent-top-bar-' + transparency);
         } else {
-            Main.panel.add_style_class_name('transparent-top-bar--solid');
-            Main.panel.remove_style_class_name('transparent-top-bar--transparent');
-            Main.panel.remove_style_class_name('transparent-top-bar--transparent-' + transparency);
+            Main.panel.remove_style_class_name('transparent-top-bar');
+            Main.panel.remove_style_class_name('transparent-top-bar-' + transparency);
         }
     }
 
 };
-
-function init() {
-    return new Extension();
-}

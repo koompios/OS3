@@ -1,9 +1,13 @@
-const { Meta, St } = imports.gi;
+import Meta from 'gi://Meta';
+import St from 'gi://St';
 
-const Main = imports.ui.main;
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-class Extension {
-    constructor() {
+export default class TransparentTopBarExtension extends Extension {
+    constructor(metadata) {
+        super(metadata);
+
         this._actorSignalIds = null;
         this._windowSignalIds = null;
     }
@@ -30,10 +34,6 @@ class Extension {
             global.window_group.connect('actor-removed', this._onWindowActorRemoved.bind(this))
         ]);
 
-        this._actorSignalIds.set(global.window_manager, [
-            global.window_manager.connect('switch-workspace', this._updateTransparent.bind(this))
-        ]);
-
         this._updateTransparent();
     }
 
@@ -48,8 +48,7 @@ class Extension {
         this._actorSignalIds = null;
         this._windowSignalIds = null;
 
-        Main.panel.remove_style_class_name('transparent-top-bar--solid');
-        Main.panel.remove_style_class_name('transparent-top-bar--transparent');
+        Main.panel.remove_style_class_name('transparent-top-bar');
     }
 
     _onWindowActorAdded(container, metaWindowActor) {
@@ -101,15 +100,9 @@ class Extension {
 
     _setTransparent(transparent) {
         if (transparent) {
-            Main.panel.remove_style_class_name('transparent-top-bar--solid');
-            Main.panel.add_style_class_name('transparent-top-bar--transparent');
+            Main.panel.add_style_class_name('transparent-top-bar');
         } else {
-            Main.panel.add_style_class_name('transparent-top-bar--solid');
-            Main.panel.remove_style_class_name('transparent-top-bar--transparent');
+            Main.panel.remove_style_class_name('transparent-top-bar');
         }
     }
 };
-
-function init() {
-    return new Extension();
-}

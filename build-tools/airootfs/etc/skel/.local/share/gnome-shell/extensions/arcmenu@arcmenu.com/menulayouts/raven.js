@@ -1,34 +1,32 @@
-/* eslint-disable jsdoc/require-jsdoc */
-/* exported getMenuLayoutEnum, Menu */
-const Me = imports.misc.extensionUtils.getCurrentExtension();
+import Clutter from 'gi://Clutter';
+import GObject from 'gi://GObject';
+import St from 'gi://St';
 
-const {Clutter, GObject, St} = imports.gi;
-const {BaseMenuLayout} = Me.imports.menulayouts.baseMenuLayout;
-const Constants = Me.imports.constants;
-const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
-const Main = imports.ui.main;
-const MW = Me.imports.menuWidgets;
-const _ = Gettext.gettext;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-function getMenuLayoutEnum() {
-    return Constants.MenuLayout.RAVEN;
-}
+import {BaseMenuLayout} from './baseMenuLayout.js';
+import * as Constants from '../constants.js';
+import * as MW from '../menuWidgets.js';
 
-var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
+import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
+
+export const Layout = class RavenLayout extends BaseMenuLayout {
     static {
         GObject.registerClass(this);
     }
 
     constructor(menuButton) {
+        const {settings} = menuButton.extension;
+
         super(menuButton, {
             has_search: true,
             display_type: Constants.DisplayType.GRID,
-            search_display_type: Me.settings.get_enum('raven-search-display-style'),
+            search_display_type: settings.get_enum('raven-search-display-style'),
             context_menu_location: Constants.ContextMenuLocation.BOTTOM_CENTERED,
             column_spacing: 10,
             row_spacing: 10,
             default_menu_width: 415,
-            icon_grid_style: 'SmallIconGrid',
+            icon_grid_size: Constants.GridIconSize.SMALL,
             vertical: false,
             supports_category_hover_activation: true,
             category_icon_size: Constants.EXTRA_SMALL_ICON_SIZE,
@@ -39,12 +37,12 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
         });
 
         this.arcMenu.box.style = 'padding: 0px; margin: 0px; border-radius: 0px;';
-        this.searchBox.style = 'margin: 10px 10px 10px 10px;';
+        this.searchEntry.style = 'margin: 10px 10px 10px 10px;';
 
-        Me.settings.connectObject('changed::raven-position', () => this._updatePosition(), this);
+        this._settings.connectObject('changed::raven-position', () => this._updatePosition(), this);
 
-        Me.settings.connectObject('changed::enable-clock-widget-raven', () => this._updateWidgets(), this);
-        Me.settings.connectObject('changed::enable-weather-widget-raven', () => this._updateWidgets(), this);
+        this._settings.connectObject('changed::enable-clock-widget-raven', () => this._updateWidgets(), this);
+        this._settings.connectObject('changed::enable-weather-widget-raven', () => this._updateWidgets(), this);
 
         this.updateLocation();
 
@@ -59,7 +57,7 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
         this.arcMenu.close();
         this.arcMenu._boxPointer.hide();
 
-        const homeScreen = Me.settings.get_boolean('enable-unity-homescreen');
+        const homeScreen = this._settings.get_boolean('enable-unity-homescreen');
         this.activeCategoryName = homeScreen ? _('Pinned') : _('All Programs');
 
         this.actionsBoxContainer = new St.BoxLayout({
@@ -87,7 +85,7 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
             y_align: Clutter.ActorAlign.START,
             vertical: false,
         });
-        this.topBox.add_child(this.searchBox);
+        this.topBox.add_child(this.searchEntry);
 
         this._mainBox = new St.BoxLayout({
             x_expand: true,
@@ -147,7 +145,7 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
 
         this.shortcutsBox.add_child(this.shortcutsGrid);
 
-        const applicationShortcuts = Me.settings.get_value('application-shortcuts-list').deep_unpack();
+        const applicationShortcuts = this._settings.get_value('application-shortcuts-list').deep_unpack();
         for (let i = 0; i < applicationShortcuts.length; i++) {
             const shortcutMenuItem = this.createMenuItem(applicationShortcuts[i], Constants.DisplayType.GRID, false);
             if (shortcutMenuItem.shouldShow)
@@ -165,11 +163,11 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
     }
 
     _updateWidgets() {
-        const clockWidgetEnabled = Me.settings.get_boolean('enable-clock-widget-raven');
-        const weatherWidgetEnabled = Me.settings.get_boolean('enable-weather-widget-raven');
+        const clockWidgetEnabled = this._settings.get_boolean('enable-clock-widget-raven');
+        const weatherWidgetEnabled = this._settings.get_boolean('enable-weather-widget-raven');
 
         if (clockWidgetEnabled && !this._clocksItem) {
-            this._clocksItem = new MW.WorldClocksSection(this);
+            this._clocksItem = new MW.WorldClocksWidget(this);
             this._clocksItem.set({
                 x_expand: true,
                 x_align: Clutter.ActorAlign.FILL,
@@ -181,7 +179,7 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
         }
 
         if (weatherWidgetEnabled && !this._weatherItem) {
-            this._weatherItem = new MW.WeatherSection(this);
+            this._weatherItem = new MW.WeatherWidget(this);
             this._widgetBox.add_child(this._weatherItem);
         } else if (!weatherWidgetEnabled && this._weatherItem) {
             this._weatherItem.destroy();
@@ -196,7 +194,7 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
         if (this.contains(this.actionsBoxContainer))
             this.remove_child(this.actionsBoxContainer);
 
-        const ravenPosition = Me.settings.get_enum('raven-position');
+        const ravenPosition = this._settings.get_enum('raven-position');
         if (ravenPosition === Constants.RavenPosition.LEFT) {
             this.insert_child_at_index(this.actionsBoxContainer, 0);
             this.actionsBoxContainer.style = `border-right-width: 1px;${style}`;
@@ -207,7 +205,7 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
     }
 
     updateLocation() {
-        const ravenPosition = Me.settings.get_enum('raven-position');
+        const ravenPosition = this._settings.get_enum('raven-position');
 
         const alignment = ravenPosition === Constants.RavenPosition.LEFT ? 0 : 1;
         this.arcMenu._boxPointer.setSourceAlignment(alignment);
@@ -233,7 +231,7 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
 
     setDefaultMenuView() {
         super.setDefaultMenuView();
-        const homeScreen = Me.settings.get_boolean('enable-unity-homescreen');
+        const homeScreen = this._settings.get_boolean('enable-unity-homescreen');
         if (homeScreen) {
             this.activeCategoryName = _('Pinned');
             this.activeCategoryType = Constants.CategoryType.HOME_SCREEN;
@@ -256,7 +254,7 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
         this.categoryDirectories.set(Constants.CategoryType.HOME_SCREEN, categoryMenuItem);
         this.hasPinnedApps = true;
 
-        const extraCategories = Me.settings.get_value('extra-categories').deep_unpack();
+        const extraCategories = this._settings.get_value('extra-categories').deep_unpack();
         for (let i = 0; i < extraCategories.length; i++) {
             const categoryEnum = extraCategories[i][0];
             const shouldShow = extraCategories[i][1];
@@ -292,8 +290,8 @@ var Menu = class ArcMenuRavenLayout extends BaseMenuLayout {
             this.applicationsBox.add_child(this.shortcutsBox);
 
         this._widgetBox.hide();
-        const clockWidgetEnabled = Me.settings.get_boolean('enable-clock-widget-raven');
-        const weatherWidgetEnabled = Me.settings.get_boolean('enable-weather-widget-raven');
+        const clockWidgetEnabled = this._settings.get_boolean('enable-clock-widget-raven');
+        const weatherWidgetEnabled = this._settings.get_boolean('enable-weather-widget-raven');
 
         if (clockWidgetEnabled || weatherWidgetEnabled)
             this._widgetBox.show();

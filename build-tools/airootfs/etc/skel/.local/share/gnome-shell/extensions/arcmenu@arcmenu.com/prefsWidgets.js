@@ -1,11 +1,14 @@
-/* exported DialogWindow, DragRow, EditEntriesBox,
-   IconGrid, MenuButtonIconTile, MenuLayoutTile */
-const Me = imports.misc.extensionUtils.getCurrentExtension();
-const {Adw, Gdk, GdkPixbuf, Gio, GLib, GObject, Gtk} = imports.gi;
-const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
-const _ = Gettext.gettext;
+import Adw from 'gi://Adw';
+import Gdk from 'gi://Gdk';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
 
-var DialogWindow = GObject.registerClass({
+import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+
+export const DialogWindow = GObject.registerClass({
     Signals: {
         'response': {param_types: [GObject.TYPE_INT]},
     },
@@ -25,7 +28,7 @@ var DialogWindow = GObject.registerClass({
     }
 });
 
-var DragRow = GObject.registerClass({
+export const DragRow = GObject.registerClass({
     Properties: {
         'shortcut-name': GObject.ParamSpec.string(
             'shortcut-name', 'shortcut-name', 'shortcut-name',
@@ -205,7 +208,7 @@ const ModifyEntryType = {
     REMOVE: 2,
 };
 
-var EditEntriesBox = GObject.registerClass({
+export const EditEntriesBox = GObject.registerClass({
     Properties: {
         'allow-modify': GObject.ParamSpec.boolean(
             'allow-modify', 'allow-modify', 'allow-modify',
@@ -324,7 +327,7 @@ var EditEntriesBox = GObject.registerClass({
     }
 });
 
-var IconGrid = GObject.registerClass(class ArcMenuIconGrid extends Gtk.FlowBox {
+export const IconGrid = GObject.registerClass(class ArcMenuIconGrid extends Gtk.FlowBox {
     _init(spacing = 4) {
         super._init({
             max_children_per_line: 15,
@@ -370,7 +373,7 @@ var IconGrid = GObject.registerClass(class ArcMenuIconGrid extends Gtk.FlowBox {
     }
 });
 
-var MenuButtonIconTile = GObject.registerClass(class ArcMenuMenuButtonIconTile extends Gtk.FlowBoxChild {
+export const MenuButtonIconTile = GObject.registerClass(class ArcMenuMenuButtonIconTile extends Gtk.FlowBoxChild {
     _init(icon, name) {
         super._init({
             css_classes: ['card', 'activatable'],
@@ -418,7 +421,7 @@ var MenuButtonIconTile = GObject.registerClass(class ArcMenuMenuButtonIconTile e
     }
 });
 
-var MenuLayoutTile = GObject.registerClass(class ArcMenuMenuLayoutTile extends Gtk.FlowBoxChild {
+export const MenuLayoutTile = GObject.registerClass(class ArcMenuMenuLayoutTile extends Gtk.FlowBoxChild {
     _init(styleInfo) {
         super._init({
             css_classes: ['card', 'activatable'],

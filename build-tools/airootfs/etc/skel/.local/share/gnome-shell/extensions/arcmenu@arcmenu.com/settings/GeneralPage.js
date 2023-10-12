@@ -1,13 +1,12 @@
-/* exported GeneralPage */
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
+import Adw from 'gi://Adw';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
 
-const {Adw, Gio, GObject, Gtk} = imports.gi;
-const Constants = Me.imports.constants;
-const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
-const _ = Gettext.gettext;
+import * as Constants from '../constants.js';
 
-var GeneralPage = GObject.registerClass(
+import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+
+export const GeneralPage = GObject.registerClass(
 class ArcMenuGeneralPage extends Adw.PreferencesPage {
     _init(settings) {
         super._init({

@@ -17,7 +17,6 @@
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const GnomeVersion = Math.floor(imports.misc.config.PACKAGE_VERSION);
 
 const Extensions = {
     backgroundClock: 'background-clock',
@@ -29,7 +28,9 @@ const Extensions = {
     powerMenu: 'power-menu',
     workspaceIndicator: 'workspace-indicator',
     dynamicPanel: 'dynamic-panel',
-    windowHeaderbar: 'window-headerbar'
+    windowHeaderbar: 'window-headerbar',
+    quickSettingsTweaks: 'quick-settings-tweaks',
+    stylishOSD: 'stylish-osd'
 }
 
 class Extension {
@@ -40,7 +41,7 @@ class Extension {
         for (const extension in Extensions) { if (Object.hasOwnProperty.call(Extensions, extension)) {
             const settings_key = Extensions[extension];
             
-            this[extension] = new Me.imports.widgets[extension].Extension(settings);
+            this[extension] = new Me.imports.extensions[extension].Extension(settings);
             if(settings.get_boolean(settings_key))
                 this._toggleExtension(this[extension]);
             
@@ -48,12 +49,6 @@ class Extension {
                 this._toggleExtension(this[extension]);
             });
         }}
-
-        if(GnomeVersion >= 43){
-            this.quickSettingsTweaks = new Me.imports.widgets.quickSettingsTweaks.Extension();
-            if(settings.get_boolean('quick-settings-tweaks')) this._toggleExtension(this.quickSettingsTweaks);
-            settings.connect('changed::quick-settings-tweaks', () => this._toggleExtension(this.quickSettingsTweaks));
-        }
     }
 
     disable() {
@@ -65,11 +60,6 @@ class Extension {
 
             this[extension] = null;
         }}
-
-        if(GnomeVersion >= 43){
-            if(this.quickSettingsTweaks.enabled){ this.quickSettingsTweaks.disable(); this.quickSettingsTweaks.enabled = false; }
-            this.quickSettingsTweaks = null;
-        }
     }
 
     _toggleExtension(extension){

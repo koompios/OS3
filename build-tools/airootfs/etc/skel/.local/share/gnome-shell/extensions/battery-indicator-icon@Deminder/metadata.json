@@ -9,10 +9,9 @@
   ],
   "settings-schema": "org.gnome.shell.extensions.battery-indicator-icon",
   "shell-version": [
-    "43",
-    "44"
+    "45"
   ],
   "url": "https://github.com/Deminder/battery-indicator-icon",
   "uuid": "battery-indicator-icon@Deminder",
-  "version": 8
+  "version": 10
 }

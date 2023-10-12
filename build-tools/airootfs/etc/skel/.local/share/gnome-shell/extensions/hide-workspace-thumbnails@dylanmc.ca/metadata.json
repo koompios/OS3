@@ -3,11 +3,9 @@
   "description": "Hide workspace thumbnails from the overview",
   "name": "Hide Workspace Thumbnails",
   "shell-version": [
-    "42",
-    "43",
-    "44"
+    "45"
   ],
   "url": "https://gitlab.gnome.org/dylanmccall/hide-workspace-thumbnails-extension",
   "uuid": "hide-workspace-thumbnails@dylanmc.ca",
-  "version": 4
+  "version": 5
 }

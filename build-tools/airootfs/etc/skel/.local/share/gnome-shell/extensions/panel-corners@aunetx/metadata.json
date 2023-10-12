@@ -4,11 +4,9 @@
   "name": "Panel corners",
   "settings-schema": "org.gnome.shell.extensions.panel-corners",
   "shell-version": [
-    "42",
-    "43",
-    "44"
+    "45"
   ],
   "url": "https://github.com/aunetx/panel-corners",
   "uuid": "panel-corners@aunetx",
-  "version": 7
+  "version": 9
 }

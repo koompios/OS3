@@ -1,115 +1,103 @@
-const GdkPixbuf = imports.gi.GdkPixbuf;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Config = imports.misc.config;
-const [major] = Config.PACKAGE_VERSION.split('.');
-const shellVersion = Number.parseInt(major);
+import Gio from 'gi://Gio';
+import Adw from 'gi://Adw';
+import Gtk from 'gi://Gtk';
+import Gdk from 'gi://Gdk';
 
-const Gettext = imports.gettext.domain('KeepAwake');
-const _ = Gettext.gettext;
+import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+
 
 const NO_COLOR_BACKGROUND = 'no-color-background';
 const ENABLE_NOTIFICATIONS = 'enable-notifications';
 const BACKGROUND_COLOR = 'background-color';
+const USE_BOLD_ICONS = 'use-bold-icons';
+
+export default class KeepAwakePreferences extends ExtensionPreferences {
+    fillPreferencesWindow(window) {
+        const page = new Adw.PreferencesPage({
+        });
+        window.add(page);
+
+        const appearanceGroup = new Adw.PreferencesGroup({
+            title: _('GROUP_APPEARANCE'),
+        });
+        page.add(appearanceGroup);
+            
+
+        // use colored icon for video mode
+
+        const colorizedIconRow = new Adw.SwitchRow({
+            title: _('TITLE_COLORIZED_ICON_BG'),
+            subtitle: _('DESC_COLORIZE_ICON_BG_IF_KEEP_AWAKE'),
+        });
+        appearanceGroup.add(colorizedIconRow);
+
+        window._settings = this.getSettings();
+        window._settings.bind(NO_COLOR_BACKGROUND, colorizedIconRow, 'active',
+            Gio.SettingsBindFlags.INVERT_BOOLEAN);
 
 
-function init() {
-    ExtensionUtils.initTranslations("KeepAwake");
-}
+            
+        // color picker
 
-function ShowDesktopSettingsWidget() {
-    this._init();
-}
-
-ShowDesktopSettingsWidget.prototype = {
-
-    _init: function() {
-        this._grid = new Gtk.Grid();
-        this._grid.margin_start = 50;
-        this._grid.margin_end = 50;
-        this._grid.margin_top = 50;
-        this._grid.margin_bottom = 50;
-        this._grid.row_spacing = this._grid.column_spacing = 20;
-  	    this._settings = ExtensionUtils.getSettings();
-
-        // first setting row
-        let enableNotificationsLabel = _("Show notifications on mode change");
-
-        this._grid.attach(new Gtk.Label({ label: enableNotificationsLabel, wrap: true, sensitive: true,
-                                   margin_bottom: 10, margin_top: 5 }),
-                                    0, 0, 1, 1);
-
-        let currentEnableNotifications = this._settings.get_boolean(ENABLE_NOTIFICATIONS);
-        let enableNotificationsSwitcher = new Gtk.Switch();
-        enableNotificationsSwitcher.active = currentEnableNotifications;
-        this._grid.attach(enableNotificationsSwitcher, 1, 0, 1, 1);
-        enableNotificationsSwitcher.connect('state-set', () => {
-              this._settings.set_boolean(ENABLE_NOTIFICATIONS, !this._settings.get_boolean(ENABLE_NOTIFICATIONS));
-            });
-
-        // second setting row
-        let colorOnBackgroundLabel = _("Show background-colored icon if keep awake is enabled");
-
-        this._grid.attach(new Gtk.Label({ label: colorOnBackgroundLabel, wrap: true, sensitive: true,
-                                   margin_bottom: 10, margin_top: 5 }),
-                                    0, 1, 1, 1);
-
-        let currentNoColorBackground = this._settings.get_boolean(NO_COLOR_BACKGROUND);
-        let noColorBackgroundSwitcher = new Gtk.Switch();
-        noColorBackgroundSwitcher.active = !currentNoColorBackground;
-        this._grid.attach(noColorBackgroundSwitcher, 1, 1, 1, 1);
-
-        noColorBackgroundSwitcher.connect('state-set',() => {
-              this._settings.set_boolean(NO_COLOR_BACKGROUND, !this._settings.get_boolean(NO_COLOR_BACKGROUND));
-            });
-
-
-        // third setting row
-        let colorBackgroundLabel = _("Use this background color");
-
-        this._grid.attach(new Gtk.Label({ label: colorBackgroundLabel, wrap: true, sensitive: true,
-                                   margin_bottom: 10, margin_top: 5 }),
-                                    0, 2, 1, 1);
+        let colorBackgroundLabel = new Gtk.Label({ label: _('TITLE_COLORIZE_ICON_BGWITH_THIS_COLOR'),
+             margin_bottom: 10, margin_top: 10, margin_start: 10, margin_end: 32});
 
         const rgba = new Gdk.RGBA();
-        rgba.parse(this._settings.get_string(BACKGROUND_COLOR));
+        rgba.parse(window._settings.get_string(BACKGROUND_COLOR));
 
-        let backgroundColor = new Gtk.ColorButton({
+        let colorPicker = new Gtk.ColorButton({
             rgba: rgba,
             show_editor: true,
             use_alpha: true,
             visible: true
         });
-        this._grid.attach(backgroundColor, 1, 2, 1, 1);
 
-        backgroundColor.connect('color-set', () => {
-            this._settings.set_string(BACKGROUND_COLOR, backgroundColor.get_rgba().to_string());
+        let bgColorBox = new Gtk.Box();
+        bgColorBox.set_orientation(Gtk.Orientation.HORIZONTAL); 
+        bgColorBox.prepend(colorBackgroundLabel, true, false, 32);
+        bgColorBox.append(colorPicker, true, false, 32);
+
+        const bgColorRow = new Adw.PreferencesRow();
+        bgColorRow.child = bgColorBox;
+        appearanceGroup.add(bgColorRow);
+
+
+        colorPicker.connect('color-set', () => {
+            window._settings.set_string(BACKGROUND_COLOR, colorPicker.get_rgba().to_string());
         });
 
-    },
 
-    _completePrefsWidget: function() {
-        let scollingWindow = new Gtk.ScrolledWindow({
-                                 'hscrollbar-policy': Gtk.PolicyType.AUTOMATIC,
-                                 'vscrollbar-policy': Gtk.PolicyType.AUTOMATIC,
-                                 'hexpand': true, 'vexpand': true});
-        if (shellVersion >= 40){
-            scollingWindow.set_child(this._grid);
-            scollingWindow.show();
-        }else {
-            scollingWindow.add_with_viewport(this._grid);
-            scollingWindow.show_all();
-        }
-        return scollingWindow;
+        // icon set
+
+        const iconSetRow = new Adw.SwitchRow({
+            title: _('DESC_USE_ALTERNATIVE_ICON_SET'),
+            subtitle: _('TITLE_USE_BOLD_ICONS_REQUIRES_RELAUNCH'),
+        });
+        appearanceGroup.add(iconSetRow);
+
+        window._settings.bind(USE_BOLD_ICONS, iconSetRow, 'active',
+            Gio.SettingsBindFlags.DEFAULT);
+
+
+       
+
+        // Notifications    
+
+        const notificationsGroup = new Adw.PreferencesGroup({
+            title: _('GROUP_NOTIFICATIONS'),
+        });
+        page.add(notificationsGroup);
+
+        const showNotificationsRow = new Adw.SwitchRow({
+            title: _('TITLE_SHOW_NOTIFICATIONS'),
+            subtitle: _('DESC_SHOW_NOTIFICATION_WHEN_CLICKED'),
+        });
+        notificationsGroup.add(showNotificationsRow);
+
+        window._settings.bind(ENABLE_NOTIFICATIONS, showNotificationsRow, 'active',
+            Gio.SettingsBindFlags.DEFAULT);
+
+        
     }
-};
-
-function buildPrefsWidget() {
-    let widget = new ShowDesktopSettingsWidget();
-    return widget._completePrefsWidget();
 }
+

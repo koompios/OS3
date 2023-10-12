@@ -6,74 +6,50 @@
  * @license    GPL-3.0-only
  */
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
+import Adw from 'gi://Adw';
+import Gtk from 'gi://Gtk';
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
 
-const {Prefs, PrefsKeys} = Me.imports.lib.Prefs;
-const {Gtk, Gdk, Gio, GLib, GObject} = imports.gi;
+import {ExtensionPreferences} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.js';
 
-const Config = imports.misc.config;
-const shellVersion = parseFloat(Config.PACKAGE_VERSION);
-
-const gettextDomain = Me.metadata['gettext-domain'];
-const UIFolderPath = Me.dir.get_child('ui').get_path();
-const binFolderPath = Me.dir.get_child('bin').get_path();
-
-/**
- * prefs widget
- *
- * @param {boolean} isAdw whether it is calling for adw ui
- *
- * @returns {Prefs.Prefs}
- */
-function getPrefs(isAdw)
-{
-    let builder = new Gtk.Builder();
-    let settings = ExtensionUtils.getSettings();
-    let prefsKeys = new PrefsKeys.PrefsKeys(shellVersion, isAdw);
-
-    return new Prefs.Prefs(
-        {
-            Builder: builder,
-            Settings: settings,
-            GObjectBindingFlags: GObject.BindingFlags,
-            Gtk,
-            Gdk,
-            Gio,
-            GLib,
-        },
-        prefsKeys,
-        shellVersion
-    );
-}
+import {Prefs} from './lib/Prefs/Prefs.js';
+import {PrefsKeys} from './lib/Prefs/PrefsKeys.js';
 
 /**
- * prefs initiation
- *
- * @returns {void}
+ * Preferences window entry point
  */
-function init()
+export default class JustPerfectionPrefs extends ExtensionPreferences
 {
-    ExtensionUtils.initTranslations();
-}
+    /**
+     * fill preferences window
+     *
+     * @returns {void}
+     */
+    fillPreferencesWindow(window)
+    {
+        const shellVersion = parseFloat(Config.PACKAGE_VERSION);
+        const gettextDomain = this.metadata['gettext-domain'];
 
-/**
- * fill prefs window
- *
- * @returns {void}
- */
-function fillPreferencesWindow(window)
-{
-    getPrefs(true).fillPrefsWindow(window, UIFolderPath, binFolderPath, gettextDomain);
-}
+        let UIFolderPath = this.dir.get_child('ui').get_path();
+        let prefsKeys = new PrefsKeys(shellVersion);
 
-/**
- * prefs widget
- *
- * @returns {Gtk.Widget}
- */
-function buildPrefsWidget()
-{
-    return getPrefs(false).getPrefsWidget(UIFolderPath, binFolderPath, gettextDomain);
+        let prefs = new Prefs(
+            {
+                Builder: new Gtk.Builder(),
+                Settings: this.getSettings(),
+                Gtk,
+                Gdk,
+                Gio,
+                GLib,
+            },
+            prefsKeys,
+            shellVersion
+        );
+
+        prefs.fillPrefsWindow(window, UIFolderPath, gettextDomain);
+    }
 }
 
