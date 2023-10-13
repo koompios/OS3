@@ -16,15 +16,10 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-/* exported init */
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-const Main = imports.ui.main;
-
-class Extension {
-    constructor() {
-        this._oldUpdateShouldShow = null;
-    }
-
+export default class HideWorkspaceThumbnailsExtension extends Extension {
     enable() {
         const thumbnailsBox = this._getThumbnailsBox();
         this._oldUpdateShouldShow = thumbnailsBox._updateShouldShow;
@@ -42,7 +37,9 @@ class Extension {
 
     disable() {
         const thumbnailsBox = this._getThumbnailsBox();
-        thumbnailsBox._updateShouldShow = this._oldUpdateShouldShow;
+        if (this._oldUpdateShouldShow) {
+            thumbnailsBox._updateShouldShow = this._oldUpdateShouldShow;
+        }
         thumbnailsBox._updateShouldShow();
     }
 
@@ -52,6 +49,3 @@ class Extension {
     }
 }
 
-function init() {
-    return new Extension();
-}

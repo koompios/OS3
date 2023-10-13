@@ -1,17 +1,15 @@
-/* exported LayoutsPage */
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
+import Adw from 'gi://Adw';
+import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
 
-const {Adw, Gio, GObject, Gtk} = imports.gi;
-const Constants = Me.imports.constants;
-const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
-const PW = Me.imports.prefsWidgets;
-const _ = Gettext.gettext;
+import * as Constants from '../../constants.js';
+import * as PW from '../../prefsWidgets.js';
+import {SubPage} from './SubPage.js';
 
-const Settings = Me.imports.settings;
-const {SubPage} = Settings.Menu.SubPage;
+import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-var LayoutsPage = GObject.registerClass({
+export const LayoutsPage = GObject.registerClass({
     Signals: {
         'response': {param_types: [GObject.TYPE_INT]},
     },

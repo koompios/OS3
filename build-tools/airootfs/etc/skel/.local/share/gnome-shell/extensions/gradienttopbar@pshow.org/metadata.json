@@ -7,10 +7,9 @@
   "name": "Gradient Top Bar",
   "settings-schema": "org.gnome.shell.extensions.org.pshow.gradienttopbar",
   "shell-version": [
-    "43",
-    "44"
+    "45"
   ],
   "url": "https://github.com/petar-v/gradienttopbar",
   "uuid": "gradienttopbar@pshow.org",
-  "version": 11
+  "version": 15
 }

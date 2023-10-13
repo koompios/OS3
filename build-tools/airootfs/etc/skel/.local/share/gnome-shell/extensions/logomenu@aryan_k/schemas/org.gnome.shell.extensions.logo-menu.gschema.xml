@@ -63,6 +63,18 @@
       <description>Toggle Software Centre option visibility.</description>
     </key>
 
+    <key type="b" name="show-activities-button">
+      <default>false</default>
+      <summary>Toggle visibility of the top panel activities button</summary>
+      <description>Toggle visibility of the top panel activities button.</description>
+    </key>
+
+    <key type="b" name="symbolic-icon">
+      <default>true</default>
+      <summary>Toggle if user chose symbolic or coloured distro logo</summary>
+      <description>Toggle if user chose symbolic or coloured distro logo.</description>
+    </key>
+
   </schema>
 
 </schemalist>
