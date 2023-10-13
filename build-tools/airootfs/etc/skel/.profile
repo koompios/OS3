@@ -54,3 +54,4 @@ fi
 #fi
 
 #dconf load / < ~/.dconf_settings.ini
+killall gnome-software
