@@ -149,10 +149,12 @@ wpm
 
 # Fonts
 noto-fonts
-#noto-fonts-cjk
-#noto-fonts-emoji
-khmer-fonts
+noto-fonts-cjk
+noto-fonts-emoji
 inter-font
+adobe-source-han-sans-cn-fonts
+
+
 
 # printing
 cups

@@ -1,0 +1,38 @@
+[koompi-test]
+SigLevel = Never
+Server = https://koompi-os.github.io/koompi/x86_64
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+put at the end here
+[koompi]
+SigLevel = Never
+Server = https://koompi-os.github.io/koompi/x86_64
