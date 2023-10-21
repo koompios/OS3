@@ -177,15 +177,15 @@ a2ps
 
 
 # io & fs
-kio
-kio-extras
-kio-fuse
-kio-gdrive
+#kio
+#kio-extras
+#kio-fuse
+#kio-gdrive
 imount
-mtpfs
-libmtp
-gvfs-mtp
-audiocd-kio
+#mtpfs
+#libmtp
+#gvfs-mtp
+#audiocd-kio
 btrfs-progs
 exfatprogs
 f2fs-tools
