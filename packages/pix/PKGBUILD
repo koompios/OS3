@@ -17,7 +17,7 @@ depends=(
 makedepends=('go>=1.17')
 options=(!lto)
 source=(
-  'pix::git+https://github.com/KOOMPI-OS/pix.git#branch=main'
+  'pix::git+https://github.com/KOOMPI-OS/pix.git'
   'config.json'
   )
 md5sums=('SKIP')
