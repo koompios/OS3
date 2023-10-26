@@ -11,8 +11,7 @@ license=('GPL')
 package() {
     # You don't need to do anything here for a meta-package
     # It's empty because the package doesn't contain files
-    #install -Dm644 ../os-release "$pkgdir/etc/os-release"
-    echo "This is updated package"
+    install -Dm644 ../os-release "$pkgdir/etc/os-release"
 }
 
 # The following functions are optional but can be included for more control:
