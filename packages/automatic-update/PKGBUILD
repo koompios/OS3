@@ -1,0 +1,12 @@
+# Maintainer: Hangsiahong <honghangsia@gmail.com>
+pkgname=automatic-update
+pkgver=1.0
+pkgrel=1
+pkgdesc="KOOMPI OS Automatic Update binary and systemd service"
+arch=('any')
+license=('GPL')
+
+package() {
+    install -Dm644 ../autocheck "$pkgdir/usr/bin/autocheck"
+    install -Dm644 ../systemd/automatic-update.service "$pkgdir/etc/systemd/user/"
+}
