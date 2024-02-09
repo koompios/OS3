@@ -1,7 +1,39 @@
+sddm-kcm
+brightnessctl
+vlc
+plasma-sdk
+telegram-desktop
+feh
+ripgrep
+network-manager-applet
+ttf-hack
+ttf-hanazono
+ttf-jetbrains-mono
+ttf-nerd-fonts-symbols-common
+ttf-nerd-fonts-symbols-mono
+ttf-roboto
+ttf-ubuntu-font-family
+ttf-ubuntu-mono-nerd
+ttf-ubuntu-nerd
+ttf-jetbrains-mono-nerd
+awesome-git
+papirus-icon-theme
+upower
+flameshot
+bluez
+bluez-utils
+xorg-setxkbmap
+xfce4-power-manager
+playerctl
+rofi
+oh-my-posh
+yay
+edk2-shell
+neofetch
+picom
 xorriso
 os-prober
-gnome-disk-utility
-gnome-tweaks
+inxi
 vim
 grub-koompi
 efibootmgr
@@ -12,7 +44,6 @@ archinstall
 b43-fwcutter
 base
 bash
-bash-completion
 bind
 brltty
 broadcom-wl
@@ -31,11 +62,12 @@ f2fs-tools
 fatresize
 gpart
 gptfdisk
+fish
 hdparm
 hyperv
 intel-ucode
 irssi
-less
+tree
 libfido2
 libusb-compat
 linux-zen
@@ -101,11 +133,11 @@ android-tools
 
 
 # Background and services
-pipewire
-pipewire-pulse
-pipewire-jack
-pipewire-alsa
-wireplumber
+pulseaudio
+pulseaudio-alsa
+pulseaudio-bluetooth
+pulsemixer
+pavucontrol
 networkmanager
 ifstat
 
@@ -124,7 +156,22 @@ ifstat
 #ichaotic-mirrorlist
 
 ### Gnome Software
-gnome
+filelight
+okular
+sddm
+gnome-tweaks
+gnome-calculator
+gnome-characters
+gnome-clocks
+gnome-font-viewer
+gnome-keyring
+gnome-logs
+gnome-maps
+gnome-weather
+gnome-system-monitor
+elisa
+kate
+nautilus
 firefox
 flatpak
 #gnome-software-plugin-flatpak
@@ -143,6 +190,7 @@ pibee-git
 jade-gui
 python-yaml
 koompi-backgrounds
+picom
 waydroid-koompi
 waydroid-image
 wpm
@@ -152,8 +200,6 @@ noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 inter-font
-adobe-source-han-sans-cn-fonts
-ibus-pinyin
 khmer-fonts
 
 
@@ -212,14 +258,15 @@ udftools
 usb_modeswitch
 usbmuxd
 usbutils
+thunderbird
+tmux
 
 # editors
 nano
 nano-syntax-highlighting
+micro
 vim
-
-
-
+kitty
 
 # Startup
 plymouth-koompi
@@ -230,11 +277,9 @@ python-pytz
 python-gobject
 libadwaita
 gtk4
-adwaita-icon-theme
 vte3
 gparted
 openssl
-gdm
 cups-pk-helper
 open-vm-tools
 iio-sensor-proxy

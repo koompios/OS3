@@ -1,0 +1,16 @@
+[SddmGreeterTheme]
+Name=KOOMPI Transparent
+Description=KOOMPI Transparent
+Author=Hieng KimHong
+Copyright=(c) 2020, Hieng KimHong
+License=GPL 3+
+Type=sddm-theme
+Version=0.1
+Website=https://github.com/EliverLara/Nordic/tree/master/kde/sddm
+Screenshot=KPS.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=hiengkimhong36912@gmail.com
+Theme-Id=Hieng KimHong
+Theme-API=2.1

@@ -1,0 +1,2 @@
+# KOOMPI-SDDM
+SDDM
