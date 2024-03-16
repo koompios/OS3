@@ -1,0 +1,2 @@
+/dev/root / ext2 noatime,errors=remount-ro 0 1
+
