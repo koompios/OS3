@@ -1,0 +1,109 @@
+pix (1.8.3) kinetic; urgency=medium
+
+  * Fix Arch Container cannot initialize by removing sabay mirrorlist for now
+
+ -- Hangsia Hong <send@koompi.org> Wed, 15 Aug 2023 02:16:00 +0300
+
+pix (1.8.2) kinetic; urgency=medium
+
+  * attempt to fix mirror sabay problem
+
+ -- Hangsia Hong <send@koompi.org> Thur, 24 Mar 2023 05:49:00 +0300
+
+pix (1.8.1) kinetic; urgency=medium
+
+  * Fix Wget Url wrong
+
+ -- Hangsia Hong <send@koompi.org> Thur, 24 Mar 2023 05:49:00 +0300
+
+pix (1.8.0) kinetic; urgency=medium
+
+  * Fix: Require package name for nix upgrade
+  * Setup Goreleaser
+  * Semi-auto export binary
+  * Use spinner from Orchid across application
+  * Fix: export/unexport desktop entries with binary names that differ from
+    package name work consistently
+  * Copy deb file instead of moving when sideloading
+  * Fix: Nix install/uninstall didn't accept multiple packages at once
+  * Nix commands have more consistent output
+  * Add Sabay Mirror
+
+ -- Mateus Melchiades <matbme@duck.com>  Tue, 28 Feb 2023 10:17:00 -0300
+
+pix (1.7.0-1) kinetic; urgency=medium
+
+  * New translations
+  * Fix command summary
+  * Fix: don't show pix failure when shell command returns error
+  * Add sv man page to pix.install
+  * Added Nix search
+  * Added Nix upgrade
+
+ -- Mirko brombin <send@mirko.pm>  Mon, 13 Feb 2023 23:00:03 +0200
+
+pix (1.6.3) kinetic; urgency=medium
+
+  * New nix flag for the nix package manager
+  * Porting to the orchid library
+
+ -- Mirko brombin <send@mirko.pm>  Mon, 06 Feb 2023 17:45:03 +0200
+ 
+pix (1.5.0) kinetic; urgency=medium
+
+  * New --zypper flag
+  * New --xbps flag
+  * Fix export for linked binaries
+  * Accurately check package is installed
+  * Fix arguments order
+  * Fix the storage error by setting a custom podman configuration if not available
+
+ -- Mirko brombin <send@mirko.pm>  Fri, 20 Jan 2023 08:00:03 +0200
+ 
+pix (1.4.2) kinetic; urgency=medium
+
+  * Exit status on show -i
+  * Automatically unexport on package removal
+  * Unexport binary
+  * Add isinstalled flag to pix show
+  * Change connection test server to 'cloudflare'
+
+ -- Mirko brombin <send@mirko.pm>  Fri, 20 Jan 2023 08:00:03 +0200
+
+pix (1.4.1-2) kinetic; urgency=critical
+
+  * Allow exporting binaries
+  * Update manpage
+  * Fix bug the graph driver
+
+ -- Mirko brombin <send@mirko.pm>  Sun, 11 Dec 2022 10:00:03 +0200
+ 
+pix (1.4.0) kinetic; urgency=medium
+
+  * New managed Alpine Linux container
+  * Automatic environment variable matching to flags
+  * Allow arbitrary container names
+  * Better error handling
+  * General code cleanup and refactoring
+
+ -- Mirko brombin <send@mirko.pm>  Sun, 11 Dec 2022 10:00:03 +0200
+ 
+pix (1.3.4) kinetic; urgency=medium
+
+  * Skip export for sideloaded packages
+  * Mute export logs
+  * Addition of man page (man pix)
+
+ -- Mirko brombin <send@mirko.pm>  Sun, 11 Dec 2022 10:00:03 +0200
+
+pix (1.2.5) kinetic; urgency=medium
+
+  * Support for sideloading packages (--sideload)
+
+ -- Mirko brombin <send@mirko.pm>  Sun, 11 Dec 2022 09:10:03 +0200
+ 
+pix (1.2.4) kinetic; urgency=medium
+
+  * First Release
+
+ -- Mirko brombin <send@mirko.pm>  Wen, 16 Sep 2022 23:26:34 +0200
