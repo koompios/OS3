@@ -1,0 +1,172 @@
+#!/bin/bash
+
+function set_layout() {
+    layout=$1
+    case $layout in
+        "layout1")
+            backup_file="$HOME/.local/share/pizard/config/gnome_customizations_layout1.tar.gz"
+            ;;
+        "layout2")
+            backup_file="$HOME/.local/share/pizard/config/gnome_customizations_layout2.tar.gz"
+            ;;
+        *)
+            echo "Error: Invalid layout specified."
+            exit 1
+            ;;
+    esac
+
+    update "$backup_file"
+
+    # Restart the GNOME Shell to apply the changes
+    # loginctl kill-user $USER
+}
+
+# Backup GNOME customization files
+function backup() {
+    # Set the backup file name and location
+    backup_file="gnome_customizations_$(date +%Y%m%d).tar.gz"
+
+    # Set the directories to backup
+    customization_directories=(
+      "$HOME/.themes"
+      "$HOME/.icons"
+      "$HOME/.local/share/gnome-shell/extensions"
+      "$HOME/.local/share/icons/"
+      "$HOME/.local/share/flatpak/overrides"
+      "$HOME/.config/dconf"
+      "$HOME/.config/gtk-4.0"
+    )
+
+    # Create a temporary directory to store the backup files
+    backup_dir=$(mktemp -d)
+
+    # Copy customization directories to the backup directory
+    for directory in "${customization_directories[@]}"; do
+      if [ -d "$directory" ]; then
+        cp -r "$directory" "$backup_dir"
+      fi
+    done
+
+    # Backup dconf settings using gsettings
+    dconf_settings_file="$backup_dir/.dconf_settings.ini"
+    dconf dump / > "$dconf_settings_file"
+
+    # Create the final backup archive
+    tar -czvf "$backup_file" -C "$backup_dir" .
+
+    # Cleanup the temporary backup directory
+    rm -rf "$backup_dir"
+
+    echo "Backup created: $backup_file"
+}
+
+# Restore GNOME customization files
+function update() {
+    backup_file=$1
+
+    # Set the URL of the backup directory
+    # backup_url="https://dev.koompi.org/os3/gnome-backup/"
+
+    # Set the destination directory to update the configuration files
+    destination_dir="$HOME"
+
+    # Set the layout-specific backup file names
+    # layout1_backup_file="gnome_customizations_layout1$(date +%Y%m%d).tar.gz"
+    # layout2_backup_file="gnome_customizations_layout2$(date +%Y%m%d).tar.gz"
+
+    # # Check if the backup directory URL is accessible
+    # if curl --output /dev/null --silent --head --fail "$backup_url"; then
+    #     # Check if the latest backup file for layout1 exists
+    #     if curl --output /dev/null --silent --head --fail "${backup_url}${layout1_backup_file}"; then
+    #         # Download the latest backup file for layout1
+    #         wget "${backup_url}${layout1_backup_file}" -O "$destination_dir/gnome_customizations.tar.gz"
+    #     fi
+
+    #     # Check if the latest backup file for layout2 exists
+    #     if curl --output /dev/null --silent --head --fail "${backup_url}${layout2_backup_file}"; then
+    #         # Download the latest backup file for layout2
+    #         wget "${backup_url}${layout2_backup_file}" -O "$destination_dir/gnome_customizations.tar.gz"
+    #     fi
+
+    #     # Check if the download was successful
+    #     if [ $? -eq 0 ]; then
+    #         # Extract the backup file
+    #         tar -xzvf "$destination_dir/gnome_customizations.tar.gz" -C "$destination_dir" --keep-newer-files
+
+    #         # Copy the extracted files to their respective destinations
+    #         cp -r "$destination_dir/extensions" "$HOME/.local/share/gnome-shell/"
+    #         cp -r "$destination_dir/dconf" "$HOME/.config/"
+    #         cp -r "$destination_dir/gtk-4.0" "$HOME/.config/"
+    #         cp -r "$destination_dir/icons" "$HOME/.local/share/icons/"
+    #         cp -r "$destination_dir/overrides" "$HOME/.local/share/flatpak/"
+
+    #         # Remove the extracted directories
+    #         rm -rf "$destination_dir/extensions"
+    #         rm -rf "$destination_dir/dconf"
+    #         rm -rf "$destination_dir/gtk-4.0"
+    #         rm -rf "$destination_dir/icons"
+    #         rm -rf "$destination_dir/overrides"
+
+    #         # Load the dconf settings
+    #         dconf load / < "$destination_dir/.dconf_settings.ini"
+
+    #         echo "Configuration files have been updated."
+    #     else
+    #         echo "Error: Failed to download the latest backup file."
+    #         exit 1
+    #     fi
+    # else
+    #     echo "Internet connection not available. Checking for local backup file..."
+
+        if [ -f "$backup_file" ]; then
+            echo "Local backup file found: $backup_file"
+            # Remove dconf/user
+            rm -rf ~/.config/dconf/user
+            rm -rf $HOME/.local/share/gnome-shell/extensions
+            # Extract the local backup file
+            tar -xzvf "$backup_file" -C "$destination_dir" --keep-newer-files
+
+            cp -r "$destination_dir/extensions" "$HOME/.local/share/gnome-shell/"
+            cp -r "$destination_dir/dconf" "$HOME/.config/"
+            cp -r "$destination_dir/gtk-4.0" "$HOME/.config/"
+            cp -r "$destination_dir/icons" "$HOME/.local/share/icons/"
+            cp -r "$destination_dir/overrides" "$HOME/.local/share/flatpak/"
+
+            rm -rf "$destination_dir/extensions"
+            rm -rf "$destination_dir/dconf"
+            rm -rf "$destination_dir/gtk-4.0"
+            rm -rf "$destination_dir/icons"
+            rm -rf "$destination_dir/overrides"
+
+            dconf load / < "$destination_dir/.dconf_settings.ini"
+            echo "Configuration files have been updated using local backup."
+        else
+            echo "Error: Local backup file not found."
+            exit 1
+        fi
+}
+
+# Display usage information
+function usage() {
+  echo "Usage: $0 [backup|update|set <layout>]"
+}
+
+# Check command line arguments
+case "$1" in
+  "backup")
+    backup
+    ;;
+  "update")
+    update "gnome_customizations.tar.gz"
+    ;;
+  "set")
+    if [ -z "$2" ]; then
+      echo "Error: Layout not specified."
+      exit 1
+    fi
+    set_layout "$2"
+    ;;
+  *)
+    usage
+    ;;
+esac
