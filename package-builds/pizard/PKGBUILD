@@ -1,0 +1,18 @@
+# Maintainer: Hangsiahong <honghangsia@gmail.com>
+pkgname=pizard
+pkgver=1.0
+pkgrel=1
+pkgdesc="KOOMPI OS Gnome Layout Config"
+arch=('any')
+license=('GPL')
+
+
+package() {
+    mkdir -pv "$pkgdir/usr/bin/"
+    mkdir -pv "$pkgdir/etc/skel/.local/share/pizard/config/"
+    wget https://raw.githubusercontent.com/KOOMPI-OS/koompi-control-center/tauri-nextjs/linux-utils/pizard -O "$pkgdir/usr/bin/pizard"
+    chmod +x $pkgdir/usr/bin/pizard
+    install -Dm644 ../config/gnome_customizations_layout1.tar.gz "$pkgdir/etc/skel/.local/share/pizard/config/gnome_customizations_layout1.tar.gz"
+    install -Dm644 ../config/gnome_customizations_layout2.tar.gz "$pkgdir/etc/skel/.local/share/pizard/config/gnome_customizations_layout2.tar.gz"
+}
+

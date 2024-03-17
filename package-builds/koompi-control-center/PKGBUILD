@@ -1,0 +1,20 @@
+# Maintainer: Hangsia Hong <hangsia@koompi.org>
+
+pkgname=koompi-control-center
+pkgver=0.1.1
+pkgrel=1
+pkgdesc='KOOMPI Control Center'
+arch=(x86_64 aarch64)
+url='https://github.com/KOOMPI-OS/koompi-control-center'
+license=(GPL3)
+#makedepends=('itstool' 'base-devel' 'python' 'meson' 'libadwaita' 'gettext' 'make' 'desktop-file-utils')
+#depends=('python' 'python-gobject' 'libadwaita' 'gtk4' 'pix' 'koompi-system-operator')
+source=("$pkgname::git+https://github.com/koompi-os/koompi-control-center.git")
+md5sums=('SKIP')
+
+
+package() {
+  cp -r ../usr $pkgdir/usr
+  ln -sf $pkgdir/usr/local/bin/control-center $pkgdir/usr/local/bin/koompi-control-center
+  ## Install the Control Center here
+}
