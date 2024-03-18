@@ -228,9 +228,9 @@ def inst_setup_base(config):
               airootfs_sfs])
     else:
         exec(['unsquashfs', '-f', '-d', '/mnt',
-              '/run/archiso/bootmnt/koompi/x86_64/airootfs.sfs'])
+              '/run/archiso/bootmnt/koompilive/x86_64/airootfs.sfs'])
     # Enable system services
-    #enable_service('akshara')
+    #enable_service('akshara'
     enable_service('bluetooth')
     enable_service('cups')
     # Enable koompi-files
