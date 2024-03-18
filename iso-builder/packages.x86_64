@@ -1,3 +1,4 @@
+starship
 alsa-utils
 amd-ucode
 arch-install-scripts
@@ -161,7 +162,7 @@ adwdialog
 koompi-control-center
 micro-distrobox
 pix
-pibee-x11
+pibee-git-x11
 jade-gui
 python-yaml
 koompi-backgrounds
@@ -196,6 +197,7 @@ inter-font
 adobe-source-han-sans-cn-fonts
 ibus-pinyin
 khmer-fonts
+ttf-meslo-nerd
 
 # Startup
 plymouth-koompi
