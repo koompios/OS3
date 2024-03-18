@@ -333,7 +333,7 @@ def inst_networking(config):
 
 def inst_users(config):
     # Create sudoers
-    exec_chroot(['bash', '-c', 'userdel -r koompi &>/dev/null'])
+    exec_chroot(['bash', '-c', 'userdel -r koompilive &>/dev/null'])
     exec_chroot(
         ['bash', '-c', 'echo "root ALL=(ALL:ALL) ALL" > /etc/sudoers'])
     exec_chroot(
@@ -344,9 +344,9 @@ def inst_users(config):
 
     # Add users
     for user in config['users']:
-        if user['name'] == 'koompi':
+        if user['name'] == 'koompilive':
             print()
-            print('The username koompi is not allowed.')
+            print('The username koompilive is not allowed.')
             sys.exit(3)
 
         exec_chroot(['useradd', '-m', '-s', '/bin/bash', user['name']])
