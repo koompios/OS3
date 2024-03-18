@@ -3,7 +3,7 @@
 # Original maintainer: Crystal Linux Distribution Team <distribution@lists.getcryst.al>
 
 pkgname=jade-gui
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 pkgdesc='Libadwaita based GUI front-end for pibee'
 license=('GPL3')
@@ -11,20 +11,21 @@ arch=('x86_64' 'aarch64')
 url="https://github.com/koompi-os/jade-gui"
 depends=('openssl' 'libadwaita' 'python-pytz' 'gparted' 'vte4' 'gtksourceview5' 'python-tzlocal' 'python-requests' 'reflector')
 makedepends=('meson' 'ninja' 'desktop-file-utils' 'appstream-glib' 'gtk4')
-source=("jade-gui::git+https://github.com/KOOMPI-OS/jade-gui.git"
-        "installer-autostart.desktop")
+#source=("jade-gui::git+https://github.com/KOOMPI-OS/jade-gui.git"
+#        "installer-autostart.desktop")
 
-sha256sums=('SKIP'
-            'SKIP')
+#sha256sums=('SKIP'
+#            'SKIP')
 
 build() {
-    cd "$srcdir/jade-gui"
+    cp -r ../../../package-sources/jade-gui .
+    cd ./jade-gui
     meson setup --prefix="/usr" _build
     ninja -C _build
 }
 
 package() {
-    cd "$srcdir/jade-gui/_build"
+    cd jade-gui/_build
     DESTDIR="${pkgdir}" ninja install
-    install -Dm755 ../../installer-autostart.desktop -t "${pkgdir}"/etc/xdg/autostart/
+    install -Dm755 ../../../installer-autostart.desktop -t "${pkgdir}"/etc/xdg/autostart/
 }
