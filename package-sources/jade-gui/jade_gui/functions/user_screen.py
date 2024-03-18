@@ -71,7 +71,7 @@ class UserScreen(JadeScreen, Adw.Bin):
     def username_passes_regex(self, widget):
         input = self.username_entry.get_text()
         print(input)
-        if not re.search("^[a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$)$", input) or input == 'koompi':
+        if not re.search("^[a-z_]([a-z0-9_-]{0,31}|[a-z0-9_-]{0,30}\$)$", input) or input == 'koompilive':
             print("Invalid username!")
             self.username_entry.add_css_class("error")
             self.username_filled = False

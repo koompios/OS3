@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo rm -rf work
+sleep 5
+sudo mkarchiso -v -o ./ iso-builder
