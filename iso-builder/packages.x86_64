@@ -163,11 +163,15 @@ adwdialog
 koompi-control-center
 micro-distrobox
 pix
-pibee-git-x11
+pibee-git
 jade-gui
 python-yaml
 koompi-backgrounds
 flatpak
+waydroid-koompi
+waydroid-image
+wpm
+android-tools
 
 # office
 libreoffice-fresh
