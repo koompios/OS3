@@ -4,7 +4,9 @@
 bash /root/flatpak.install
 
 set -e -u
+chmod +x /usr/bin/satpaper
 systemctl enable sddm
+systemctl enable satpaper
 systemctl set-default graphical.target
 
 export $(dbus-launch)

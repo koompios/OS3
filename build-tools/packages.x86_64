@@ -1,7 +1,7 @@
 sddm-kcm
 brightnessctl
 vlc
-plasma-sdk
+plasma
 telegram-desktop
 feh
 ripgrep
@@ -16,7 +16,6 @@ ttf-ubuntu-font-family
 ttf-ubuntu-mono-nerd
 ttf-ubuntu-nerd
 ttf-jetbrains-mono-nerd
-awesome-git
 papirus-icon-theme
 upower
 flameshot
@@ -52,6 +51,7 @@ cryptsetup
 cups
 dhclient
 dmidecode
+breeze-gtk
 dnsmasq
 dosfstools
 e2fsprogs
@@ -256,6 +256,8 @@ partimage
 reiserfsprogs
 udftools
 usb_modeswitch
+ark
+dolphin
 usbmuxd
 usbutils
 thunderbird
