@@ -13,7 +13,7 @@ To build KOOMPI OS3, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/koompi/OS3/
+git clone https://github.com/koompios/OS3/
 cd OS3
 ```
 Checkout the branch you need. You can check our available branches to find the one that suits your requirements.
