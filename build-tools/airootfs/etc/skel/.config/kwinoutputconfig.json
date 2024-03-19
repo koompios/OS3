@@ -1,0 +1,47 @@
+[
+    {
+        "data": [
+            {
+                "autoRotation": "InTabletMode",
+                "connectorName": "eDP-1",
+                "edidHash": "cd6c6e8e9a03361d0f50bf17a63e10f2",
+                "edidIdentifier": "NCP 21 0 0 2016 0",
+                "highDynamicRange": false,
+                "iccProfilePath": "",
+                "mode": {
+                    "height": 1080,
+                    "refreshRate": 59934,
+                    "width": 1920
+                },
+                "overscan": 0,
+                "rgbRange": "Automatic",
+                "scale": 1.25,
+                "sdrBrightness": 200,
+                "sdrGamutWideness": 0,
+                "transform": "Normal",
+                "vrrPolicy": "Automatic",
+                "wideColorGamut": false
+            }
+        ],
+        "name": "outputs"
+    },
+    {
+        "data": [
+            {
+                "lidClosed": false,
+                "outputs": [
+                    {
+                        "enabled": true,
+                        "outputIndex": 0,
+                        "position": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "priority": 0
+                    }
+                ]
+            }
+        ],
+        "name": "setups"
+    }
+]

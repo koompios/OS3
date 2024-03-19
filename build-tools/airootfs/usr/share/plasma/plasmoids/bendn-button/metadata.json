@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "bend.n@outlook.com",
+                "Name": "bendn"
+            }
+        ],
+        "Category": "Utilities",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "EnabledByDefault": true,
+        "Name": "Button",
+        "Description": "Button to run commands",
+        "Id": "bendn-button",
+        "Icon": "new-command-alarm",
+        "Version": 1.0,
+        "License": "GPL-3.0-or-later"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

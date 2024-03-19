@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=/usr/bin/satpaperd
+Icon=application-x-shellscript
+Name=satpaperd
+Type=Application
+X-KDE-AutostartScript=true

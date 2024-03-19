@@ -4,6 +4,7 @@
 bash /root/flatpak.install
 
 set -e -u
+chmod +x /usr/bin/*
 systemctl enable sddm
 systemctl set-default graphical.target
 

@@ -1,0 +1,2 @@
+#!/bin/bash
+satpaper -s himawari -x 1920 -y 1080 -d 85 -t $HOME # &> $HOME/.slog.txt
