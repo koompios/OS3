@@ -368,6 +368,12 @@ def inst_users(config):
         ['bash', '-c', 'echo "Current=breeze" >> /etc/sddm.conf.d/default.conf'])
     exec_chroot(['rm', '-f', '/etc/gdm/custom.conf'])
 
+    # Remove Jade-GUI and Pibee again
+    exec_chroot(
+       # ['bash', '-c', 'pacman -Rn --noconfirm jade-gui pibee-git']
+        ['pacman -Rn --noconfirm jade-gui pibee-git']
+    )
+
     # Create ~/.local/share/applications with right perms
     exec_chroot(['sudo', '-u', user['name'], 'mkdir', '-p',
                 f'/home/{user["name"]}/.local/share/applications'])
