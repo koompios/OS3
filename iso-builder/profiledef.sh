@@ -4,7 +4,7 @@
 iso_name="KOOMPIOS-3.0.0-X11"
 iso_label="KOOMPIOS_$(date +%Y%m)"
 iso_publisher="KOOMPIOS <https://koompi.org"
-iso_application="KOOMPIOS Live/Rescue CD"
+iso_application="KOOMPIOS Live/Rescue CD>"
 iso_version="$(date +%Y.%m.%d)"
 install_dir="arch"
 buildmodes=('iso')
@@ -12,7 +12,9 @@ bootmodes=('bios.syslinux.mbr' 'bios.syslinux.eltorito' 'uefi-x64.systemd-boot.e
 arch="x86_64"
 pacman_conf="pacman.conf"
 airootfs_image_type="squashfs"
-airootfs_image_tool_options=('-comp' 'xz' '-Xbcj' 'x86' '-b' '1M' '-Xdict-size' '1M')
+#airootfs_image_tool_options=('-comp' 'xz' '-Xbcj' 'x86' '-b' '1M' '-Xdict-size' '1M')
+airootfs_image_tool_options=('-comp' 'zstd' '-Xcompression-level' '10' '-b' '1M')
+
 file_permissions=(
   ["/etc/shadow"]="0:0:400"
   ["/root"]="0:0:750"
