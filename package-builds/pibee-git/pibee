@@ -228,9 +228,9 @@ def inst_setup_base(config):
               airootfs_sfs])
     else:
         exec(['unsquashfs', '-f', '-d', '/mnt',
-              '/run/archiso/bootmnt/koompi/x86_64/airootfs.sfs'])
+              '/run/archiso/bootmnt/koompilive/x86_64/airootfs.sfs'])
     # Enable system services
-    #enable_service('akshara')
+    #enable_service('akshara'
     enable_service('bluetooth')
     enable_service('cups')
     # Enable koompi-files
@@ -244,23 +244,40 @@ def inst_setup_base(config):
         ['bash', '-c', 'echo \'COMPRESSION="zstd"\' >> /etc/mkinitcpio.conf'])
     # Generate fstab
     exec(['bash', '-c', 'genfstab -U /mnt > /mnt/etc/fstab'])
+    # copy linux-zen
+    exec(['bash', '-c', 'cp /usr/lib/modules/*zen/vmlinuz /mnt/boot/vmlinuz-linux-zen'])
     # Refresh package lists, pacman-key --init
     exec_chroot(['pacman-key', '--init'])
     exec_chroot(['pacman-key', '--populate', 'archlinux'])
     # Install linux-zen
     #exec_chroot(['pacman', '-Sy', '--noconfirm', 'linux-zen', 'xorriso'])
     # cp linux-zen image
-    exec_chroot(['cp', '/usr/lib/modules/*zen', '/boot/vmlinuz-linux-zen'])
+    #exec_chroot(['cp', '/usr/lib/modules/*zen', '/boot/vmlinuz-linux-zen'])
     # generate linux-zen image
     exec_chroot(['mkinitcpio', '-p', 'linux-zen'])
     # Remove jade-gui and pibee
-    exec_chroot(['pacman', '-Rn', '--noconfirm', 'jade-gui', 'pibee-git'])
-    # delete installer-autostart.desktop
-    exec(['bash', '-c', 'rm -rf /mnt/etc/xdg/autostart/installer-autostart.desktop'])
-    # delete pibee
+    exec_chroot(['/usr/bin/pacman', '-Rn', '--noconfirm', 'jade-gui', 'pibee-git'])
+    # remove jadegui pibee
     exec(['bash', '-c', 'rm -rf /mnt/usr/bin/pibee'])
-    # delete pibee
     exec(['bash', '-c', 'rm -rf /mnt/usr/bin/jade-gui'])
+    exec(['bash', '-c', 'rm -rf /mnt/etc/xdg/autostart/installer-autostart.desktop'])
+
+    # Create Swapfile
+    exec_chroot(
+        ['bash', '/usr/local/bin/create-swap']
+    )
+
+    # Enable autocheck
+    exec_chroot(
+            ['bash', "echo 'ALL ALL=(ALL) NOPASSWD: /usr/bin/autocheck' | tee -a /etc/sudoers"]
+    )
+
+    # remove linux.present
+    exec_chroot(
+        ['rm', '-rf', '/etc/mkinitcpio.d/linux.preset']
+    )
+
+
 
 def inst_bootloader(config):
     # Install bootloader
@@ -366,16 +383,25 @@ def inst_users(config):
         exec_chroot(
             ['bash', '-c', f'echo "SystemAccount=false" >> /var/lib/AccountsService/users/{user["name"]}'])
 
-    # Update display manager configuration
-    exec_chroot(
-        ['bash', '-c', 'echo "[Theme]" > /etc/sddm.conf.d/default.conf'])
-    exec_chroot(
-        ['bash', '-c', 'echo "Current=breeze" >> /etc/sddm.conf.d/default.conf'])
+    ## Update display manager configuration
+    #exec_chroot(
+    #    ['bash', '-c', 'echo "[Theme]" > /etc/sddm.conf.d/default.conf'])
+    #exec_chroot(
+    #    ['bash', '-c', 'echo "Current=breeze" >> /etc/sddm.conf.d/default.conf'])
     exec_chroot(['rm', '-f', '/etc/gdm/custom.conf'])
 
     # Create ~/.local/share/applications with right perms
     exec_chroot(['sudo', '-u', user['name'], 'mkdir', '-p',
                 f'/home/{user["name"]}/.local/share/applications'])
+
+    # Create ~/.config/autostart
+    exec_chroot(['sudo', '-u', user['name'], 'mkdir', '-p',
+                f'/home/{user["name"]}/.config/autostart'])
+
+    # Copy desktop from /usr/share/applications/org.koompios.FirstSetup.desktop to ~/.config/autostart
+    #exec_chroot(['sudo', '-u', user['name'], 'cp', '/usr/local/share/applations/org.koompios.FirstSetup.desktop',
+    #            f'/home/{user["name"]}/.config/autostart'])
+
 
 
 ########################################################################################
