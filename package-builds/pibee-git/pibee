@@ -255,7 +255,12 @@ def inst_setup_base(config):
     exec_chroot(['mkinitcpio', '-p', 'linux-zen'])
     # Remove jade-gui and pibee
     exec_chroot(['pacman', '-Rn', '--noconfirm', 'jade-gui', 'pibee-git'])
-
+    # delete installer-autostart.desktop
+    exec(['bash', '-c', 'rm -rf /mnt/etc/xdg/autostart/installer-autostart.desktop'])
+    # delete pibee
+    exec(['bash', '-c', 'rm -rf /mnt/usr/bin/pibee'])
+    # delete pibee
+    exec(['bash', '-c', 'rm -rf /mnt/usr/bin/jade-gui'])
 
 def inst_bootloader(config):
     # Install bootloader
@@ -367,12 +372,6 @@ def inst_users(config):
     exec_chroot(
         ['bash', '-c', 'echo "Current=breeze" >> /etc/sddm.conf.d/default.conf'])
     exec_chroot(['rm', '-f', '/etc/gdm/custom.conf'])
-
-    # Remove Jade-GUI and Pibee again
-    exec_chroot(
-       # ['bash', '-c', 'pacman -Rn --noconfirm jade-gui pibee-git']
-        ['pacman -Rn --noconfirm jade-gui pibee-git']
-    )
 
     # Create ~/.local/share/applications with right perms
     exec_chroot(['sudo', '-u', user['name'], 'mkdir', '-p',
