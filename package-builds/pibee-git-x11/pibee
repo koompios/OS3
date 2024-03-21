@@ -257,6 +257,10 @@ def inst_setup_base(config):
     exec_chroot(['mkinitcpio', '-p', 'linux-zen'])
     # Remove jade-gui and pibee
     exec_chroot(['/usr/bin/pacman', '-Rn', '--noconfirm', 'jade-gui', 'pibee-git'])
+    # remove jadegui pibee
+    exec(['bash', '-c', 'rm -rf /mnt/usr/bin/pibee'])
+    exec(['bash', '-c', 'rm -rf /mnt/usr/bin/jade-gui'])
+    exec(['bash', '-c', 'rm -rf /mnt/etc/xdg/autostart/installer-autostart.desktop'])
 
     # Create Swapfile
     exec_chroot(
