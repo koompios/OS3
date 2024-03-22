@@ -1,5 +1,6 @@
 bash-completion
 starship
+bash-completion
 alsa-utils
 amd-ucode
 arch-install-scripts
@@ -115,7 +116,8 @@ virtualbox-guest-utils-nox
 vpnc
 wireless-regdb
 wireless_tools
-wpa_supplicant
+#wpa_supplicant
+networkmanager-iwd-overlay
 wvdial
 xfsprogs
 xl2tpd
