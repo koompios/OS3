@@ -283,3 +283,15 @@ cups-pk-helper
 open-vm-tools
 iio-sensor-proxy
 xorg-xhost
+
+#vulkan driver
+vulkan-extra-layers
+vulkan-intel
+vulkan-icd-loader
+vulkan-tools
+vulkan-extra-tools
+vulkan-mesa-layers
+vulkan-utility-libraries
+vulkan-headers
+#vulkan-radeon
+vulkan-validation-layers
