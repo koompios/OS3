@@ -1,6 +1,6 @@
 pkgname=plymouth-koompi
 pkgver=22.02.122
-pkgrel=13
+pkgrel=14
 pkgdesc="A graphical boot splash screen with kernel mode-setting support"
 url="https://www.freedesktop.org/wiki/Software/Plymouth/"
 arch=('i686' 'x86_64')
@@ -14,15 +14,12 @@ optdepends=('cantarell-fonts: For text output, e.g. during decryption'
         'xf86-video-fbdev: Support special graphic cards on early startup')
 backup=('etc/plymouth/plymouthd.conf')
 
-source=("https://gitlab.freedesktop.org/plymouth/plymouth/-/archive/${pkgver}/plymouth-${pkgver}.tar.gz"
-        "https://github.com/koompi-os/plymouth/tarball/master")
-
-sha256sums=('8921cd61a9f32f5f8903ceffb9ab0defaef8326253e1549ef85587c19b7f2ab6'
-            'SKIP')
+source=("https://gitlab.freedesktop.org/plymouth/plymouth/-/archive/${pkgver}/plymouth-${pkgver}.tar.gz")
+sha256sums=('8921cd61a9f32f5f8903ceffb9ab0defaef8326253e1549ef85587c19b7f2ab6')
 
 prepare() {
-	tar xf master
-	cp KOOMPI-OS-plymouth-*/* .
+	#cp -r ../../package-sources/plymouth/* .
+	cp /home/hangsia/project/koompi/OS3-x11/package-sources/plymouth/* .
 
 	cd "$srcdir"/plymouth-${pkgver}
 	patch -p1 -i $srcdir/plymouth-update-initrd.patch
