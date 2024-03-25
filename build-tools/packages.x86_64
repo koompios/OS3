@@ -122,11 +122,11 @@ virtualbox-guest-utils-nox
 vpnc
 wireless-regdb
 wireless_tools
-wpa_supplicant
+# wpa_supplicant
 wvdial
 xfsprogs
 xl2tpd
-android-tools
+# android-tools
 
 ### On-ISO drivers
 ###nvidia
@@ -139,6 +139,7 @@ pulseaudio-bluetooth
 pulsemixer
 pavucontrol
 networkmanager
+networkmanager-iwd-overlay
 ifstat
 
 # Startup
@@ -159,6 +160,7 @@ ifstat
 filelight
 okular
 sddm
+btop
 gnome-tweaks
 gnome-calculator
 gnome-characters
@@ -191,9 +193,9 @@ jade-gui
 python-yaml
 koompi-backgrounds
 picom
-waydroid-koompi
-waydroid-image
-wpm
+# waydroid-koompi
+# waydroid-image
+# wpm
 
 # Fonts
 noto-fonts

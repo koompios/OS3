@@ -2,6 +2,7 @@
 Description=Run Satpaper on login
 
 [Service]
+Environment=XDG_CURRENT_DESKTOP=KDE
 Environment=SATPAPER_SATELLITE=himawari
 Environment=SATPAPER_RESOLUTION_X=1920
 Environment=SATPAPER_RESOLUTION_Y=1080
