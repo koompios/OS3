@@ -1,3 +1,4 @@
+inotify-tools
 rofi-lbonn-wayland
 base-devel
 sddm-kcm
@@ -10,12 +11,9 @@ ripgrep
 network-manager-applet
 ttf-hack
 ttf-hanazono
-ttf-jetbrains-mono
 ttf-nerd-fonts-symbols-common
 ttf-nerd-fonts-symbols-mono
 ttf-ubuntu-font-family
-ttf-ubuntu-mono-nerd
-ttf-ubuntu-nerd
 papirus-icon-theme
 upower
 flameshot
