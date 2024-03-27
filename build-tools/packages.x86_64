@@ -1,3 +1,5 @@
+rofi-lbonn-wayland
+base-devel
 sddm-kcm
 brightnessctl
 vlc
@@ -11,11 +13,9 @@ ttf-hanazono
 ttf-jetbrains-mono
 ttf-nerd-fonts-symbols-common
 ttf-nerd-fonts-symbols-mono
-ttf-roboto
 ttf-ubuntu-font-family
 ttf-ubuntu-mono-nerd
 ttf-ubuntu-nerd
-ttf-jetbrains-mono-nerd
 papirus-icon-theme
 upower
 flameshot
@@ -24,7 +24,6 @@ bluez-utils
 xorg-setxkbmap
 xfce4-power-manager
 playerctl
-rofi
 oh-my-posh
 yay
 edk2-shell
@@ -173,7 +172,6 @@ gnome-weather
 gnome-system-monitor
 elisa
 kate
-nautilus
 firefox
 flatpak
 #gnome-software-plugin-flatpak
@@ -273,7 +271,7 @@ vim
 kitty
 
 # Startup
-plymouth-koompi
+# plymouth-koompi
 
 ### Temporary install koompi-install and koompi-first-setup dependencies here
 python-requests

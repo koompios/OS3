@@ -136,7 +136,12 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [General]
-ColorSchemeHash=2ef8a9f7238e072ca91b0eb590f49ded650c76bd
+ColorSchemeHash=cb4c6ee5cc9a59dbe09fb467a529af1bf5c55c97
+fixed=Delugia,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+font=Ubuntu,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Ubuntu,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Ubuntu,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Ubuntu,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [Icons]
 Theme=Papirus-Dark
@@ -167,6 +172,7 @@ View Style=DetailTree
 [WM]
 activeBackground=49,54,59
 activeBlend=252,252,252
+activeFont=Ubuntu,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 activeForeground=252,252,252
 inactiveBackground=42,46,50
 inactiveBlend=161,169,177
