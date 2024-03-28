@@ -1,0 +1,8 @@
+.panel-gradient {
+  box-shadow: none;
+}
+
+.corner-gradient {
+  background-color: transparent;
+  -panel-corner-radius: 0;
+}

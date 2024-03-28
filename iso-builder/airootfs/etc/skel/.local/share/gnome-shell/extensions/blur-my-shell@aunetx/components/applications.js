@@ -1,17 +1,19 @@
 import Shell from 'gi://Shell';
 import Clutter from 'gi://Clutter';
 import Meta from 'gi://Meta';
+import Gio from 'gi://Gio';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import { PaintSignals } from '../effects/paint_signals.js';
 import { ApplicationsService } from '../dbus/services.js';
-
 
 export const ApplicationsBlur = class ApplicationsBlur {
     constructor(connections, settings, _) {
         this.connections = connections;
         this.settings = settings;
         this.paint_signals = new PaintSignals(connections);
+
+        this.mutter_gsettings = new Gio.Settings({ schema: 'org.gnome.mutter' });
 
         // stores every blurred window
         this.window_map = new Map();
@@ -322,7 +324,7 @@ export const ApplicationsBlur = class ApplicationsBlur {
     /// Add the blur effect to the window.
     create_blur_effect(pid, window_actor, meta_window, brightness, sigma) {
         let blur_effect = new Shell.BlurEffect({
-            sigma: sigma,
+            radius: sigma * 2,
             brightness: brightness,
             mode: Shell.BlurMode.BACKGROUND
         });
@@ -416,15 +418,27 @@ export const ApplicationsBlur = class ApplicationsBlur {
         });
     }
 
+    /// Compute the size and position for a blur actor.
+    /// If `scale-monitor-framebuffer` experimental feature if on, we don't need to manage scaling.
+    /// Else, on wayland, we need to divide by the scale to get the correct result.
     compute_allocation(meta_window) {
+        const scale_monitor_framebuffer = this.mutter_gsettings.get_strv('experimental-features')
+            .includes('scale-monitor-framebuffer');
+        const is_wayland = Meta.is_wayland_compositor();
+        const monitor_index = meta_window.get_monitor();
+        // check if the window is using wayland, or xwayland/xorg for rendering
+        const scale = !scale_monitor_framebuffer && is_wayland && meta_window.get_client_type() == 0
+            ? Main.layoutManager.monitors[monitor_index].geometry_scale
+            : 1;
+
         let frame = meta_window.get_frame_rect();
         let buffer = meta_window.get_buffer_rect();
 
         return {
-            x: (frame.x - buffer.x),
-            y: (frame.y - buffer.y),
-            width: frame.width,
-            height: frame.height
+            x: (frame.x - buffer.x) / scale,
+            y: (frame.y - buffer.y) / scale,
+            width: frame.width / scale,
+            height: frame.height / scale
         };
     }
 
@@ -451,7 +465,7 @@ export const ApplicationsBlur = class ApplicationsBlur {
     /// Updates the blur effect by overwriting its sigma and brightness values.
     update_blur_effect(blur_actor, brightness, sigma) {
         let effect = blur_actor.get_effect('blur-effect');
-        effect.sigma = sigma;
+        effect.radius = sigma * 2;
         effect.brightness = brightness;
     }
 
@@ -487,6 +501,7 @@ export const ApplicationsBlur = class ApplicationsBlur {
         this._log("removing blur from applications...");
 
         this.service?.unexport();
+        delete this.mutter_gsettings;
 
         this.blur_actor_map.forEach(((_blur_actor, pid) => {
             this.remove_blur(pid);
