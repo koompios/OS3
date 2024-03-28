@@ -1,0 +1,36 @@
+pre_install() {
+  # Put the content of your *.preinst script here
+  #!/bin/bash
+  umount -l /usr
+  true
+}
+
+post_install() {
+  # Put the content of your *.postinst script here
+  #!/bin/bash
+  umount -l /usr
+  units="\x2esystem-usr.mount kso-autoupdate.service kso-autoupdate.timer"
+  
+  for unit in $units; do
+    echo "Enabling unit file: $unit..."
+    systemctl enable $unit
+  done
+  
+  systemctl daemon-reload
+  
+  umount -l /usr  # workaround: dpkg still needs to be able to access /usr to complete the transaction
+  echo "Reboot to complete installation."
+  true
+}
+
+pre_upgrade() {
+  # If the actions for upgrades are different, adjust them here
+  # Otherwise, you can call the install functions
+  pre_install
+}
+
+post_upgrade() {
+  # If the actions for upgrades are different, adjust them here
+  # Otherwise, you can call the install functions
+  post_install
+}

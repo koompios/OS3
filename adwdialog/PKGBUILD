@@ -1,0 +1,26 @@
+# Maintainer: Hangsia Hong <hangsia@koompi.org>
+
+pkgname=adwdialog
+pkgver=0.1.6
+pkgrel=1
+pkgdesc="Display GTK4/libadwaita dialogs from terminal and scripts."
+arch=('any')
+url="https://github.com/KOOMPI-OS/AdwDialog"
+license=('GPL3')
+depends=('libadwaita' 'python')
+makedepends=('git' 'meson')
+checkdepends=('appstream-glib')
+source=('adwdialog::git+https://github.com/KOOMPI-OS/adwdialog.git#branch=main')
+md5sums=('SKIP')
+
+build() {
+  cd "$srcdir/$pkgname"
+  arch-meson build
+  meson compile -C build
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+  meson install -C build --destdir "$pkgdir"
+
+}

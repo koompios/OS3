@@ -1,0 +1,16 @@
+# Maintainer: Jordan Day jordanday 4 4 4 at gmail.com
+# Contributer: Josh VanderLinden <arch@cloudlery.com>
+pkgname=gnome-software-plugin-flatpak
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Software lets you install and update applications and system extensions."
+arch=('any')
+license=('BSD')
+
+
+package() {
+  #ls -r $pwd/usr
+  cd $srcdir/../
+  cp -r usr $pkgdir/usr
+}
+
