@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="koompi-control-center">
-	<schema id="org.koompios.ControlCenter" path="/org/koompios/ControlCenter/">
-	</schema>
-</schemalist>
