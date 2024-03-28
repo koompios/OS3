@@ -1,3 +1,0 @@
-post_install() {
-	echo "Note the command is named 'ifstat2' since 'ifstat' lives in the iproute2 package."
-}
