@@ -1,0 +1,6 @@
+{
+    "containername": "pix_managed_aur",
+    "image": "docker.io/library/archlinux",
+    "pkgmanager": "yay",
+    "distroboxpath": "/usr/lib/pix/distrobox"
+}
