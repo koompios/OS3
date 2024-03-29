@@ -132,6 +132,7 @@ mesa
 gnome-control-center
 gnome-settings-daemon
 gnome-system-monitor
+xdg-user-dirs
 firefox
 nautilus
 #xorg-drivers
@@ -175,6 +176,7 @@ waydroid-koompi
 waydroid-image
 wpm
 android-tools
+yay
 
 # office
 libreoffice-fresh
@@ -301,3 +303,5 @@ vulkan-headers
 #vulkan-radeon
 vulkan-validation-layers
 
+# WIFI Firmware
+rtl8821ce-dkms-git
