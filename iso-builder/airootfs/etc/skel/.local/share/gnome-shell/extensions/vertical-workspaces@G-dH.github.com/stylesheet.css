@@ -1,0 +1,414 @@
+/*
+* V-Shell (Vertical Workspaces)
+* stylesheet.css
+*/
+
+/* General dash */
+#dash.vertical {
+	margin: 0px;
+	padding: 0px;
+}
+
+#dash.vertical .app-well-app,
+#dash.vertical .show-apps {
+	/* left/right padding exceeds dash bg by 6px
+	 to cover the spacing between dash and the edge of the screen
+	 so the icons will be selectable even at the edge
+	 this spacing must be accounted for in overview allocate() */
+	padding-right: 16px;
+	padding-left: 16px;
+	/*spacing between icons*/
+	padding-top: 1px;
+	padding-bottom: 1px;
+	margin: 0px;
+}
+
+#dash.vertical .dash-separator {
+	height: 1px;
+	margin-right: 2px;
+	margin-left: 2px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+#dash.vertical .overview-icon {
+	padding: 5px 0;
+}
+
+#dash.vertical .app-well-app-running-dot,
+#dash.vertical .app-grid-running-dot {
+	margin: 4px 0px;
+}
+
+#dash.vertical .app-well-app-running-dot-custom {
+	margin: 4px 0px;
+	width: 2px;
+	height: 16px;
+}
+
+#dash.vertical .dash-background {
+	margin: 0px;
+}
+
+#dash.vertical-gs3-left .dash-background {
+	border-radius: 0 18px 18px 0;
+	border-left: 0px;
+	padding: 8px 12px 8px 4px;
+	margin-left: 0;
+}
+
+#dash.vertical-gs3-right .dash-background {
+	border-radius: 18px 0 0 18px;
+	border-right: 0px;
+	padding: 8px 4px 8px 12px;
+	margin-right: 0;
+}
+
+#dash.vertical-gs3-left {
+	margin-right: 6px;
+	margin-left: 0px;
+	padding: 0px;
+}
+
+#dash.vertical-gs3-right {
+	margin-right: 0px;
+	margin-left: 6px;
+	padding: 0px;
+}
+
+#dash.vertical-gs3-left .app-well-app,
+#dash.vertical-gs3-left .show-apps,
+#dash.vertical-gs3-right .app-well-app,
+#dash.vertical-gs3-right .show-apps {
+	/* left/right padding exceeds dash bg by 6px to
+	 cover spacing between dash icons and the edge of the screen
+	 so the icons will be selectable even at the edge
+	 this spacing must be accounted for in overview allocate() */
+	padding: 0;
+	padding-right: 9px;
+	padding-left: 9px;
+}
+
+.dash-background-light {
+	background-color: rgb(200, 200, 200);
+	border-color: rgba(150, 150, 150, 0.4);
+}
+
+.app-well-app-running-dot-custom {
+	width: 16px;
+	height: 2px;
+}
+
+
+/* add shadow to the app grid app label to be readable if it overlaps light icon below */
+.overview-icon-with-label, .folder-name-label {
+    text-shadow: 1px 1px 3px rgba(33, 33, 33, 0.5);
+}
+
+/* adjustment for the vertical ws switcher indicator popup */
+.ws-switcher-indicator {
+	padding: 3px;
+	margin: 5px;
+}
+
+.ws-switcher-indicator:active {
+	  padding: 5px;
+	  margin: 3px;
+}
+
+/* ws thumbnails captions */
+.ws-tmb-label {
+	padding: 2px;
+	color: rgb(255, 255, 255);
+	background-color: rgba(40,40,40,0.8);
+	text-align: center;
+}
+
+.workspace-thumbnail-indicator {
+	border-radius: 6px;
+}
+
+.ws-tmb-labeled {
+	border: 0px;
+}
+
+.ws-tmb-transparent {
+	border: 0px;
+	background-color: rgba(200, 200, 200, 0.16);
+}
+
+/* app grid page indicators */
+.page-indicator-icon {
+	margin: 10px 10px 10px 10px;
+}
+
+.page-indicator {
+	padding: 0px;
+}
+
+.search-entry{
+	background-color: rgba(200, 200, 200, 0.1);
+	color: white;
+	border-color: rgba(160, 160, 160, 0.4);
+}
+
+.search-entry StLabel.hint-text {
+	color: rgba(200, 200, 200, 0.5);
+}
+
+.search-entry:hover,
+.search-entry:focus {
+	background-color: rgba(200, 200, 200, 0.2);
+}
+
+.search-entry-om2 {
+	color: white;
+	background-color: rgba(40, 40, 40, 1);
+}
+
+.search-entry-om2:hover,
+.search-entry-om2:focus {
+	background-color: rgba(50, 50, 50, 1);
+}
+
+/* for static ws mode */
+/*.search-section-content-bg,*/
+.search-section-content-bg-om2 {
+	border-radius: 26px;
+	border: 1px, rgb(60, 60, 60);
+	padding-top: 15px;
+}
+
+.search-section-content-bg-om2 {
+	background-color: rgb(40, 40, 40);
+}
+
+.search-section-content {
+	background-color: rgba(200, 200, 200, 0.1);
+}
+
+/* Reduce edge fading of search results scroll view */
+.vfade { -st-vfade-offset: 34px; }
+.hfade { -st-hfade-offset: 34px; }
+.search-section-content {
+	background-color: rgba(200, 200, 200, 0.1);
+}
+
+/* "no results" / "searching..." text*/
+.search-statustext, .search-statustext-om2 {
+	background-color: rgba(200, 200, 200, 0.1);
+	color: white;
+	margin-top: 50px;
+	padding: 30px;
+	border-radius: 20px;
+	text-shadow: 0px 0px 5px rgb(23, 23, 23);
+}
+
+.search-statustext-om2 {
+	background-color: rgb(40, 40, 40);
+	border: 1px rgba(200, 200, 200, 0.1);
+}
+
+#panel:overview, .transparent-panel {
+	background-color: transparent;
+}
+
+/* reduce spacing between app icons in search results */
+.grid-search-results {
+	spacing: 4px;
+}
+
+/* hide vertical scroll bar, it's distracting in the search results */
+StButton#vhandle {
+	background-color: transparent;
+}
+
+.show-apps-icon-horizontal-hide {
+	width: 0;
+    margin: 0;
+    spacing: 0;
+}
+
+.show-apps-icon-vertical-hide {
+	height: 0;
+    margin: 0;
+    spacing: 0;
+}
+
+.workspace-close-button {
+	color: white;
+	background-color: dimgrey;
+	width: 18px;
+	height: 18px;
+	padding: 2px;
+	margin: 2px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	border: 0px;
+	border-radius: 35px;
+}
+
+.workspace-close-button-hover {
+	background-color: rgb(255, 0, 0);
+}
+
+/* ws tmb placeholder */
+.placeholder-vertical {
+    background-size: contain;
+    height: 18px;
+}
+
+/* reduce size of hot corner ripples to half */
+.ripple-box {
+	width: 26px;
+	height: 26px;
+}
+
+.osd-window {
+	margin: 4em;
+	margin-bottom: 8em; /* avoid overlap with dock extension */
+}
+
+.app-folder-46,
+.app-folder-46 .overview-tile,
+.app-folder-46 .overview-icon,
+.app-folder-45 .overview-icon,
+.edit-folder-button,
+.folder-name-entry {
+	background-color: rgba(200, 200, 200, 0.08);
+}
+
+.app-folder-dialog-vshell {
+	background-color: rgba(200, 200, 200, 0.08);
+}
+
+.app-folder-dialog {
+	border-color: rgba(160, 160, 160, 0.3);
+}
+
+.edit-folder-button:hover, 
+.app-folder-46:hover,
+.app-folder-45:hover .overview-icon,
+.app-folder-45:focus .overview-icon {
+	background-color: rgba(200, 200, 200, 0.15);
+}
+
+/* add missing spacing between buttons */
+.edit-folder-button-46 {
+	margin-right: 6px;
+}
+
+/* 46 changes the default bg color from transparent to the solid color blending with widget background */
+ .search-provider-icon,
+ .list-search-result,
+ .overview-tile {
+	 background-color: transparent;
+ }
+ 
+ /* Needed only for 46+, but doesn't hurt 45 */
+ .search-provider-icon:hover,
+ .search-provider-icon:focus,
+ .search-provider-icon:selected,
+ .list-search-result:hover,
+ .list-search-result:focus,
+ .list-search-result:selected,
+ .overview-tile:hover,
+ .overview-tile:focus,
+ .overview-tile:selected,
+ .overview-icon:hover,
+ .overview-icon:focus,
+ .overview-icon:selected {
+	 background-color: rgba(200, 200, 200, 0.15);
+ }
+
+.app-folder-46,
+.app-folder-46 .overview-tile,
+.app-folder-45 .overview-icon, /* 45 only */
+.edit-folder-button,
+.folder-name-entry {
+	background-color: rgba(200, 200, 200, 0.08);
+}
+
+.app-folder-46 .overview-icon,
+ #dash.dash-46 .overview-icon {
+	 background-color: transparent;
+ }
+ 
+ #dash.dash-46 .overview-tile,
+ #dash.dash-46 .show-apps {
+	 background-color: transparent;
+ }
+ 
+ #dash.dash-46 .overview-tile:hover .overview-icon,
+ #dash.dash-46 .overview-tile:focus .overview-icon,
+ #dash.dash-46 .overview-tile:selected .overview-icon,
+ #dash.dash-46 .show-apps:hover .overview-icon,
+ #dash.dash-46 .show-apps:focus .overview-icon,
+ #dash.dash-46 .show-apps:selected .overview-icon {
+	 background-color: rgba(200, 200, 200, 0.15);
+ }
+
+#dash.vertical-46 {
+	margin: 0px;
+	padding: 0px;
+}
+
+#dash.vertical-46-gs3-left {
+	margin-left: 0px;
+}
+
+#dash.vertical-46-gs3-right {
+	margin-right: 0px;
+}
+
+#dash.vertical-46 .overview-tile,
+#dash.vertical-46 .show-apps {
+	margin: 0px;
+	background-color: transparent;
+	/* this padding should keep the dash 6px from the screen edge */
+	padding: 0, 18px;
+}
+
+#dash.vertical-46 .dash-separator {
+	height: 1px;
+	margin-right: 2px;
+	margin-left: 2px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+#dash.vertical-46 .app-well-app-running-dot-custom {
+	margin: 0px;
+	width: 2px;
+	height: 16px;
+}
+
+#dash.vertical-46 .dash-background {
+	padding: 12px;
+	margin: 0;
+}
+
+#dash.vertical-46-gs3-left .overview-tile,
+#dash.vertical-46-gs3-left .show-apps {
+	/* this padding should extend the icon tile to the edge of the dash background */
+	padding: 0, 12px;
+}
+
+#dash.vertical-46-gs3-right .overview-tile,
+#dash.vertical-46-gs3-right .show-apps {
+	padding: 0, 12px;
+}
+
+#dash.vertical-46-gs3-left .dash-background {
+	border-radius: 0 18px 18px 0;
+	border-left: 0px;
+}
+
+#dash.vertical-46-gs3-right .dash-background {
+	border-radius: 18px 0 0 18px;
+	border-right: 0px;
+}
+
+/* reverse padding */
+.ws-switcher-vertical {
+	padding: 18px 12px
+}

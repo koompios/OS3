@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="zen@le0.gs">
+    <schema id="org.gnome.shell.extensions.zen" path="/org/gnome/shell/extensions/zen/">
+        <!-- Components -->
+        <key type="b" name="enable-direct-window-switch">
+            <default>true</default>
+            <summary>Enables Super-TAB and Super-Shift-TAB bindings for quick window switching</summary>
+        </key>
+        <key type="b" name="enable-mouse-follows-focus">
+            <default>true</default>
+            <summary>Enables automatic teleporting of cursor to newly focused windows</summary>
+        </key>
+        <key type="b" name="enable-dbus-window-focus">
+            <default>true</default>
+            <summary>Enables a D-Bus interface to predictably focus windows</summary>
+        </key>
+        <!-- DirectWindowSwitch: Bindings -->
+        <key type="as" name="switch-window-next-workspace">
+            <default><![CDATA[['<Super>TAB']]]></default>
+            <summary>Switch to the next window on the current workspace</summary>
+        </key>
+        <key type="as" name="switch-window-prev-workspace">
+            <default><![CDATA[['<Super><Shift>TAB']]]></default>
+            <summary>Switch to the previous window on the current workspace</summary>
+        </key>
+    </schema>
+</schemalist>

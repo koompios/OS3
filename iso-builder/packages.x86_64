@@ -185,6 +185,9 @@ krita
 visual-studio-code-bin
 teams
 zoom
+virtualbox
+virtualbox-host-dkms
+kdenlive
 
 ## OneLab
 imagemagick
@@ -300,3 +303,6 @@ vulkan-validation-layers
 
 # WIFI Firmware
 rtl8821ce-dkms-git
+
+# Gnome Extension
+gnome-shell-extension-dash-to-dock
