@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://gitlab.com/smedius/desktop-icons-ng.git
+	fetch = +refs/*:refs/*
+	mirror = true
