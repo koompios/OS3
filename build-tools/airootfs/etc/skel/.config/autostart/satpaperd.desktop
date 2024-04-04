@@ -1,6 +1,6 @@
 [Desktop Entry]
-Exec=/usr/bin/satpaperd
-Icon=application-x-shellscript
-Name=satpaperd
+Exec=/usr/bin/satpaper
+Icon=googleearth
+Name=satpaper
 Type=Application
 X-KDE-AutostartScript=true
