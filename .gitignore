@@ -13,3 +13,5 @@ pkg/
 src/
 *.iso
 work
+*/out
+iso-builder/workdir

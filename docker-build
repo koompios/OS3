@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#docker build -t archiso-builder . 
+docker run --privileged --rm -it -v $PWD:/workdir archiso-builder sudo mkarchiso -v -w workdir/ -o out/ .
