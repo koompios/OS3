@@ -1,0 +1,15 @@
+.box-width{
+	width: 350px;
+}
+
+.custom-dialog-entry {
+    width: 20em;
+    margin-bottom: 6px; 
+}
+
+.custom-search-button {
+  min-width: 75px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  padding: 2px 8px;
+}
