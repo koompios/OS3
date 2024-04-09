@@ -24,6 +24,6 @@ file_permissions=(
   ["/etc/default/useradd"]="0:0:600"
   ["/etc/gshadow"]="0:0:400"
   ["/etc/sudoers"]="0:0:400"
-  ["/usr/local/bin/livecd-sound"]="0:0:755"
+  ["/etc/polkit-1/rules.d"]="0:0:750"
   ["/etc/locale.gen"]="0:0:644"
 )
