@@ -307,3 +307,10 @@ vulkan-validation-layers
 
 # WIFI Firmware
 rtl8821ce-dkms-git
+
+
+## GTK theme
+catppuccin-gtk-theme-frappe
+catppuccin-gtk-theme-latte
+catppuccin-gtk-theme-macchiato
+catppuccin-gtk-theme-mocha
