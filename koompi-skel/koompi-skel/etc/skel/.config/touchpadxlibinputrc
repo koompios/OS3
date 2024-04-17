@@ -1,0 +1,6 @@
+[SYNA3602:00 093A:0255 Touchpad]
+naturalScroll=true
+tapToClick=true
+
+[HTIX5288:00 0911:5288 Touchpad]
+tapToClick=true

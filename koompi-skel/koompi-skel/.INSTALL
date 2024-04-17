@@ -1,0 +1,14 @@
+pre_install() {
+    rm -rf /etc/skel/
+    install -dm755 /etc/skel
+}
+
+pre_upgrade() {
+    rm -rf /etc/skel/
+    install -dm755 /etc/skel
+}
+
+post_remove() {
+    rm -rf /etc/skel/
+    install -dm755 /etc/skel
+}
