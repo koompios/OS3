@@ -1,36 +1,14 @@
 # Maintainer: Hangsiahong <honghangsia@gmail.com>
 pkgname=koompi-skel
 pkgver=20240417
-pkgrel=1
+pkgrel=7
 pkgdesc="KOOMPI OS Skel"
 arch=('any')
 license=('GPL')
-
 package() {
-    # You don't need to do anything here for a meta-package
-    # It's empty because the package doesn't contain files
+    # Use the 'install' command to copy files and overwrite existing files if they exist
     mkdir -pv $pkgdir/etc/
-    cp -rp ../koompi-skel/* $pkgdir/
+    cp -r ../koompi-skel/* $pkgdir/
+   # install -m 644 ../koompi-skel/etc/skel/.bash_profile "$pkgdir/etc/skel/.bash_profile"
+   # install -m 644 ../koompi-skel/etc/skel/.bashrc "$pkgdir/etc/skel/.bashrc"
 }
-
-# The following functions are optional but can be included for more control:
-
-# You can add pre-installation actions if necessary
-# pre_install() {
-#    echo "Pre-installation actions here"
-# }
-
-# You can add post-installation actions if necessary
-# post_install() {
-#    echo "Post-installation actions here"
-# }
-
-# You can add pre-removal actions if necessary
-# pre_remove() {
-#    echo "Pre-removal actions here"
-# }
-
-# You can add post-removal actions if necessary
-# post_remove() {
-#    echo "Post-removal actions here"
-# }
