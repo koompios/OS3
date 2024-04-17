@@ -1,0 +1,15 @@
+# Maintainer: Hangsiahong <honghangsia@gmail.com>
+pkgname=waydroid-script
+pkgver=1.0
+pkgrel=1
+pkgdesc="Waydroid Script Credit to casualsnek"
+arch=('any')
+
+#depends=('flatpak-repo-add') # Replace with the actual package name providing the updated os-release file
+
+package() {
+    # You don't need to do anything here for a meta-package
+    # It's empty because the package doesn't contain files
+    mkdir -pv $pkgdir/usr/local/share/
+    cp -rp ../waydroid_script "$pkgdir/usr/local/share/"
+}
