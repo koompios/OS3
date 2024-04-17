@@ -37,7 +37,6 @@ gpart
 gpm
 gptfdisk
 grml-zsh-config
-#grub
 hdparm
 intel-ucode
 irssi
@@ -158,9 +157,12 @@ xorriso
 os-prober
 gnome-disk-utility
 gnome-tweaks
-grub-koompi
+#grub-koompi
+grub
+
 # Core packages
 koompi-os
+koompi-skel
 pizard
 automatic-update
 adwdialog
@@ -173,6 +175,7 @@ python-yaml
 koompi-backgrounds
 flatpak
 waydroid-koompi
+waydroid-script
 waydroid-image
 wpm
 android-tools
@@ -199,7 +202,7 @@ nodejs
 npm
 tigervnc
 x11vnc
-anydesk
+#anydesk
 
 # Fonts
 noto-fonts
@@ -292,6 +295,7 @@ cups-pk-helper
 open-vm-tools
 iio-sensor-proxy
 xorg-xhost
+lzip
 
 #vulkan driver
 vulkan-extra-layers

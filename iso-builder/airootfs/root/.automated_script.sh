@@ -29,6 +29,11 @@ automated_script ()
     fi
 }
 
+systemd_service() {
+	systemctl enable automatic-update
+}
+
 if [[ $(tty) == "/dev/tty1" ]]; then
-    automated_script
+    automated_script;
+    systemd_service;
 fi
