@@ -33,8 +33,9 @@ const AskRenamePopup = class {
         this._desktopFile = Gio.File.new_for_path(
             GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP));
         this._fileItem = fileItem;
+        this._window = fileItem._grid._window;
         this._popover = new Gtk.Popover();
-        this._popover.set_autohide(true);
+        this._popover.set_autohide(false);
         let contentBox = new Gtk.Grid({
             row_spacing: 6,
             column_spacing: 6,
@@ -60,30 +61,25 @@ const AskRenamePopup = class {
             this._validate().catch(e => console.error(e));
         });
         this._textAreaActivateId = this._textArea.connect('activate', this._do_rename.bind(this));
-        this._popoverId = this._popover.connect('closed', this._cleanAll.bind(this));
         this._textArea.set_activates_default(true);
         this._popover.set_default_widget(this._textArea);
         this._button.get_style_context().add_class('suggested-action');
         contentBox.show();
-        this._popover.set_parent(fileItem._grid._window);
+        this._popover.set_parent(this._window);
         this._popover.set_pointing_to(fileItem.iconLocalWindowRectangle);
         const menuGtkPosition = fileItem._grid.getIntelligentPosition(fileItem._grid.getGlobaltoLocalRectangle(fileItem.iconRectangle));
         if (menuGtkPosition)
             this._popover.set_position(menuGtkPosition);
 
+        this._focusTracker = Gtk.EventControllerFocus.new();
+        this._popover.add_controller(this._focusTracker);
+        this._focusTrackerID = this._focusTracker.connect('leave', this.close.bind(this));
+        this._popoverId = this._popover.connect('closed', this.close.bind(this));
+
         this._popover.popup();
         this._validate().catch(e => console.error(e));
         this._textArea.grab_focus_without_selecting();
         this._textArea.select_region(0, this.DesktopIconsUtil.getFileExtensionOffset(fileItem.fileName, {'isDirectory': fileItem.isDirectory}).offset);
-    }
-
-    _cleanAll() {
-        this._validateCancellable.cancel();
-        this._button.disconnect(this._buttonId);
-        this._textArea.disconnect(this._textAreaActivateId);
-        this._textArea.disconnect(this._textAreaChangedId);
-        this._popover.disconnect(this._popoverId);
-        this._closeCB();
     }
 
     async _validate() {
@@ -128,7 +124,15 @@ const AskRenamePopup = class {
     }
 
     close() {
-        this._popover.popdown();
+        this._validateCancellable.cancel();
+        this._button.disconnect(this._buttonId);
+        this._textArea.disconnect(this._textAreaActivateId);
+        this._textArea.disconnect(this._textAreaChangedId);
+        this._popover.disconnect(this._popoverId);
+        this._focusTracker.disconnect(this._focusTrackerID);
+        this._popover.unparent();
+        this._popover = null;
+        this._closeCB();
     }
 
     popupat(fileItem) {

@@ -472,7 +472,6 @@ const FileItemMenu = class {
         this.popupmenu.popup();
         this.popupmenu.connect('closed', async () => {
             this._desktopManager.popupmenuopen = this.popupmenuopen = false;
-            fileItem._grid.enableIntellihide();
             await this.DesktopIconsUtil.waitDelayMs(50);
             this.popupmenu.unparent();
         });

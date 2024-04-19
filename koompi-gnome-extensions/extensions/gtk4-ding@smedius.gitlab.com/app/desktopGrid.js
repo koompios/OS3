@@ -132,6 +132,8 @@ const DesktopGrid = class {
         this._buttonClick.set_propagation_phase(Gtk.PropagationPhase.BUBBLE);
         this._container.add_controller(this._buttonClick);
         this._buttonClick.connect('pressed', (actor, nPress, x, y) => {
+            if (this._desktopManager.closePopUps())
+                return;
             const button = actor.get_current_button();
             const state = this._buttonClick.get_current_event_state();
             const isCtrl = (state & Gdk.ModifierType.CONTROL_MASK) !== 0;
@@ -195,7 +197,7 @@ const DesktopGrid = class {
         this.windowGlobalRectangle.height = this._windowHeight;
     }
 
-    _resizeWindow() {
+    resizeWindow() {
         this._updateWindowGeometry();
         this._desktopName = `@!${this._x},${this._y};BDHF`;
         this._window.set_title(this._desktopName);

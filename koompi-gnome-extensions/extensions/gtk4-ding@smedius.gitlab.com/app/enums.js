@@ -155,3 +155,9 @@ export const UnixPermissions = {
     S_IXOTH: 0o00001, // others have execute permission
     // From https://www.commandlinux.com/man-page/man2/lstat.2.html
 };
+export const IgnoreKeys = [
+    'KEY_space', 'KEY_Shift_L', 'KEY_Shift_R', 'KEY_Control_L',
+    'KEY_Control_R', 'KEY_Caps_Lock', 'KEY_Shift_Lock', 'KEY_Meta_L',
+    'KEY_Meta_R', 'KEY_Alt_L', 'KEY_Alt_R', 'KEY_Super_L',
+    'KEY_Super_R', 'KEY_ISO_Level3_Shift', 'KEY_ISO_Level5_Shift'
+];

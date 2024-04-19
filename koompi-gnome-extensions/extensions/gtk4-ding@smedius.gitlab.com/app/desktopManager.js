@@ -30,7 +30,7 @@ import {
     StackItem
 } from '../dependencies/localFiles.js';
 
-import {Gtk, Gdk, Gio, GLib} from '../dependencies/gi.js';
+import {Gtk, Gdk, Gio, GLib, GLibUnix} from '../dependencies/gi.js';
 import {_} from '../dependencies/gettext.js';
 
 export {DesktopManager};
@@ -91,8 +91,7 @@ const DesktopManager = class {
         this._scriptsList = [];
         this._pendingDropFiles = {};
         this._pendingSelfCopyFiles = {};
-        this.ignoreKeys = [Gdk.KEY_space, Gdk.KEY_Shift_L, Gdk.KEY_Shift_R, Gdk.KEY_Control_L, Gdk.KEY_Control_R, Gdk.KEY_Caps_Lock, Gdk.KEY_Shift_Lock, Gdk.KEY_Meta_L, Gdk.KEY_Meta_R, Gdk.KEY_Alt_L, Gdk.KEY_Alt_R, Gdk.KEY_Super_L, Gdk.KEY_Super_R, Gdk.KEY_ISO_Level3_Shift, Gdk.KEY_ISO_Level5_Shift];
-
+        this.ignoreKeys = this.Enums.IgnoreKeys.map(_k => Gdk._k);
         // init methods
         this._initLocalCSSprovider();
         this._configureSelectionColor();
@@ -119,7 +118,7 @@ const DesktopManager = class {
 
         // setup gracefull termination
         if (this._asDesktop) {
-            this._sigtermID = GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, 15, () => {
+            this._sigtermID = GLibUnix.signal_add_full(GLib.PRIORITY_DEFAULT, 15, () => {
                 GLib.source_remove(this._sigtermID);
                 this.terminateProgram();
                 if (this._hold_active) {
@@ -996,9 +995,18 @@ const DesktopManager = class {
         return data;
     }
 
+    closePopUps() {
+        if (this._renameWindow) {
+            this._renameWindow.close();
+            return true;
+        }
+        return false;
+    }
+
     async onPressButton(X, Y, x, y, button, shiftPressed, controlPressed, grid) {
         this._clickX = Math.floor(X);
         this._clickY = Math.floor(Y);
+
         if (button === 1) {
             if (!shiftPressed && !controlPressed) {
                 // clear selection
@@ -1211,6 +1219,7 @@ const DesktopManager = class {
     }
 
     findFiles(text) {
+        const activeWindow = this.mainApp.get_active_window();
         this._findFileWindow = new Gtk.Dialog({
             use_header_bar: true,
             resizable: false,
@@ -1221,6 +1230,7 @@ const DesktopManager = class {
         this._findFileWindow.set_modal(true);
         this._findFileWindow.set_title(_('Find Files on Desktop'));
         this.DesktopIconsUtil.windowHidePagerTaskbarModal(this._findFileWindow, true);
+        this._findFileWindow.set_transient_for(activeWindow);
         let contentArea = this._findFileWindow.get_content_area();
         this._findFileTextArea = new Gtk.Entry();
         this._findFileTextArea.set_margin_top(5);
