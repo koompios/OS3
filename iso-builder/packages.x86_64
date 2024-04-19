@@ -1,3 +1,6 @@
+zram-generator
+dkms
+base-devel
 extension-manager
 starship
 bash-completion
@@ -181,7 +184,7 @@ wpm
 android-tools
 yay
 koompi-gnome-extensions
-gnome-shell-extension-dash-to-dock
+#gnome-shell-extension-dash-to-dock
 
 # office
 libreoffice-fresh
@@ -306,7 +309,7 @@ vulkan-extra-tools
 vulkan-mesa-layers
 vulkan-utility-libraries
 vulkan-headers
-#vulkan-radeon
+vulkan-radeon
 vulkan-validation-layers
 
 # WIFI Firmware
