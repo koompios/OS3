@@ -1,7 +1,7 @@
 # Maintainer: Hangsiahong <honghangsia@gmail.com>
 pkgname=koompi-skel
-pkgver=20240417
-pkgrel=7
+pkgver=20240419
+pkgrel=2
 pkgdesc="KOOMPI OS Skel"
 arch=('any')
 license=('GPL')
