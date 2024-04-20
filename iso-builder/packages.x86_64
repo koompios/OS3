@@ -1,6 +1,4 @@
-zram-generator
-dkms
-base-devel
+xmlstarlet
 extension-manager
 starship
 bash-completion
@@ -40,6 +38,7 @@ gpart
 gpm
 gptfdisk
 grml-zsh-config
+#grub
 hdparm
 intel-ucode
 irssi
@@ -58,7 +57,7 @@ linux-zen
 linux-zen-headers
 livecd-sounds
 lsscsi
-lvm2
+lvm2sy
 lynx
 man-db
 man-pages
@@ -152,7 +151,10 @@ eog
 nano
 efibootmgr
 hyperv
-
+gst-plugins-good
+libva
+gstreamer-vaapi
+gst-plugin-pipewire
 
 ## KOOMPI-OS
 webkit2gtk
@@ -160,12 +162,10 @@ xorriso
 os-prober
 gnome-disk-utility
 gnome-tweaks
-#grub-koompi
-grub
+grub-koompi
 
 # Core packages
 koompi-os
-koompi-skel
 pizard
 automatic-update
 adwdialog
@@ -178,7 +178,6 @@ python-yaml
 koompi-backgrounds
 flatpak
 waydroid-koompi
-waydroid-script
 waydroid-image
 wpm
 android-tools
@@ -205,7 +204,7 @@ nodejs
 npm
 tigervnc
 x11vnc
-#anydesk
+anydesk
 
 # Fonts
 noto-fonts
@@ -298,7 +297,6 @@ cups-pk-helper
 open-vm-tools
 iio-sensor-proxy
 xorg-xhost
-lzip
 
 #vulkan driver
 vulkan-extra-layers
@@ -309,15 +307,15 @@ vulkan-extra-tools
 vulkan-mesa-layers
 vulkan-utility-libraries
 vulkan-headers
-vulkan-radeon
+#vulkan-radeon
 vulkan-validation-layers
 
 # WIFI Firmware
-rtl8821ce-dkms-git
+#rtl8821ce-dkms-git
 
 
 ## GTK theme
 catppuccin-gtk-theme-frappe
 catppuccin-gtk-theme-latte
 catppuccin-gtk-theme-macchiato
-#catppuccin-gtk-theme-mocha
+catppuccin-gtk-theme-mocha
