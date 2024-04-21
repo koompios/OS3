@@ -3,7 +3,7 @@
 
 iso_name="KOOMPIOS-3.0.0"
 iso_label="KOOMPIOS_$(date +%Y%m)"
-iso_publisher="KOOMPIOS <https://koompi.org"
+iso_publisher="KOOMPIOS <https://koompi.org>"
 iso_application="KOOMPIOS Live/Rescue CD"
 iso_version="$(date +%Y.%m.%d)"
 install_dir="arch"
