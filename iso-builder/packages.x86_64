@@ -1,3 +1,10 @@
+polkit
+polkit-gnome
+zram-generator
+xmlstarlet
+ca-certificates-utils
+ca-certificates-mozilla
+ca-certificates
 extension-manager
 starship
 bash-completion
@@ -37,6 +44,7 @@ gpart
 gpm
 gptfdisk
 grml-zsh-config
+#grub
 hdparm
 intel-ucode
 irssi
@@ -53,9 +61,7 @@ linux-atm
 linux-firmware
 linux-zen
 linux-zen-headers
-livecd-sounds
 lsscsi
-lvm2
 lynx
 man-db
 man-pages
@@ -87,7 +93,7 @@ pptpclient
 pv
 qemu-guest-agent
 refind
-reflector
+#reflector
 reiserfsprogs
 rp-pppoe
 rsync
@@ -149,7 +155,12 @@ eog
 nano
 efibootmgr
 hyperv
-
+gst-plugins-good
+libva
+gstreamer-vaapi
+gst-plugin-pipewire
+obs-studio
+xdg-desktop-portal-gnome
 
 ## KOOMPI-OS
 webkit2gtk
@@ -157,12 +168,11 @@ xorriso
 os-prober
 gnome-disk-utility
 gnome-tweaks
-#grub-koompi
-grub
+grub-koompi
 
 # Core packages
-koompi-os
 koompi-skel
+koompi-os
 pizard
 automatic-update
 adwdialog
@@ -175,13 +185,12 @@ python-yaml
 koompi-backgrounds
 flatpak
 waydroid-koompi
-waydroid-script
 waydroid-image
 wpm
 android-tools
 yay
 koompi-gnome-extensions
-gnome-shell-extension-dash-to-dock
+#gnome-shell-extension-dash-to-dock
 
 # office
 libreoffice-fresh
@@ -202,7 +211,7 @@ nodejs
 npm
 tigervnc
 x11vnc
-#anydesk
+#anydesk-bin
 
 # Fonts
 noto-fonts
@@ -213,6 +222,7 @@ adobe-source-han-sans-cn-fonts
 ibus-pinyin
 khmer-fonts
 ttf-meslo-nerd
+font-manager
 
 # Startup
 #plymouth-koompi
@@ -295,7 +305,6 @@ cups-pk-helper
 open-vm-tools
 iio-sensor-proxy
 xorg-xhost
-lzip
 
 #vulkan driver
 vulkan-extra-layers
@@ -310,7 +319,7 @@ vulkan-headers
 vulkan-validation-layers
 
 # WIFI Firmware
-rtl8821ce-dkms-git
+#rtl8821ce-dkms-git
 
 
 ## GTK theme
