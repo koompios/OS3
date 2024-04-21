@@ -1,4 +1,10 @@
+polkit
+polkit-gnome
+zram-generator
 xmlstarlet
+ca-certificates-utils
+ca-certificates-mozilla
+ca-certificates
 extension-manager
 starship
 bash-completion
@@ -55,9 +61,7 @@ linux-atm
 linux-firmware
 linux-zen
 linux-zen-headers
-livecd-sounds
 lsscsi
-lvm2sy
 lynx
 man-db
 man-pages
@@ -89,7 +93,7 @@ pptpclient
 pv
 qemu-guest-agent
 refind
-reflector
+#reflector
 reiserfsprogs
 rp-pppoe
 rsync
@@ -155,6 +159,8 @@ gst-plugins-good
 libva
 gstreamer-vaapi
 gst-plugin-pipewire
+obs-studio
+xdg-desktop-portal-gnome
 
 ## KOOMPI-OS
 webkit2gtk
@@ -165,6 +171,7 @@ gnome-tweaks
 grub-koompi
 
 # Core packages
+koompi-skel
 koompi-os
 pizard
 automatic-update
@@ -204,7 +211,7 @@ nodejs
 npm
 tigervnc
 x11vnc
-anydesk
+#anydesk-bin
 
 # Fonts
 noto-fonts
@@ -215,6 +222,7 @@ adobe-source-han-sans-cn-fonts
 ibus-pinyin
 khmer-fonts
 ttf-meslo-nerd
+font-manager
 
 # Startup
 #plymouth-koompi
@@ -318,4 +326,4 @@ vulkan-validation-layers
 catppuccin-gtk-theme-frappe
 catppuccin-gtk-theme-latte
 catppuccin-gtk-theme-macchiato
-catppuccin-gtk-theme-mocha
+#catppuccin-gtk-theme-mocha
