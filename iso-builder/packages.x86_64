@@ -298,6 +298,7 @@ python-gobject
 libadwaita
 gtk4
 adwaita-icon-theme
+pop-icon-theme-git ## Credit to POP-OS Teams and Package Maintainer
 vte3
 gparted
 openssl
