@@ -30,27 +30,30 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][56][Configuration]
-PreloadWeight=75
+PreloadWeight=80
 SystrayContainmentId=57
 
-[Containments][2][Applets][76]
+[Containments][2][Applets][80]
 immutability=1
-plugin=bendn-button
+plugin=P-Connor.PlasmaDrawer
 
-[Containments][2][Applets][76][Configuration][ConfigDialog]
+[Containments][2][Applets][80][Configuration]
+PreloadWeight=100
+
+[Containments][2][Applets][80][Configuration][ConfigDialog]
 DialogHeight=450
 DialogWidth=600
 
-[Containments][2][Applets][76][Configuration][General]
-command=rofi -show drun -theme ~/.config/rofi/rofi.rasi
-icon=/usr/share/icons/koompi-blue.svg
+[Containments][2][Applets][80][Configuration][General]
+customButtonImage=/usr/share/icons/koompi-blue.svg
+useCustomButtonImage=true
 
 [Containments][2][ConfigDialog]
 DialogHeight=84
 DialogWidth=1920
 
 [Containments][2][General]
-AppletOrder=76;53;56;21
+AppletOrder=80;53;56;21
 
 [Containments][29]
 activityId=
@@ -287,7 +290,7 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][57][Applets][77][Configuration]
-PreloadWeight=70
+PreloadWeight=75
 
 [Containments][57][General]
 extraItems=org.kde.kscreen,org.kde.plasma.battery,org.kde.plasma.bluetooth,org.kde.plasma.brightness,org.kde.plasma.cameraindicator,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.keyboardindicator,org.kde.plasma.keyboardlayout,org.kde.plasma.manage-inputmethod,org.kde.plasma.mediacontroller,org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.vault,org.kde.plasma.volume,org.kde.plasma.printmanager
