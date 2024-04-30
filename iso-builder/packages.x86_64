@@ -290,14 +290,13 @@ usb_modeswitch
 usbmuxd
 usbutils
 
-
-# tmp
 python-requests
 python-pytz
 python-gobject
 libadwaita
 gtk4
 adwaita-icon-theme
+pop-icon-theme-git
 vte3
 gparted
 openssl
