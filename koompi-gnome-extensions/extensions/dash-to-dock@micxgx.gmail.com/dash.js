@@ -27,10 +27,7 @@ import {
     Utils,
 } from './imports.js';
 
-// module "Dash" does not export DASH_ANIMATION_TIME
-// so we just define it like it is defined in Dash;
-// taken from https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/main/js/ui/dash.js
-const DASH_ANIMATION_TIME = 200;
+const {DASH_ANIMATION_TIME} = Dash;
 const DASH_VISIBILITY_TIMEOUT = 3;
 
 const Labels = Object.freeze({
@@ -56,29 +53,6 @@ class DockDashItemContainer extends Dash.DashItemContainer {
 
     showLabel() {
         return AppIcons.itemShowLabel.call(this);
-    }
-
-    // we override the method show taken from:
-    // https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/main/js/ui/dash.js
-    // in order to apply a little modification at the end of the animation
-    // which makes sure that the icon background is not blurry
-    show(animate) {
-        if (this.child == null)
-            return;
-
-        this.ease({
-            scale_x: 1,
-            scale_y: 1,
-            opacity: 255,
-            duration: animate ? DASH_ANIMATION_TIME : 0,
-            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
-            onComplete: () => {
-                // when the animation is ended, we simulate
-                // a hover to gain back focus and unblur the
-                // background
-                this.set_hover(true);
-            },
-        });
     }
 });
 
@@ -178,12 +152,10 @@ export const DockDash = GObject.registerClass({
         this._scrollView.connect('scroll-event', this._onScrollEvent.bind(this));
 
         this._boxContainer = new St.BoxLayout({
-            name: 'dashtodockBoxContainer',
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.FILL,
             vertical: !this._isHorizontal,
         });
-        this._boxContainer.add_style_class_name(Theming.PositionStyleClass[this._position]);
 
         const rtl = Clutter.get_default_text_direction() === Clutter.TextDirection.RTL;
         this._box = new St.BoxLayout({
@@ -196,12 +168,9 @@ export const DockDash = GObject.registerClass({
             x_expand: this._isHorizontal,
         });
         this._box._delegate = this;
-        this._boxContainer.add_child(this._box);
-        if (this._scrollView.add_actor)
-            this._scrollView.add_actor(this._boxContainer);
-        else
-            this._scrollView.add_child(this._boxContainer);
-        this._dashContainer.add_child(this._scrollView);
+        this._dashContainer.add_actor(this._scrollView);
+        this._boxContainer.add_actor(this._box);
+        this._scrollView.add_actor(this._boxContainer);
 
         this._showAppsIcon = new AppIcons.DockShowAppsIcon(this._position);
         this._showAppsIcon.show(false);
