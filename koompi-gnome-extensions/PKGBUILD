@@ -1,6 +1,6 @@
 # Maintainer: Hangsiahong <honghangsia@gmail.com>
 pkgname=koompi-gnome-extensions
-pkgver=1.1
+pkgver=1.2
 pkgrel=5
 pkgdesc="KOOMPI OS Gnome 46 Extension"
 arch=('any')

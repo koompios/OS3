@@ -1,0 +1,14 @@
+# Maintainer: Mark Wagie <mark dot wagie at proton dot me>
+# Contributor: Erik Wallström <erik.wallstrom@live.com>
+pkgname=colloid-icon
+pkgver=1.0
+pkgrel=1
+pkgdesc="Colloid Icon Theme"
+arch=('any')
+sha256sums=('SKIP')
+
+package() {
+  mkdir -pv $pkgdir/usr/local/share/icons/
+  cp -r ./icons/* $pkgdir/usr/local/share/icons/
+
+}
