@@ -80,7 +80,6 @@ nbd
 ndisc6
 nfs-utils
 nilfs-utils
-nmap
 ntfs-3g
 nvme-cli
 openconnect
@@ -147,8 +146,8 @@ xf86-input-evdev
 xf86-input-libinput
 #xf86-input-synaptics
 networkmanager
-#xf86-video-amdgpu
-#xf86-video-intel
+xf86-video-amdgpu
+xf86-video-intel
 xf86-video-nouveau
 xf86-video-vmware
 xf86-video-vesa
@@ -170,7 +169,7 @@ xorriso
 os-prober
 gnome-disk-utility
 gnome-tweaks
-grub-koompi
+grub
 
 # Core packages
 koompi-skel
@@ -316,7 +315,7 @@ vulkan-extra-tools
 vulkan-mesa-layers
 vulkan-utility-libraries
 vulkan-headers
-#vulkan-radeon
+vulkan-radeon
 vulkan-validation-layers
 
 # WIFI Firmware
