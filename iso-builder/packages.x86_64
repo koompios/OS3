@@ -43,7 +43,7 @@ exfatprogs
 f2fs-tools
 fatresize
 fsarchiver
-gnu-netcat
+#gnu-netcat
 gpart
 gpm
 gptfdisk
@@ -61,6 +61,7 @@ lftp
 libfido2
 libusb-compat
 linux
+linux-headers
 linux-atm
 linux-firmware
 linux-zen
@@ -95,7 +96,7 @@ pcsclite
 ppp
 pptpclient
 pv
-qemu-guest-agent
+#qemu-guest-agent
 refind
 #reflector
 reiserfsprogs
@@ -121,7 +122,7 @@ usb_modeswitch
 usbmuxd
 usbutils
 vim
-nvim
+neovim
 virtualbox-guest-utils-nox
 vpnc
 wireless-regdb
@@ -143,10 +144,10 @@ gnome-system-monitor
 xdg-user-dirs
 firefox
 nautilus
-xorg-drivers
+#xorg-drivers
 xf86-input-evdev
-xf86-input-libinput
-xf86-input-synaptics
+#xf86-input-libinput
+#xf86-input-synaptics
 networkmanager
 xf86-video-amdgpu
 xf86-video-intel
