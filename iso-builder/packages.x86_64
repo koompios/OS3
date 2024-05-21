@@ -1,3 +1,4 @@
+xclip
 clang
 base-devel
 polkit
@@ -46,7 +47,7 @@ gpart
 gpm
 gptfdisk
 grml-zsh-config
-#grub
+grub
 hdparm
 intel-ucode
 irssi
@@ -171,7 +172,7 @@ xorriso
 os-prober
 gnome-disk-utility
 gnome-tweaks
-grub-koompi
+#grub-koompi
 
 # Core packages
 koompi-skel
@@ -212,8 +213,8 @@ zoom
 imagemagick
 nodejs
 npm
-tigervnc
-x11vnc
+#tigervnc
+#x11vnc
 #anydesk-bin
 
 # Fonts
@@ -296,13 +297,16 @@ usbutils
 
 
 # tmp
+python3
 python-requests
 python-pytz
 python-gobject
+python-inquirerpy
+python-tqdm
 libadwaita
 gtk4
 adwaita-icon-theme
-pop-icon-theme-git ## Credit to POP-OS Teams and Package Maintainer
+colloid-icon
 vte3
 gparted
 openssl
