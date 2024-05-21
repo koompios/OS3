@@ -1,5 +1,5 @@
 pkgname='pibee-git'
-pkgver=0.1.4
+pkgver=0.1.5
 pkgrel=1
 pkgdesc='KOOMPI OS3 Installer Framework'
 arch=(any)
