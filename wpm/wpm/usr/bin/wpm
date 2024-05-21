@@ -1,16 +1,16 @@
 #!/bin/bash
 # set -e
 
-# This script adds a package manager for Waydroid and will work across all devices. 
+# This script adds a package manager for Waydroid and will work across all devices.
 # This script is provided as a convenience and is not intended to be used as an enterprise solution.
-# 
+#
 # Copyright (c) 2022 Waydroid, GPLv3
 #
 # Created by: Waydroid Development Team (Erfan Abdi, Jon West and others)
 
 USER_HOME=$(xdg-user-dir)
 SHARED_DIR="$USER_HOME/.local/share/wpm"
-BINFOLDER="$SHARED_DIR/bin"	
+BINFOLDER="$SHARED_DIR/bin"
 TEMPFOLDER="$SHARED_DIR/tmp"
 REPOSFOLDER="$SHARED_DIR/repos"
 
@@ -39,7 +39,7 @@ init_waydroid() {
 	sudo cp -r /usr/share/wpm $USER_HOME/.local/share/
 
 	sudo chown -R -v $USER $USER_HOME/.local/share/wpm
- 
+
 	if ! systemctl is-active --quiet waydroid.service; then
 		echo "Waydroid is not initialized. Running initialization..."
 		sudo waydroid init
@@ -50,7 +50,7 @@ init_waydroid() {
 		waydroid prop set persist.waydroid.multi_windows true
 		waydroid prop set persist.waydroid.fake_touch "com.*"
 		sleep 2
-		sudo /usr/local/share/waydroid_script/venv/bin/python3 /usr/local/share/waydroid_script/main.py install libndk libhoudini
+		sudo python3 main.py install libndk libhoudini
 		sleep 2
 		sudo waydroid upgrade -o
 		sleep 3
@@ -64,18 +64,18 @@ init_waydroid() {
 downloadStuff() {
 	    what="$1"
 		where="$2"
-		
+
 		while ! wget --connect-timeout=10 --tries=2 "$what" -O "$where";do sleep 1;done
 }
 
 #downloadFromRepo repo repo_dir packageName overrides
 downloadFromRepo() {
-        # Repos 
+        # Repos
 		repo="$1"
 		repo_dir="$2"
 		package="$3"
 		overrides="$4"
-				
+
 		mkdir -p "$repo_dir"
 	if [ ! -f "$repo_dir"/index.xml ];then
 		downloadStuff "$repo"/index.jar "$repo_dir"/index.jar
@@ -127,11 +127,11 @@ listRepos() {
 
 #searchRepo repo repo_dir packageName
 searchRepo() {
-        # Repos 
+        # Repos
 		repo="$1"
 		repo_dir="$2"
 		package="$3"
-				
+
 		mkdir -p "$repo_dir"
 	if [ ! -f "$repo_dir"/index.xml ];then
 		downloadStuff "$repo"/index.jar "$repo_dir"/index.jar
@@ -151,8 +151,8 @@ searchRepo() {
 		npversion="$(xmlstarlet sel -t -m '//application[name="'"$package"'"]/package[versioncode="'"$marketvercode"'"]' -v ./version "$repo_dir"/index.xml || xmlstarlet sel -t -m '//application[name="'"$package"'"]/package[1]' -v ./version "$repo_dir"/index.xml)"
 		npsdk="$(xmlstarlet sel -t -m '//application[name="'"$package"'"]/package[versioncode="'"$marketvercode"'"]' -v ./sdkver "$repo_dir"/index.xml || xmlstarlet sel -t -m '//application[name="'"$package"'"]/package[1]' -v ./sdkver "$repo_dir"/index.xml)"
 		nptargetsdk="$(xmlstarlet sel -t -m '//application[name="'"$package"'"]/package[versioncode="'"$marketvercode"'"]' -v ./targetSdkVersion "$repo_dir"/index.xml || xmlstarlet sel -t -m '//application[name="'"$package"'"]/package[1]' -v ./targetSdkVersion "$repo_dir"/index.xml)"
-		
-		if [ "$apk" != "" ]; then 
+
+		if [ "$apk" != "" ]; then
 			echo ""
 			echo -e "${GREEN}Found in repo: ${NC}$repo"
         	echo -e "Package: ${LT_BLUE}$apk${NC}"
@@ -187,7 +187,7 @@ listAllRepoApps() {
 	# Process given repo first, because the user only passes in the repo name, not link
 	repo_link=$(cat "$repo")
 
-	# Process the top repo first, then the rest. 
+	# Process the top repo first, then the rest.
 	# echo "repo_link: $repo_link"
 	for link in $repo_link; do
 		# echo "link: $link"
@@ -209,8 +209,8 @@ listAllRepoApps() {
 	for i in "${PACKAGE_IDS[@]}"; do
 		PACKAGE_COUNT=$(( $PACKAGE_COUNT + 1 ))
 		echo -ne "Processing Package: ${LT_BLUE} $PACKAGE_COUNT: ${i[@]}${NC}\033[0K\r"
-		PACKAGE_NAMES+=( "$(xmlstarlet sel -t --value-of '//application[id = "'"$i"'"]'/name "$repo_dir"/index.xml)" ) 
-	done 
+		PACKAGE_NAMES+=( "$(xmlstarlet sel -t --value-of '//application[id = "'"$i"'"]'/name "$repo_dir"/index.xml)" )
+	done
 
 	echo -e "${GREEN}Found the following apps:${NC}"
 
@@ -224,7 +224,7 @@ cleanUp() {
 	rm -rf $BINFOLDER
 }
 
-#installApp apkName 
+#installApp apkName
 installApp() {
 	apkName="$1"
 	if [ ! -f $BINFOLDER/$apkName ];then
@@ -381,7 +381,7 @@ if [ "$SEARCH" == "true" ]; then
 				# echo "Found in repo: $search_repo"
 				found="true"
 			fi
-			
+
 		done
 	done
 	if [ ! $found ]; then
@@ -418,9 +418,9 @@ elif [ "$INSTALL" == "true" ]; then
 			if searchRepo "$search_repo" "$TEMPFOLDER/$reponame" "$1" ; then
 				# echo "Found in repo: $search_repo"
 				found="true"
-    			downloadFromRepo "$search_repo" "$TEMPFOLDER/$reponame" "$1" 
+    			downloadFromRepo "$search_repo" "$TEMPFOLDER/$reponame" "$1"
 				# if app is downloaded, install it
-				
+
 				installApp "$apk"
 				# cleanUp
 
@@ -440,4 +440,3 @@ else
 	echo "No options specified, please see -h | --help for more info"
 
 fi
-
