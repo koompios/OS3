@@ -50,7 +50,7 @@ init_waydroid() {
 		waydroid prop set persist.waydroid.multi_windows true
 		waydroid prop set persist.waydroid.fake_touch "com.*"
 		sleep 2
-		sudo python3 main.py install libndk libhoudini
+		sudo python3 /usr/local/share/waydroid_script/main.py install libndk libhoudini
 		sleep 2
 		sudo waydroid upgrade -o
 		sleep 3
