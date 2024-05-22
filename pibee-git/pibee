@@ -373,10 +373,12 @@ def inst_users(config):
         exec_chroot(['usermod', '-c', user['fullname'], user['name']])
         exec_chroot(
             ['bash', '-c', f'echo \'{user["name"]}:{user["password"]}\' | chpasswd'])
-
-        # Set root password
-        exec_chroot(['bash', '-c', f'echo "root:{password}" | chpasswd'])
+    
         exec_chroot(['usermod', '-aG', 'wheel', user['name']])
+    
+        # Set root password same as user password
+        exec_chroot(['bash', '-c', f'echo "root:{user["password"]}" | chpasswd'])
+   
         # Add AccountsService user file
         mkdir('/mnt/var/lib/AccountsService/users')
         exec_chroot(
