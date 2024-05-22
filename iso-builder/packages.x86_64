@@ -190,6 +190,7 @@ koompi-backgrounds
 flatpak
 waydroid-koompi
 waydroid-image
+waydroid-scrip
 wpm
 android-tools
 yay
@@ -208,6 +209,7 @@ krita
 visual-studio-code-bin
 teams
 zoom
+vlc
 
 ## OneLab
 imagemagick
@@ -215,7 +217,7 @@ nodejs
 npm
 #tigervnc
 #x11vnc
-#anydesk-bin
+anydesk-bin
 
 # Fonts
 noto-fonts
