@@ -1,6 +1,6 @@
 pkgname='pibee-git'
 pkgver=0.1.5
-pkgrel=1
+pkgrel=2
 pkgdesc='KOOMPI OS3 Installer Framework'
 arch=(any)
 depends=('squashfs-tools' 'arch-install-scripts' 'util-linux' 'parted')
