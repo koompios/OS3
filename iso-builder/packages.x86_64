@@ -56,7 +56,7 @@ iwd
 jfsutils
 kitty-terminfo
 less
-lftp
+#lftp
 libfido2
 libusb-compat
 linux
@@ -190,7 +190,7 @@ koompi-backgrounds
 flatpak
 waydroid-koompi
 waydroid-image
-waydroid-scrip
+waydroid-script
 wpm
 android-tools
 yay
