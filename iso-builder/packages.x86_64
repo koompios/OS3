@@ -119,7 +119,7 @@ udftools
 usb_modeswitch
 usbmuxd
 usbutils
-vim
+neovim
 virtualbox-guest-utils-nox
 vpnc
 wireless-regdb
@@ -326,7 +326,7 @@ vulkan-extra-tools
 vulkan-mesa-layers
 vulkan-utility-libraries
 vulkan-headers
-#vulkan-radeon
+vulkan-radeon
 vulkan-validation-layers
 
 # WIFI Firmware
