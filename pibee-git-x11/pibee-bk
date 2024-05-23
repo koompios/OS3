@@ -230,8 +230,7 @@ def inst_setup_base(config):
         exec(['unsquashfs', '-f', '-d', '/mnt',
               '/run/archiso/bootmnt/koompilive/x86_64/airootfs.sfs'])
     # Enable system services
-    enable_service('automatic-update')
-    enable_service('systemd-zram-setup@zram0.service')
+    #enable_service('akshara'
     enable_service('bluetooth')
     enable_service('cups')
     # Enable koompi-files
@@ -240,7 +239,7 @@ def inst_setup_base(config):
     exec_chroot(['bash', '-c', 'echo \'MODULES=""\' > /etc/mkinitcpio.conf'])
     exec_chroot(['bash', '-c', 'echo \'BINARIES=""\' >> /etc/mkinitcpio.conf'])
     exec_chroot(['bash', '-c', 'echo \'FILES=""\' >> /etc/mkinitcpio.conf'])
-    exec_chroot(['bash', '-c', 'echo \'HOOKS="base udev autodetect modconf block keyboard keymap consolefont filesystems fsck"\' >> /etc/mkinitcpio.conf'])
+    exec_chroot(['bash', '-c', 'echo \'HOOKS="base udev plymouth autodetect modconf block keyboard keymap consolefont filesystems fsck"\' >> /etc/mkinitcpio.conf'])
     exec_chroot(
         ['bash', '-c', 'echo \'COMPRESSION="zstd"\' >> /etc/mkinitcpio.conf'])
     # Generate fstab
@@ -258,23 +257,26 @@ def inst_setup_base(config):
     exec_chroot(['mkinitcpio', '-p', 'linux-zen'])
     # Remove jade-gui and pibee
     exec_chroot(['/usr/bin/pacman', '-Rn', '--noconfirm', 'jade-gui', 'pibee-git'])
-    # remove jadegui pibee
-    exec(['bash', '-c', 'rm -rf /mnt/usr/bin/pibee'])
-    exec(['bash', '-c', 'rm -rf /mnt/usr/bin/jade-gui'])
-    exec(['bash', '-c', 'rm -rf /mnt/etc/xdg/autostart/installer-autostart.desktop'])
 
     # Create Swapfile
-    #exec_chroot(
-    #    ['bash', '/usr/local/bin/create-swap']
-    #)
+    exec_chroot(
+        ['bash', '/usr/local/bin/create-swap']
+    )
 
     # Enable autocheck
+    exec_chroot(
+            ['bash', "echo 'ALL ALL=(ALL) NOPASSWD: /usr/bin/autocheck' | tee -a /etc/sudoers"]
+    )
 
     # remove linux.present
     exec_chroot(
         ['rm', '-rf', '/etc/mkinitcpio.d/linux.preset']
     )
 
+    # Disable Wayland as Default session
+    exec_chroot(
+        ['sed', '-i', 's/#WaylandEnable=false/WaylandEnable=false/', '/etc/gdm3/custom.conf']
+    )
 
 
 def inst_bootloader(config):
@@ -310,15 +312,15 @@ def inst_bootloader(config):
 def inst_locale(config):
     # Set locale
     exec_chroot(['bash', '-c', 'echo \'en_US.UTF-8 UTF-8\' > /etc/locale.gen'])
-    # first_locale = True
-    # for locale in config['locale']['locale']:
-    #     if locale != 'en_US.UTF-8 UTF-8':
-    #         exec_chroot(
-    #             ['bash', '-c', f'echo \'{locale}\' >> /etc/locale.gen'])
-    #     if first_locale:
-    #         exec_chroot(
-    #             ['bash', '-c', f'echo \'LANG={locale.split()[0]}\' > /etc/locale.conf'])
-    #         first_locale = False
+    first_locale = True
+    for locale in config['locale']['locale']:
+        if locale != 'en_US.UTF-8 UTF-8':
+            exec_chroot(
+                ['bash', '-c', f'echo \'{locale}\' >> /etc/locale.gen'])
+        if first_locale:
+            exec_chroot(
+                ['bash', '-c', f'echo \'LANG={locale.split()[0]}\' > /etc/locale.conf'])
+            first_locale = False
     exec_chroot(['locale-gen'])
 
     # Set keyboard layout
@@ -373,12 +375,7 @@ def inst_users(config):
         exec_chroot(['usermod', '-c', user['fullname'], user['name']])
         exec_chroot(
             ['bash', '-c', f'echo \'{user["name"]}:{user["password"]}\' | chpasswd'])
-    
         exec_chroot(['usermod', '-aG', 'wheel', user['name']])
-    
-        # Set root password same as user password
-        exec_chroot(['bash', '-c', f'echo "root:{user["password"]}" | chpasswd'])
-   
         # Add AccountsService user file
         mkdir('/mnt/var/lib/AccountsService/users')
         exec_chroot(
@@ -403,13 +400,6 @@ def inst_users(config):
     exec_chroot(['sudo', '-u', user['name'], 'mkdir', '-p',
                 f'/home/{user["name"]}/.config/autostart'])
 
-
-    # Reset Gnome File Manager to default
-    exec_chroot(['sudo', '-u', user['name'], 'xdg-mime', 'default', 'org.gnome.Nautilus.desktop', 'inode/directory'])
-
-    # Set Mirrorlist
-    # exec_chroot(['sudo', '-u', 'cp', '/etc/pacman.d/mirrorlist.koompi', '/etc/pacman.d/mirrorlist'])
-    exec_chroot(['sudo', 'cp', '/etc/pacman.d/mirrorlist.koompi', '/etc/pacman.d/mirrorlist'])
     # Copy desktop from /usr/share/applications/org.koompios.FirstSetup.desktop to ~/.config/autostart
     #exec_chroot(['sudo', '-u', user['name'], 'cp', '/usr/local/share/applations/org.koompios.FirstSetup.desktop',
     #            f'/home/{user["name"]}/.config/autostart'])
