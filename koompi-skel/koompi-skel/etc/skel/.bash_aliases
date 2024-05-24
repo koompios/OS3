@@ -9,7 +9,7 @@ alias reboot="systemctl reboot -i"
 alias c='clear'
 alias cl='c & ls'
 alias vi="nvim"
-alias vim"nvim"
+alias vim="nvim"
 
 
 

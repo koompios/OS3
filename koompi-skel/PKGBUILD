@@ -1,6 +1,6 @@
-# Maintainer: Hangsiahong <honghangsia@gmail.com>
+# Maintainer: Hangsiahong <honghangsia@gmail.com> pkgname=koompi-skel
 pkgname=koompi-skel
-pkgver=20240522
+pkgver=20240524
 pkgrel=1
 pkgdesc="KOOMPI OS Skel"
 arch=('any')
