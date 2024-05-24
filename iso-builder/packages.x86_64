@@ -136,6 +136,7 @@ gnome-session
 gnome-console
 gnome-calculator
 gnome-software
+gnome-menus
 mesa
 gnome-control-center
 gnome-settings-daemon
