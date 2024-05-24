@@ -113,14 +113,14 @@ const AskRenamePopup = class {
     _do_rename() {
         if (!this._button.sensitive)
             return;
-        // popdown will trigger the 'close' signal, which, in turn, will call _closeCB()
-        this._popover.popdown();
         let newFilePath = GLib.build_filenamev([this._desktopFile.get_path(), this._textArea.text]);
         let newFile = Gio.File.new_for_path(newFilePath);
         this.setPendingDropCoordinates(newFile, this._fileItem.savedCoordinates);
         this.DBusUtils.RemoteFileOperations.RenameURIRemote(
             this._fileItem.file.get_uri(), this._textArea.text
         );
+        // popdown will trigger the 'close' signal, which, in turn, will call _closeCB()
+        this._popover.popdown();
     }
 
     close() {
@@ -133,16 +133,5 @@ const AskRenamePopup = class {
         this._popover.unparent();
         this._popover = null;
         this._closeCB();
-    }
-
-    popupat(fileItem) {
-        this._fileItem = fileItem;
-        const menuGtkPosition = fileItem._grid.getIntelligentPosition(fileItem._grid.getGlobaltoLocalRectangle(fileItem.iconRectangle));
-        if (menuGtkPosition)
-            this._popover.set_position(menuGtkPosition);
-
-        this._popover.unparent();
-        this._popover.set_parent(fileItem._grid._window);
-        this._popover.set_pointing_to(this._fileItem.iconLocalWindowRectangle);
     }
 };

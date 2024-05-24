@@ -121,7 +121,7 @@ export const DESKTOPFILE_TERMINAL_EXEC_KEY = 'Exec';
 export const DESKTOPFILE_TERMINAL_EXEC_SWITCH = 'X-ExecArg';
 export const NAUTILUS_SCRIPTS_DIR = '.local/share/nautilus/scripts';
 export const THUMBNAILS_DIR = '.cache/thumbnails';
-export const DND_HOVER_TIMEOUT = 500; // In milliseconds
+export const DND_HOVER_TIMEOUT = 1500; // In milliseconds
 export const DND_SHELL_HOVER_POLL = 200; // In milliseconds
 export const TOOLTIP_HOVER_TIMEOUT = 1000; // In milliseconds
 export const XDG_EMAIL_CMD = 'xdg-email';
@@ -159,5 +159,5 @@ export const IgnoreKeys = [
     'KEY_space', 'KEY_Shift_L', 'KEY_Shift_R', 'KEY_Control_L',
     'KEY_Control_R', 'KEY_Caps_Lock', 'KEY_Shift_Lock', 'KEY_Meta_L',
     'KEY_Meta_R', 'KEY_Alt_L', 'KEY_Alt_R', 'KEY_Super_L',
-    'KEY_Super_R', 'KEY_ISO_Level3_Shift', 'KEY_ISO_Level5_Shift'
+    'KEY_Super_R', 'KEY_ISO_Level3_Shift', 'KEY_ISO_Level5_Shift',
 ];

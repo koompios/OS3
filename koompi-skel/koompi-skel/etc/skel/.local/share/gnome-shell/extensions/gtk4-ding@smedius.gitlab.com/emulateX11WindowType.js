@@ -24,6 +24,7 @@ import Meta from 'gi://Meta';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as DND from 'resource:///org/gnome/shell/ui/dnd.js';
 import * as AppFavorites from 'resource:///org/gnome/shell/ui/appFavorites.js';
+import * as Utils from 'resource:///org/gnome/shell/misc/util.js';
 
 export {EmulateX11WindowType};
 class ManageWindow {
@@ -117,6 +118,12 @@ class ManageWindow {
         this._fixed = false;
         this._desktopWindow = false;
         let title = this._window.get_title();
+
+        if (!title && !!this._window.get_transient_for()) {
+            // Transient dialog window
+            // Does not have title, hide from windowlist
+            title = '@!H';
+        }
 
         if (title !== null) {
             if ((title.length > 0) && (title[title.length - 1] === ' ')) {
@@ -239,13 +246,21 @@ class ManageWindow {
     }
 
     _keepWindowHidden() {
-        if (!this._isX11 && this._waylandClient)
+        if (!this._isX11 && this._waylandClient) {
             this._waylandClient.hide_from_window_list(this._window);
+        } else {
+            const xid = this._window.xwindow;
+            this._setX11windowSkipTaskbar(xid);
+        }
     }
 
     _unhideWindow() {
-        if (!this._isX11 && this._waylandClient)
+        if (!this._isX11 && this._waylandClient) {
             this._waylandClient.show_in_window_list(this._window);
+        } else {
+            const xid = this._window.xwindow;
+            this._unSetX11windowSkipTaskbar(xid);
+        }
     }
 
     _keepWindowAtBottom() {
@@ -276,6 +291,15 @@ class ManageWindow {
         if (this._window.above)
             this._window.unmake_above();
         this._window.lower();
+    }
+
+    _keepWindowUnFullScreen() {
+        this._signalIDs.push(this._window.connect('notify::fullscreen', () => {
+            if (this._window.fullscreen)
+                this._window.unmake_fullscreen();
+        }));
+        if (this._window.fullscreen)
+            this._window.unmake_fullscreen();
     }
 
     _activateDesktopWindow() {
@@ -334,13 +358,31 @@ class ManageWindow {
     }
 
     _makeWindowTypeDesktop() {
-        const desktopWindowTypeSetOnWindow = this._waylandClient.make_desktop_window(this._window);
-        if (!desktopWindowTypeSetOnWindow) {
-            this._emulateDesktopWindow();
+        if (!this._isX11 && this._waylandClient) {
+            const desktopWindowTypeSetOnWindow = this._waylandClient.make_desktop_window(this._window);
+            if (!desktopWindowTypeSetOnWindow) {
+                this._emulateDesktopWindow();
+                return;
+            }
         } else {
-            const activateTopWindowOnWorkspace = true;
-            this._onIdleChangedStatusCallback({activateTopWindowOnWorkspace});
+            const xid = this._window.xwindow;
+            try {
+                this._setX11windowTypeDesktop(xid);
+            } catch (e) {
+                logError(e);
+                this._emulateDesktopWindow();
+                return;
+            }
         }
+
+        // Window manager bug - it treats request to resize window
+        // to monitor size as a fullscreen window request as well and makes
+        // the window fullscreen, more so for legacy X11 apps.
+        // This makes intellihide for docks/panels hide from desktop window
+        this._keepWindowUnFullScreen();
+
+        const activateTopWindowOnWorkspace = true;
+        this._onIdleChangedStatusCallback({activateTopWindowOnWorkspace});
     }
 
     _emulateDesktopWindow() {
@@ -359,6 +401,36 @@ class ManageWindow {
     _onIdleActivateTopWindowOnActiveWorkspace() {
         const activateTopWindowOnWorkspace = true;
         this._onIdleChangedStatusCallback({activateTopWindowOnWorkspace});
+    }
+
+    _setX11windowSkipTaskbar(xid) {
+        // Unfortunately xprop can set only one of the properties in the state, not multiple
+        // Stick to setting only skip-taskbar, we can otherwirse also set the property for pager,
+        // _NET_WM_STATE_SKIP_PAGER
+        const commandline = `xprop -id ${xid}` +
+        ' -f _NET_WM_STATE 32a' +
+        ' -set _NET_WM_STATE' +
+        ' _NET_WM_STATE_SKIP_TASKBAR';
+        console.log('Making X11 windowtype type skip-taskbar');
+        Utils.spawnCommandLine(commandline);
+    }
+
+    _unSetX11windowSkipTaskbar(xid) {
+        const commandline = `xprop -id ${xid}` +
+        ' -f _NET_WM_STATE 32a' +
+        ' -remove _NET_WM_STATE' +
+        ' _NET_WM_STATE_SKIP_TASKBAR';
+        console.log('Making X11 windowtype type NOT skip-taskbar');
+        Utils.spawnCommandLine(commandline);
+    }
+
+    _setX11windowTypeDesktop(xid) {
+        const commandline = `xprop -id ${xid}` +
+            ' -f _NET_WM_WINDOW_TYPE 32a' +
+            ' -set _NET_WM_WINDOW_TYPE' +
+            ' _NET_WM_WINDOW_TYPE_DESKTOP';
+        console.log('Making X11 windowtype type Desktop');
+        Utils.trySpawnCommandLine(commandline);
     }
 
     refreshProperties() {
@@ -405,6 +477,10 @@ var EmulateX11WindowType = class {
     enable() {
         this._idMap = global.window_manager.connect_after('map', (obj, windowActor) => {
             let window = windowActor.get_meta_window();
+
+            if (window.get_window_type() > Meta.WindowType.DIALOG)
+                return;
+
             if (this._waylandClient && this._waylandClient.query_window_belongs_to(window))
                 this._addWindowManagedCustomJS_ding(window, windowActor);
 

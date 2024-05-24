@@ -11,6 +11,37 @@ alias cl='c & ls'
 alias vi="nvim"
 alias vim="nvim"
 
+function update-ui() {
+	echo "Updating KOOMPI OS Interface..."
+	echo "Kindly please wait a few moments."
+	sleep 1;
+	echo "Updating Gnome extension..."
+	sudo pacman -Sy koompi-skel --noconfirm --overwrite="*"
+	cp -r /etc/skel/.local/share/gnome-shell/extensions/* $HOME/.local/share/gnome-shell/extensions/
+	echo "Backing up previous Gnome UI..."
+	echo "In case something goes wrong, we can revert back"
+	mv $HOME/.config/dconf/user $HOME/.config/dconf/user.bk
+	sleep 1;
+	dconf dump / > $HOME/.config/dconf/dconf-settings.ini.bk
+	echo "Updating KOOMPI Config..."
+	sleep 1;
+	cp /etc/skel/.config/dconf/user $HOME/.config/dconf/
+	sleep 1;
+	cp /etc/skel/.config/dconf/dconf-settings.ini $HOME/.config/dconf/
+	echo "Applying the config..."
+	sleep 1;
+	dconf load / < $HOME/.config/dconf/dconf-settings.ini
+	echo "Please Logout or Restart your machine to properly finished the update"
+
+}
+
+function revert-ui() {
+	echo "Reverting to previous KOOMPI Interface"
+	mv $HOME/.config/dconf/user.bk $HOME/.config/dconf/user
+	mv $HOME/.config/dconf/dconf-settings.bk $HOME/.config/dconf/dconf-settings.ini
+	dconf load / < $HOME/.config/dconf/dconf-settings.ini
+}
+
 
 
 function cwp() {
@@ -28,4 +59,3 @@ function sudo() {
                 command sudo $@
         fi
 }
-

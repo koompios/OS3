@@ -163,6 +163,7 @@ const DesktopIconItem = class {
 
         if (!this.Prefs.freePositionIcons) {
             this._labelContainer.append(this._iconContainer);
+            this._label.add_css_class('file-label-vertical');
             this._labelContainer.append(this._label);
             this.container.append(this._labelContainer);
         } else {
@@ -429,11 +430,11 @@ const DesktopIconItem = class {
 
     unHighLightDropTarget() {
         if (this._hasToRouteDragToGrid()) {
-            this._grid.receiveLeave();
+            this._grid?.receiveLeave();
             return;
         }
         this.setUnHighLighted();
-        this._grid.unHighLightGrids();
+        this._grid?.unHighLightGrids();
     }
 
     setSelected() {

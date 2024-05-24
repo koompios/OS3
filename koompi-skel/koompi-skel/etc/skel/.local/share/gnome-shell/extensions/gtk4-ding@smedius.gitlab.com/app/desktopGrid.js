@@ -50,9 +50,8 @@ const DesktopGrid = class {
             this._window.set_deletable(false);
             // Transparent Background only if this instance is working as a desktop
             this._window.set_name('desktopwindow');
-            if (this._using_X11) {
-                this.DesktopIconsUtil.makeX11windowTaskbarHiddenDesktop(this._window);
-            } else { // Wayland
+            if (!this._using_X11) {
+                // Wayland
                 // Compositer hang on some high resolution requires all windows be maximized to map and display initially.
                 this._window.maximize();
                 // However this creates an error where the window can be moved by the user by dragging down on top panel.
@@ -768,6 +767,10 @@ const DesktopGrid = class {
         this._desktopManager.onDragLeave();
     }
 
+    receiveLeave() {
+        this._receiveLeave();
+    }
+
     _receiveMotion(x, y, global) {
         let X;
         let Y;
@@ -823,7 +826,7 @@ const DesktopGrid = class {
     _startSpringLoadedTimer(fileItem) {
         if (!this.Prefs.openFolderOnDndHover || this.directoryOpenTimer)
             return;
-        if (this._desktopManager.dragItem.uri === fileItem.uri)
+        if (this._desktopManager.dragItem?.uri === fileItem.uri)
             return;
         this.directoryOpenTimer = GLib.timeout_add(GLib.PRIORITY_DEFAULT, this.Enums.DND_HOVER_TIMEOUT, () => {
             const context = Gdk.Display.get_default().get_app_launch_context();

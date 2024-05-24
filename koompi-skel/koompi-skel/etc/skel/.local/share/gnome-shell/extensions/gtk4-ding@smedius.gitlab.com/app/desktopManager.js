@@ -745,7 +745,9 @@ const DesktopManager = class {
                 else
                     returnAction = Gdk.DragAction.COPY;
                 this.askWhatToDoWithFiles(fileList, this._desktopDir.get_uri(),
-                    xGlobalDestination, yGlobalDestination, xlocalDestination, ylocalDestination, event);
+                    xGlobalDestination, yGlobalDestination, xlocalDestination, ylocalDestination, event).catch(e => {
+                    logError(e);
+                });
             }
             break;
         case this.Enums.DndTargetInfo.TEXT_PLAIN:
@@ -764,68 +766,77 @@ const DesktopManager = class {
         this.detectURLorText(dropData, [xGlobalDestination, yGlobalDestination]);
     }
 
-    askWhatToDoWithFiles(fileList, destinationuri, X, Y, x, y, event, opts = {desktopactions: true}) {
-        this._askWhatToDoWindow = new Gtk.Dialog({
-            use_header_bar: false,
-            resizable: false,
-        });
-        let headerbar = Gtk.HeaderBar.new();
-        headerbar.set_show_title_buttons(false);
-        this._askWhatToDoWindow.set_titlebar(headerbar);
-        this._askWhatToDoWindow.add_button(_('Move'), Gdk.DragAction.MOVE);
-        this._askWhatToDoWindow.add_button(_('Copy'), Gdk.DragAction.COPY);
-        this._askWhatToDoWindow.add_button(_('Link'), Gdk.DragAction.LINK);
-        this._askWhatToDoWindow.add_button(_('Cancel'), Gtk.ResponseType.CLOSE);
-        this._askWhatToDoWindow.set_modal(true);
-        this._askWhatToDoWindow.set_title(_('Choose Action for Files'));
-        this.DesktopIconsUtil.windowHidePagerTaskbarModal(this._askWhatToDoWindow, true);
-        this._askWhatToDoWindow.show();
+    async askWhatToDoWithFiles(fileList, destinationuri, X, Y, x, y, event, opts = {desktopactions: true}) {
+        const window = this.mainApp.get_active_window();
         this.textEntryAccelsTurnOff();
-        this._askWhatToDoWindow.connect('close', () => {
-            this._askWhatToDoWindow.response(Gtk.ResponseType.CANCEL);
-        });
-        this._askWhatToDoWindow.connect('response', async (actor, retval) => {
-            switch (retval) {
-            case Gdk.DragAction.MOVE:
+        const chooser = new Gtk.AlertDialog();
+        chooser.set_message(_('Choose Action for Files'));
+        chooser.buttons = [_('Move'), _('Copy'), _('Link'), _('Cancel')];
+        chooser.set_modal(false);
+        chooser.set_cancel_button(3);
+        chooser.set_default_button(3);
+        const cancellable = Gio.Cancellable.new();
+        if (this.dialogCancellable)
+            this.dialogCancellable.cancel();
+        this.dialogCancellable = cancellable;
+        const showdialog = new Promise(resolve => {
+            chooser.choose(window, cancellable, async (actor, choice) => {
+                let retval = Gtk.ResponseType.CANCEL;
                 try {
-                    if (opts.desktopactions)
-                        await this.clearFileCoordinates(fileList, [X, Y]);
+                    const buttonpress = actor.choose_finish(choice);
+                    switch (buttonpress) {
+                    case 0:
+                        retval = Gdk.DragAction.MOVE;
+                        try {
+                            if (opts.desktopactions)
+                                await this.clearFileCoordinates(fileList, [X, Y]);
 
-                    let forceCopy = false;
-                    await this.copyOrMoveUris(fileList,
-                        destinationuri, event, {forceCopy});
-                } catch {
-                    console.error('Error moving files');
-                }
-                break;
-            case Gdk.DragAction.COPY:
-                try {
-                    if (opts.desktopactions)
-                        await this.clearFileCoordinates(fileList, [X, Y], {dopCopy: true});
+                            let forceCopy = false;
+                            await this.copyOrMoveUris(fileList,
+                                destinationuri, event, {forceCopy});
+                        } catch {
+                            console.error('Error moving files');
+                        }
+                        break;
+                    case 1:
+                        retval = Gdk.DragAction.COPY;
+                        try {
+                            if (opts.desktopactions)
+                                await this.clearFileCoordinates(fileList, [X, Y], {dopCopy: true});
 
-                    let forceCopy = true;
-                    await this.copyOrMoveUris(fileList,
-                        destinationuri, event, {forceCopy});
-                } catch {
-                    console.error('Error copying files');
+                            let forceCopy = true;
+                            await this.copyOrMoveUris(fileList,
+                                destinationuri, event, {forceCopy});
+                        } catch {
+                            console.error('Error copying files');
+                        }
+                        break;
+                    case 2:
+                        retval = Gdk.DragAction.LINK;
+                        try {
+                            if (opts.desktopactions)
+                                await this.makeLinks(fileList, destinationuri, X, Y);
+                            else
+                                this.makeFileSystemLinks(fileList, destinationuri);
+                        } catch {
+                            console.error('Error making links');
+                        }
+                        break;
+                    default:
+                        retval = Gtk.ResponseType.CANCEL;
+                    }
+                    resolve(retval);
+                } catch (e) {
+                    if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED))
+                        console.error(e, `Error asking choosing what to do with Files ${e.message}`);
+                    resolve(retval);
                 }
-                break;
-            case Gdk.DragAction.LINK:
-                try {
-                    if (opts.desktopactions)
-                        await this.makeLinks(fileList, destinationuri, X, Y);
-                    else
-                        await this.makeFileSystemLinks(fileList, destinationuri);
-                } catch {
-                    console.error('Error making links');
-                }
-                break;
-            }
-            this.textEntryAccelsTurnOn();
-            this._askWhatToDoWindow.destroy();
-            this._askWhatToDoWindow = null;
-            return retval;
+            });
         });
+        const retval = await showdialog.catch(e => logError(e));
+        this.dialogCancellable = null;
+        this.textEntryAccelsTurnOn();
+        return retval;
     }
 
     makeFileSystemLinks(fileList, destination) {
@@ -1000,6 +1011,11 @@ const DesktopManager = class {
             this._renameWindow.close();
             return true;
         }
+        if (this.dialogCancellable) {
+            this.dialogCancellable.cancel();
+            this.dialogCancellable = null;
+            return true;
+        }
         return false;
     }
 
@@ -1027,12 +1043,13 @@ const DesktopManager = class {
                 this.popupmenu.set_position(menuGtkPosition);
 
             this.popupmenu.set_has_arrow(true);
-            this.popupmenuopen = true;
             this.popupmenu.popup();
             this.popupmenu.connect('closed', async () => {
-                this.popupmenuopen = false;
                 await this.DesktopIconsUtil.waitDelayMs(50);
                 this.popupmenu.unparent();
+                this.popupmenu = null;
+                if (this.popupmenuclosed)
+                    this.popupmenuclosed(true);
             });
         }
     }
@@ -1164,7 +1181,7 @@ const DesktopManager = class {
 
     onKeyPress(keyval, keycode, state, grid) {
         this.keyEventGrid = grid;
-        if (this.popupmenuopen)
+        if (this.popupmenu || this.fileItemMenu.popupmenu)
             return true;
 
         if (this.ignoreKeys.includes(keyval))
@@ -1229,7 +1246,8 @@ const DesktopManager = class {
         this._findFileWindow.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
         this._findFileWindow.set_modal(true);
         this._findFileWindow.set_title(_('Find Files on Desktop'));
-        this.DesktopIconsUtil.windowHidePagerTaskbarModal(this._findFileWindow, true);
+        const modal = true;
+        this.DesktopIconsUtil.windowHidePagerTaskbarModal(this._findFileWindow, modal);
         this._findFileWindow.set_transient_for(activeWindow);
         let contentArea = this._findFileWindow.get_content_area();
         this._findFileTextArea = new Gtk.Entry();
@@ -1307,8 +1325,8 @@ const DesktopManager = class {
         this.doPasteSimpleAction = Gio.SimpleAction.new('doPaste', null);
         this.doPasteSimpleAction.connect('activate', async () => {
             try {
-                if (!this.popupmenuopen)
-                    await this._updateClipboard();
+                if (!(this.popupmenu || this.fileItemMenu.popupmenu))
+                    await this._updateClipboard().catch(e => logError(e));
 
                 this._doPaste();
             } catch (e) {
@@ -1414,7 +1432,7 @@ const DesktopManager = class {
 
         let previewAction = Gio.SimpleAction.new('previewAction', null);
         previewAction.connect('activate', () => {
-            if (this.popupmenuopen || !this.activeFileItem)
+            if (this.popupmenu || this.fileItemMenu.popupmenu || !this.activeFileItem)
                 return;
 
             this.DBusUtils.RemoteFileOperations.ShowFileRemote(this.activeFileItem.uri, 0, true);
@@ -1604,7 +1622,8 @@ const DesktopManager = class {
             this.preferencesWindow = null;
         });
         this.preferencesWindow.set_title(_('Settings'));
-        this.DesktopIconsUtil.windowHidePagerTaskbarModal(this.preferencesWindow, true);
+        const modal = true;
+        this.DesktopIconsUtil.windowHidePagerTaskbarModal(this.preferencesWindow, modal);
         this.preferencesWindow.show();
     }
 
@@ -2056,33 +2075,27 @@ const DesktopManager = class {
     }
 
     _refreshMenus() {
-        if ((this.newItemDoRename && this.newItemDoRename.size) || this.fileItemMenu.popupmenuopen || this.activeFileItem) {
+        if ((this.newItemDoRename && this.newItemDoRename.size) || this.fileItemMenu.popupmenu || this.activeFileItem) {
             let activeItem = false;
             let newItemDoRename = false;
             this._fileList.forEach(f => {
                 if (this.activeFileItem && (f.fileName === this.activeFileItem.fileName))
                     this.fileItemMenu.activeFileItem = this.activeFileItem = activeItem = f;
 
-                if (this.newItemDoRename && this.newItemDoRename.has(f.fileName)) {
-                    newItemDoRename = true;
-                    f.setSelected();
-                    this.doRename(f, true);
-                }
+                if (this.newItemDoRename && this.newItemDoRename.has(f.fileName))
+                    newItemDoRename = f;
             });
-            if (!newItemDoRename) {
-                if (this._renameWindow)
-                    this._renameWindow.close();
+            if (this._renameWindow)
+                this._renameWindow.close();
+            if (newItemDoRename) {
+                newItemDoRename.setSelected();
+                const allowReturnOnSameName = true;
+                this.doRename(newItemDoRename, allowReturnOnSameName).catch(e => logError(e));
             }
-            if (activeItem && this.fileItemMenu.popupmenuopen) {
-                this.fileItemMenu.popupmenu.popdown();
-                if (this.fileItemMenu.popupmenu)
-                    this.fileItemMenu.popupmenu.unparent();
-
-                this.fileItemMenu.showMenu(this.activeFileItem);
-                return;
+            if (this.fileItemMenu.popupmenu) {
+                if (!activeItem)
+                    this.fileItemMenu.popupmenu.popdown();
             }
-            if (this.fileItemMenu.popupmenuopen)
-                this.fileItemMenu.popupmenu.popdown();
         }
     }
 
@@ -2486,7 +2499,13 @@ const DesktopManager = class {
         return count;
     }
 
-    doRename(fileItem, allowReturnOnSameName = false) {
+    menuclosed = () => {
+        return new Promise(resolve => {
+            this.popupmenuclosed = resolve;
+        });
+    };
+
+    async doRename(fileItem, allowReturnOnSameName = false) {
         let selection = this.getCurrentSelection(false);
         if (!(selection && (selection.length === 1)))
             return;
@@ -2504,6 +2523,8 @@ const DesktopManager = class {
                 this.newItemDoRename = new Set();
 
             this.newItemDoRename.add(fileItem.fileName);
+            if (this.popupmenu || this.fileItemMenu.popupmenu)
+                await this.menuclosed().catch(e => logError(e));
             this._renameWindow = new AskRenamePopup.AskRenamePopup(
                 fileItem,
                 allowReturnOnSameName,
@@ -2521,8 +2542,6 @@ const DesktopManager = class {
                     DBusUtils: this.DBusUtils,
                 }
             );
-        } else {
-            this._renameWindow.popupat(fileItem);
         }
     }
 

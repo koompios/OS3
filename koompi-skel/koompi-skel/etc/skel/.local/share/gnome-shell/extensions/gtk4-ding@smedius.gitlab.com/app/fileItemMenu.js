@@ -156,7 +156,7 @@ const FileItemMenu = class {
 
         let dorename = Gio.SimpleAction.new('dorename', null);
         dorename.connect('activate', () => {
-            this._desktopManager.doRename(this.activeFileItem, false);
+            this._desktopManager.doRename(this.activeFileItem, false).catch(e => logError(e));
         });
         this._mainApp.add_action(dorename);
         this._mainApp.set_accels_for_action('app.dorename', ['F2']);
@@ -468,19 +468,20 @@ const FileItemMenu = class {
         if (menuGtkPosition)
             this.popupmenu.set_position(menuGtkPosition);
 
-        fileItem._desktopManager.popupmenuopen = this.popupmenuopen = true;
         this.popupmenu.popup();
         this.popupmenu.connect('closed', async () => {
-            this._desktopManager.popupmenuopen = this.popupmenuopen = false;
             await this.DesktopIconsUtil.waitDelayMs(50);
             this.popupmenu.unparent();
+            this.popupmenu = null;
+            if (this._desktopManager.popupmenuclosed)
+                this._desktopManager.popupmenuclosed(true);
         });
     }
 
     showToolTip(fileItem) {
         if (this._toolTipPopup)
             return;
-        if (this.popupmenuopen && (fileItem.uri === this.activeFileItem.uri))
+        if (this.popupmenu && (fileItem.uri === this.activeFileItem.uri))
             return;
         this._toolTipPopup = Gtk.Popover.new();
         this._toolTipPopup.set_pointing_to(fileItem.iconRectangle);
@@ -610,15 +611,16 @@ const FileItemMenu = class {
         return new Promise(resolve => {
             if (!dialogTitle)
                 dialogTitle =  _('Select Destination');
+            const window = this.DesktopIconsUtil.getApplicationID().get_active_window();
             if (!selectionText)
                 selectionText = _('Select');
             const dialog = new Gtk.FileDialog({
                 title: dialogTitle,
                 accept_label: selectionText,
-                modal: false,
+                modal: true,
                 initial_folder: this.DesktopIconsUtil.getDesktopDir(),
             });
-            dialog.select_folder(null, null, (actor, gioasyncresponse) => {
+            dialog.select_folder(window, null, (actor, gioasyncresponse) => {
                 let folder;
                 try {
                     folder = actor.select_folder_finish(gioasyncresponse);
@@ -641,13 +643,17 @@ const FileItemMenu = class {
             if (!selectionText)
                 selectionText = _('Select');
             let returnValue = null;
+            const window = this.DesktopIconsUtil.getApplicationID().get_active_window();
             const dialog = new Gtk.FileChooserDialog({title: dialogTitle});
             dialog.set_action(Gtk.FileChooserAction.SELECT_FOLDER);
             dialog.set_create_folders(true);
             dialog.set_current_folder(this.DesktopIconsUtil.getDesktopDir());
             dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
             dialog.add_button(selectionText, Gtk.ResponseType.ACCEPT);
-            this.DesktopIconsUtil.windowHidePagerTaskbarModal(dialog, true);
+            dialog.set_transient_for(window);
+            const modal = true;
+            dialog.set_modal(modal);
+            this.DesktopIconsUtil.windowHidePagerTaskbarModal(dialog, modal);
             this._desktopManager.textEntryAccelsTurnOff();
             dialog.show();
             dialog.present_with_time(Gdk.CURRENT_TIME);
@@ -674,6 +680,7 @@ const FileItemMenu = class {
         try {
             result = await this.getSelectedFolderGioNewMethod(dialogTitle, selectionText);
         } catch (e) {
+            console.log('Reverting to old method of selecting');
             result = await this.getSelectedFolderGioOldMethod(dialogTitle, selectionText);
         }
         return result;

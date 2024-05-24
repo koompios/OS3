@@ -25,6 +25,12 @@ box > label.file-label-dark {
     color: black;
 }
 
+box > label.file-label-vertical {
+    /* Twice the padding set in box #file-item below to keep spacing between
+    icon and label constant with shape change */
+    margin-top: 4px;
+}
+
 box > #file-item {
     padding: 2px;
     border-radius: 5px;
