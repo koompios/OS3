@@ -172,6 +172,7 @@ xorriso
 os-prober
 gnome-disk-utility
 gnome-tweaks
+gnome-initial-setup
 #grub-koompi
 
 # Core packages
@@ -183,8 +184,8 @@ adwdialog
 koompi-control-center
 micro-distrobox
 pix
-pibee-git
-jade-gui
+pibee-git-oem
+jade-gui-oem
 python-yaml
 koompi-backgrounds
 flatpak
