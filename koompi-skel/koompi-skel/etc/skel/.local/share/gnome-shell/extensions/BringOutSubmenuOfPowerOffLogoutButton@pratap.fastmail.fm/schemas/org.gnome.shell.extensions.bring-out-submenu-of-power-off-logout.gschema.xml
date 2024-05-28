@@ -1,0 +1,46 @@
+<schemalist>
+    <schema id="org.gnome.shell.extensions.bring-out-submenu-of-power-off-logout" path="/org/gnome/shell/extensions/bring-out-submenu-of-power-off-logout/">
+        <key name="hide-lock-button" type="b">
+            <default>false</default>
+            <summary>Turn ON if you wish to remove Lock Item from system's menu.</summary>
+            <description>Lock Item</description>
+        </key>
+        <key name="hide-suspend-button" type="b">
+            <default>false</default>
+            <summary>Turn ON if you wish to remove Suspend Item from system's menu.</summary>
+            <description>Suspend Item</description>
+        </key>
+        <!-- Hibernation  -->
+        <key name="show-hybrid-sleep-button" type="b">
+            <default>false</default>
+            <summary>Turn ON if you wish to show HybridSleep Item from systems' menu.</summary>
+            <description>Restart Item</description>
+        </key>
+        <key name="show-hibernate-button" type="b">
+            <default>false</default>
+            <summary>Turn ON if you wish to show HIbernation Item from system's menu.</summary>
+            <description>Power Item</description>
+        </key>
+        <!--  -->
+        <key name="hide-logout-button" type="b">
+            <default>false</default>
+            <summary>Turn ON if you wish to remove Logout Item from system's menu.</summary>
+            <description>Logout Item</description>
+        </key>
+        <key name="hide-restart-button" type="b">
+            <default>false</default>
+            <summary>Turn ON if you wish to remove Restart Item from system's menu.</summary>
+            <description>Restart Item</description>
+        </key>
+        <key name="hide-power-button" type="b">
+            <default>false</default>
+            <summary>Turn ON if you wish to remove Power Item from system's menu.</summary>
+            <description>Power Item</description>
+        </key>
+        <key name="show-tooltip" type="b">
+            <default>true</default>
+            <summary>Turn ON if you wish to show tooltip for action buttons.</summary>
+            <description>Tooltip</description>
+        </key>
+    </schema>
+</schemalist>

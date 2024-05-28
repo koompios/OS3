@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Gnome Wayland Session
+Comment=Log in to a GNOME session using Wayland display server
+Exec=dbus-run-session -- gnome-shell --display-server --wayland
+Type=Application
+X-GNOME-UsesSessionStarter=true
+Icon=gnome-shell
+NoDisplay=false
+Categories=GNOME;Wayland;
+OnlyShowIn=GNOME-Terminal;
+X-Session-Service=wayland
