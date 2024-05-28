@@ -22,7 +22,7 @@ function update-ui() {
 	echo "In case something goes wrong, we can revert back"
 	mv $HOME/.config/dconf/user $HOME/.config/dconf/user.bk
 	sleep 1;
-	dconf dump / > $HOME/.config/dconf/dconf-settings.ini.bk
+	dconf dump / > ~/.config/dconf/dconf-settings.ini.bk
 	echo "Updating KOOMPI Config..."
 	sleep 1;
 	cp /etc/skel/.config/dconf/user $HOME/.config/dconf/
@@ -30,7 +30,7 @@ function update-ui() {
 	cp /etc/skel/.config/dconf/dconf-settings.ini $HOME/.config/dconf/
 	echo "Applying the config..."
 	sleep 1;
-	dconf load / < $HOME/.config/dconf/dconf-settings.ini
+	dconf load / < ~/.config/dconf/dconf-settings.ini
 	echo "Please Logout or Restart your machine to properly finished the update"
 
 }
@@ -39,7 +39,7 @@ function revert-ui() {
 	echo "Reverting to previous KOOMPI Interface"
 	mv $HOME/.config/dconf/user.bk $HOME/.config/dconf/user
 	mv $HOME/.config/dconf/dconf-settings.bk $HOME/.config/dconf/dconf-settings.ini
-	dconf load / < $HOME/.config/dconf/dconf-settings.ini
+	dconf load / < ~/.config/dconf/dconf-settings.ini
 }
 
 
