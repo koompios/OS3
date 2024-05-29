@@ -1,0 +1,13 @@
+pkgname='pibee-git-oem'
+pkgver=0.1.6
+pkgrel=1
+pkgdesc='KOOMPI OS3 Installer Framework'
+arch=(any)
+depends=('squashfs-tools' 'arch-install-scripts' 'util-linux' 'parted')
+provides=('pibee')
+conflicts=('pibee')
+sha256sums=('SKIP')
+
+package() {
+    install -Dm755 ../pibee -t "${pkgdir}/usr/bin/"
+}
