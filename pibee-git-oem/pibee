@@ -233,6 +233,7 @@ def inst_setup_base(config):
     enable_service('automatic-update')
     enable_service('systemd-zram-setup@zram0.service')
     enable_service('bluetooth')
+    enable_service('teamviewerd.service')
     enable_service('cups')
     # Enable koompi-files
     enable_user_service('koompi-files')
