@@ -137,9 +137,11 @@ gnome-console
 gnome-calculator
 gnome-software
 mesa
+mesa-util
 gnome-control-center
 gnome-settings-daemon
 gnome-system-monitor
+gnome-menus
 xdg-user-dirs
 firefox
 nautilus
@@ -185,7 +187,7 @@ koompi-control-center
 micro-distrobox
 pix
 pibee-git-oem
-jade-gui-oem
+jade-gui
 python-yaml
 koompi-backgrounds
 flatpak
@@ -218,12 +220,13 @@ vlc
 #npm
 #tigervnc
 #x11vnc
-anydesk-bin
+#anydesk-bin
+teamviewer
 
 # Fonts
 #noto-fonts
-#noto-fonts-cjk
-#noto-fonts-emoji
+noto-fonts-cjk
+noto-fonts-emoji
 #inter-font
 adobe-source-han-sans-cn-fonts
 ibus-pinyin
