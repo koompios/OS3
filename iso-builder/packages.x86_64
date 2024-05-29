@@ -137,7 +137,7 @@ gnome-console
 gnome-calculator
 gnome-software
 mesa
-mesa-util
+mesa-utils
 gnome-control-center
 gnome-settings-daemon
 gnome-system-monitor
