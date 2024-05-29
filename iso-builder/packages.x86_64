@@ -1,6 +1,6 @@
 xclip
-#clang
-#base-devel
+clang
+base-devel
 polkit
 polkit-gnome
 zram-generator
@@ -150,8 +150,8 @@ nautilus
 #xf86-input-libinput
 #xf86-input-synaptics
 networkmanager
-#xf86-video-amdgpu
-#xf86-video-intel
+xf86-video-amdgpu
+xf86-video-intel
 xf86-video-nouveau
 xf86-video-vmware
 #xf86-video-vesa
@@ -164,7 +164,7 @@ gst-plugins-good
 libva
 gstreamer-vaapi
 gst-plugin-pipewire
-#obs-studio
+obs-studio
 xdg-desktop-portal-gnome
 evince
 
@@ -191,27 +191,27 @@ jade-gui
 python-yaml
 koompi-backgrounds
 flatpak
-#waydroid-koompi
-#waydroid-image
-#waydroid-script
-#wpm
-#android-tools
+waydroid-koompi
+waydroid-image
+waydroid-script
+wpm
+android-tools
 yay
 koompi-gnome-extensions
 #gnome-shell-extension-dash-to-dock
 
 # office
-#libreoffice-fresh
-#libreoffice-fresh-km
+libreoffice-fresh
+libreoffice-fresh-km
 
 ## Preinstall Software
-#telegram-desktop-bin
-#gimp
-#inkscape
-#krita
-#visual-studio-code-bin
-#teams
-#zoom
+telegram-desktop-bin
+gimp
+inkscape
+krita
+visual-studio-code-bin
+teams
+zoom
 vlc
 
 ## OneLab
@@ -322,19 +322,19 @@ iio-sensor-proxy
 xorg-xhost
 
 #vulkan driver
-#vulkan-extra-layers
-#vulkan-intel
-#vulkan-icd-loader
-#vulkan-tools
-#vulkan-extra-tools
-#vulkan-mesa-layers
-#vulkan-utility-libraries
-#vulkan-headers
+vulkan-extra-layers
+vulkan-intel
+vulkan-icd-loader
+vulkan-tools
+vulkan-extra-tools
+vulkan-mesa-layers
+vulkan-utility-libraries
+vulkan-headers
 #vulkan-radeon
-#vulkan-validation-layers
+vulkan-validation-layers
 
-# WIFI Firmware
-#rtl8821ce-dkms-git
+# WIFI Firmware- KOOMPI Mini
+rtl8821ce-dkms-git
 
 
 ## GTK theme
