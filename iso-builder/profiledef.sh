@@ -29,5 +29,4 @@ file_permissions=(
   ["/etc/sudoers"]="0:0:400"
   ["/etc/polkit-1/rules.d"]="0:0:750"
   ["/etc/locale.gen"]="0:0:644"
-  ["/etc/profile.d/set-password.sh"]="755"
 )

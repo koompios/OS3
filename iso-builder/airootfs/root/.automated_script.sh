@@ -30,10 +30,10 @@ automated_script ()
 }
 
 systemd_service() {
-	systemctl enable automatic-update
+	systemctl enable --now liveuser-password.service
 }
 
 if [[ $(tty) == "/dev/tty1" ]]; then
-    automated_script;
     systemd_service;
+    automated_script;
 fi
