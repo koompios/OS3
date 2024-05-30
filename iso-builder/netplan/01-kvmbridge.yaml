@@ -1,0 +1,13 @@
+network:
+  version: 2
+  ethernets:
+    wlan0:
+      dhcp4: false
+  bridges:
+    br0:
+      interfaces: [wlan0]
+      dhcp4: true
+      mtu: 1500
+      parameters:
+        stp: true
+        forward-delay: 15

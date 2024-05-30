@@ -8,7 +8,7 @@
   <bridge name='br10' stp='on' delay='0'/>
   <ip address='10.2.0.1' netmask='255.255.255.0'>
     <dhcp>
-      <range start='10.2.0.5.0' end='10.2.0.5.200'/>
+      <range start='10.2.0.5' end='10.2.0.200'/>
     </dhcp>
   </ip>
 </network>

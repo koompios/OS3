@@ -1,15 +1,17 @@
+wireguard-tools
+docker
 the_silver_searcher
 clang
 xclip
 base-devel
-polkit
-polkit-gnome
+#polkit
+#polkit-gnome
 zram-generator
-xmlstarlet
-ca-certificates-utils
-ca-certificates-mozilla
-ca-certificates
-extension-manager
+#xmlstarlet
+#ca-certificates-utils
+#ca-certificates-mozilla
+#ca-certificates
+#extension-manager
 starship
 bash-completion
 alsa-utils
@@ -133,17 +135,17 @@ wvdial
 xfsprogs
 xl2tpd
 zsh
-gdm
-gnome-shell
-gnome-session
-gnome-console
+#gdm
+#gnome-shell
+#gnome-session
+#gnome-console
 mesa
-gnome-control-center
-gnome-settings-daemon
-gnome-system-monitor
+#gnome-control-center
+#gnome-settings-daemon
+#gnome-system-monitor
 xdg-user-dirs
-firefox
-nautilus
+#firefox
+#nautilus
 #xorg-drivers
 xf86-input-evdev
 #xf86-input-libinput
@@ -157,23 +159,23 @@ xf86-video-vesa
 nano
 efibootmgr
 hyperv
-xdg-desktop-portal-gnome
+#xdg-desktop-portal-gnome
 
 ## KOOMPI-OS
-webkit2gtk
+#webkit2gtk
 xorriso
 os-prober
-gnome-disk-utility
-gnome-tweaks
+#gnome-disk-utility
+#gnome-tweaks
 
 # Core packages
 koompi-skel
-koompi-os
+#koompi-os
 adwdialog
 micro-distrobox
 pix
 pibee-git
-jade-gui
+#jade-gui
 python-yaml
 #koompi-backgrounds
 yay
@@ -186,7 +188,7 @@ nodejs
 npm
 tigervnc
 x11vnc
-anydesk-bin
+#anydesk-bin
 
 # Fonts
 #ttf-meslo-nerd
@@ -194,12 +196,14 @@ ttf-martian-mono-nerd
 
 
 # Background and services
-pipewire
-pipewire-pulse
-pipewire-jack
-pipewire-alsa
-wireplumber
+#pipewire
+#pipewire-pulse
+#pipewire-jack
+#pipewire-alsa
+#wireplumber
 ifstat
+net-tools
+
 
 
 # io & fs
@@ -285,4 +289,5 @@ dnsmasq
 bridge-utils
 openbsd-netcat
 libguestfs
+
 
