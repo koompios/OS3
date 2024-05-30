@@ -169,7 +169,7 @@ os-prober
 #gnome-tweaks
 
 # Core packages
-koompi-skel
+#koompi-skel
 #koompi-os
 adwdialog
 micro-distrobox
