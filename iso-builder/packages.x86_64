@@ -175,7 +175,7 @@ pix
 pibee-git
 jade-gui
 python-yaml
-koompi-backgrounds
+#koompi-backgrounds
 yay
 
 ## Preinstall Software
@@ -189,7 +189,7 @@ x11vnc
 anydesk-bin
 
 # Fonts
-ttf-meslo-nerd
+#ttf-meslo-nerd
 ttf-martian-mono-nerd
 
 
@@ -255,23 +255,23 @@ iio-sensor-proxy
 xorg-xhost
 
 #vulkan driver
-vulkan-extra-layers
-vulkan-intel
-vulkan-icd-loader
-vulkan-tools
-vulkan-extra-tools
-vulkan-mesa-layers
-vulkan-utility-libraries
-vulkan-headers
-vulkan-radeon
-vulkan-validation-layers
+#vulkan-extra-layers
+#vulkan-intel
+#vulkan-icd-loader
+#vulkan-tools
+#vulkan-extra-tools
+#vulkan-mesa-layers
+#vulkan-utility-libraries
+#vulkan-headers
+#vulkan-radeon
+#vulkan-validation-layers
 
 # WIFI Firmware
 #rtl8821ce-dkms-git
 
 
 ## GTK theme
-catppuccin-gtk-theme-frappe
+#catppuccin-gtk-theme-frappe
 
 ## Qemu
 virt-manager
