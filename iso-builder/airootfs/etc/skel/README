@@ -1,0 +1,22 @@
+Step 1:
+
+If you want to change username and password of the ISO open the `koompi.json` and change from there
+
+```
+nano koompi.json
+
+```
+Step 2:
+
+Run the command below after you made change to the config file already, to install the OS.
+
+```
+sudo pibee config koompi.json
+
+```
+
+Step 3:
+Reboot the vm, you might wanna call the API to start the VM one more time.
+```
+sudo reboot
+```
