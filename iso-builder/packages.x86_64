@@ -1,3 +1,4 @@
+rustup
 wireguard-tools
 docker
 the_silver_searcher
@@ -69,7 +70,6 @@ linux-firmware
 linux-zen
 linux-zen-headers
 lsscsi
-lynx
 man-db
 man-pages
 mc
@@ -90,6 +90,7 @@ ntfs-3g
 nvme-cli
 openconnect
 openssh
+sshpass
 openvpn
 partclone
 parted
@@ -212,7 +213,7 @@ net-tools
 #kio-fuse
 #kio-gdrive
 #imount
-mtpfs
+#mtpfs
 #libmtp
 #gvfs-mtp
 #audiocd-kio
@@ -247,11 +248,7 @@ usbutils
 python-requests
 python-pytz
 python-gobject
-libadwaita
-gtk4
-adwaita-icon-theme
 vte3
-gparted
 openssl
 cups-pk-helper
 open-vm-tools
@@ -278,16 +275,16 @@ xorg-xhost
 #catppuccin-gtk-theme-frappe
 
 ## Qemu
-virt-manager
-virt-viewer
-qemu-git
-qemu-arch-extra
-edk2-ovmf
-vde2
-ebtables
-dnsmasq
-bridge-utils
-openbsd-netcat
-libguestfs
-
+#virt-manager
+#virt-viewer
+#qemu-git
+#qemu-arch-extra
+#edk2-ovmf
+#vde2
+#ebtables
+#dnsmasq
+#bridge-utils
+#openbsd-netcat
+#libguestfs
+#
 
