@@ -10,30 +10,12 @@ script_cmdline ()
     done
 }
 
-automated_script ()
-{
-    local script rt
-    script="$(script_cmdline)"
-    if [[ -n "${script}" && ! -x /tmp/startup_script ]]; then
-        if [[ "${script}" =~ ^((http|https|ftp)://) ]]; then
-            curl "${script}" --location --retry-connrefused --retry 10 -s -o /tmp/startup_script >/dev/null
-            rt=$?
-        else
-            cp "${script}" /tmp/startup_script
-            rt=$?
-        fi
-        if [[ ${rt} -eq 0 ]]; then
-            chmod +x /tmp/startup_script
-            /tmp/startup_script
-        fi
-    fi
-}
 
 systemd_service() {
 	systemctl enable --now liveuser-password.service
+	systemctl enable --now dhcpcd.service
 }
 
 if [[ $(tty) == "/dev/tty1" ]]; then
     systemd_service;
-    automated_script;
 fi
