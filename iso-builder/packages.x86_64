@@ -186,16 +186,11 @@ adwdialog
 koompi-control-center
 micro-distrobox
 pix
-pibee-git-oem
+pibee-git-x11-oem
 jade-gui
 python-yaml
 koompi-backgrounds
 flatpak
-waydroid-koompi
-waydroid-image
-waydroid-script
-wpm
-android-tools
 yay
 koompi-gnome-extensions
 #gnome-shell-extension-dash-to-dock
@@ -215,12 +210,12 @@ zoom
 vlc
 
 ## OneLab
-#imagemagick
-#nodejs
-#npm
-#tigervnc
-#x11vnc
-#anydesk-bin
+imagemagick
+nodejs
+npm
+tigervnc
+x11vnc
+anydesk-bin
 teamviewer
 
 # Fonts
@@ -330,7 +325,7 @@ vulkan-extra-tools
 vulkan-mesa-layers
 vulkan-utility-libraries
 vulkan-headers
-#vulkan-radeon
+vulkan-radeon
 vulkan-validation-layers
 
 # WIFI Firmware- KOOMPI Mini
