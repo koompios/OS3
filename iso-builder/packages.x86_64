@@ -1,4 +1,11 @@
+xclip
+clang
+polkit
+polkit-gnome
 extension-manager
+ca-certificates-utils
+ca-certificates-mozilla
+ca-certificates
 starship
 bash-completion
 alsa-utils
@@ -160,6 +167,7 @@ gnome-tweaks
 grub-koompi
 # Core packages
 koompi-os
+koompi-skel
 pizard
 automatic-update
 adwdialog
@@ -195,7 +203,7 @@ nodejs
 npm
 tigervnc
 x11vnc
-anydesk
+anydesk-bin
 
 # Fonts
 noto-fonts
@@ -298,11 +306,12 @@ vulkan-extra-tools
 vulkan-mesa-layers
 vulkan-utility-libraries
 vulkan-headers
-#vulkan-radeon
+vulkan-radeon
 vulkan-validation-layers
 
 # WIFI Firmware
 rtl8821ce-dkms-git
 
 # Gnome Extension
-gnome-shell-extension-dash-to-dock
+#gnome-shell-extension-dash-to-dock
+
