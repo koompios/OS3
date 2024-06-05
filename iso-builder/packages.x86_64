@@ -3,6 +3,7 @@ clang
 base-devel
 polkit
 polkit-gnome
+#pam-krb5
 zram-generator
 xmlstarlet
 ca-certificates-utils
@@ -138,6 +139,7 @@ gnome-calculator
 gnome-software
 gnome-menus
 mesa
+mesa-utils
 gnome-control-center
 gnome-settings-daemon
 gnome-system-monitor
@@ -146,11 +148,11 @@ firefox
 nautilus
 #xorg-drivers
 #xf86-input-evdev
-#xf86-input-libinput
-#xf86-input-synaptics
+xf86-input-libinput
+xf86-input-synaptics
 networkmanager
-#xf86-video-amdgpu
-#xf86-video-intel
+xf86-video-amdgpu
+xf86-video-intel
 xf86-video-nouveau
 xf86-video-vmware
 xf86-video-vesa
@@ -218,13 +220,14 @@ nodejs
 npm
 #tigervnc
 #x11vnc
-anydesk-bin
+#anydesk-bin
+teamviewer
 
 # Fonts
-noto-fonts
+#noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
-inter-font
+#inter-font
 adobe-source-han-sans-cn-fonts
 ibus-pinyin
 khmer-fonts
@@ -327,7 +330,7 @@ vulkan-extra-tools
 vulkan-mesa-layers
 vulkan-utility-libraries
 vulkan-headers
-vulkan-radeon
+#vulkan-radeon
 vulkan-validation-layers
 
 # WIFI Firmware

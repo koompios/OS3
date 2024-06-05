@@ -59,7 +59,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias pi="pacman"
+alias pi="sudo pacman"
 complete -F _pacman pi
 source /usr/share/bash-completion/completions/pacman
 
