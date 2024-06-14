@@ -19,6 +19,7 @@ file_permissions=(
   ["/root"]="0:0:750"
   ["/root/.automated_script.sh"]="0:0:755"
   ["/usr/local/bin/choose-mirror"]="0:0:755"
+  ["/usr/lib/systemd/system-sleep/suspend_rtw8821ce"]="0:0:755"
   ["/usr/local/bin/Installation_guide"]="0:0:755"
   ["/usr/local/bin/generate_locale"]="0:0:755"
   ["/etc/default/useradd"]="0:0:600"
