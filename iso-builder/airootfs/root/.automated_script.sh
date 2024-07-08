@@ -30,7 +30,7 @@ automated_script ()
 }
 
 systemd_service() {
-	systemctl enable automatic-update
+	systemctl enable automatic-update sddm
 }
 
 if [[ $(tty) == "/dev/tty1" ]]; then

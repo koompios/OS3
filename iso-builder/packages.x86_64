@@ -2,7 +2,8 @@ xclip
 clang
 base-devel
 polkit
-polkit-gnome
+polkit-kde-agent
+polkit-qt6
 #pam-krb5
 zram-generator
 xmlstarlet
@@ -131,21 +132,12 @@ wvdial
 xfsprogs
 xl2tpd
 zsh
-gdm
-gnome-shell
-gnome-session
-gnome-console
-gnome-calculator
-gnome-software
-gnome-menus
+sddm
 mesa
 mesa-utils
-gnome-control-center
-gnome-settings-daemon
-gnome-system-monitor
 xdg-user-dirs
 firefox
-nautilus
+dolphin
 #xorg-drivers
 #xf86-input-evdev
 xf86-input-libinput
@@ -156,25 +148,23 @@ xf86-video-intel
 xf86-video-nouveau
 xf86-video-vmware
 xf86-video-vesa
-gnome-text-editor
-eog
 nano
 efibootmgr
+gwenview
 hyperv
 gst-plugins-good
 libva
 gstreamer-vaapi
 gst-plugin-pipewire
 obs-studio
-xdg-desktop-portal-gnome
-evince
+xdg-desktop-portal-kde
+okular
 
 ## KOOMPI-OS
 webkit2gtk
 xorriso
 os-prober
 gnome-disk-utility
-gnome-tweaks
 #grub-koompi
 
 # Core packages
@@ -197,7 +187,6 @@ waydroid-script
 wpm
 android-tools
 yay
-koompi-gnome-extensions
 #gnome-shell-extension-dash-to-dock
 
 # office
@@ -338,7 +327,7 @@ vulkan-validation-layers
 
 
 ## GTK theme
-catppuccin-gtk-theme-frappe
-catppuccin-gtk-theme-latte
-catppuccin-gtk-theme-macchiato
+#catppuccin-gtk-theme-frappe
+#catppuccin-gtk-theme-latte
+#catppuccin-gtk-theme-macchiato
 #catppuccin-gtk-theme-mocha
