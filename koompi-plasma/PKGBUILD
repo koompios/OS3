@@ -1,0 +1,12 @@
+# Maintainer: Hangsiahong <honghangsia@gmail.com> 
+pkgname=koompi-plasma
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="KOOMPI OS Plasma Customization"
+arch=('any')
+license=('GPL')
+package() {
+    # Use the 'install' command to copy files and overwrite existing files if they exist
+    mkdir -pv $pkgdir/etc/
+    cp -r ../etc/* $pkgdir/etc/
+}
